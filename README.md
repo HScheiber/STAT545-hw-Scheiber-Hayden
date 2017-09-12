@@ -6,7 +6,7 @@ This is assignment 1 for the UBC statistics course STAT 545, in the Fall 2017 te
 
 ## About me
 I am a new chemistry PhD student at the University of British Columbia. I completed my undergrad in bio-organic chemistry at McGill University, graduating in December 2016.
-My specialization within chemistry is now physical/computational chemistry. If you would like to view my summer research, you can find it in my Github repository titled ["ALMO-Langevin"](https://github.com/HScheiber/ALMO-Langevin-Manuscript.git "Warning: it's in LaTeX format!").
+My specialization within chemistry is now physical/computational chemistry. If you would like to view my summer research, you can find it in my Github repository titled ["ALMO-Langevin"](https://github.com/HScheiber/ALMO-Langevin-Manuscript.git "Warning: it's in LaTeX format!"). The website for my summer research lab group can be found [here](http://khaliullin.com/ "Check out 'Team and Openings' to see a picture of me").
 
 Over the summer, I did research on *Ab initio* Molecular Dynamics. I worked on developing a new faster method of calculating the electronic structure for the system of interest. My results, posted below, show that we were able to retain fairly good accuracy of bulk properties!
 
