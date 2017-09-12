@@ -10,7 +10,7 @@ My specialization within chemistry is now physical/computational chemistry. If y
 
 
 ## Class Resources:
-..* The Github repository for STAT 545 can be found here [here!](https://github.com/STAT545-UBC/STAT545-UBC.github.io.git "STAT 545 Respoitory")
-..* The main website for STAT 545 created by that repository is found [here.](http://stat545.com/ "STAT 545 Main Webpage")
-..* The Slack webpage for STAT 545 is found [here.](https://stat545-2017.slack.com "STAT 545 Slack Webpage")
+- The Github repository for STAT 545 can be found here [here!](https://github.com/STAT545-UBC/STAT545-UBC.github.io.git "STAT 545 Respoitory")
+- The main website for STAT 545 created by that repository is found [here.](http://stat545.com/ "STAT 545 Main Webpage")
+- The Slack webpage for STAT 545 is found [here.](https://stat545-2017.slack.com "STAT 545 Slack Webpage")
 
