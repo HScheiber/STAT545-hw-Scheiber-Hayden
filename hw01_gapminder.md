@@ -3,26 +3,26 @@ Gapminder Exploration
 Hayden Scheiber
 September 14, 2017
 
-R Markdown
-----------
+Gapminder: UN statistics on countries
+=====================================
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+Below is a plot of Life Expectancy vs year for all countries covered by UN demographics data, beginning in 1952 and running up to the year 2007 in five year incriments.
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+![](hw01_gapminder_files/figure-markdown_github-ascii_identifiers/Plot_1-1.png)
 
-    ##      speed           dist       
-    ##  Min.   : 4.0   Min.   :  2.00  
-    ##  1st Qu.:12.0   1st Qu.: 26.00  
-    ##  Median :15.0   Median : 36.00  
-    ##  Mean   :15.4   Mean   : 42.98  
-    ##  3rd Qu.:19.0   3rd Qu.: 56.00  
-    ##  Max.   :25.0   Max.   :120.00
+-   Note the general trend towards longer life expectancies.
+-   There are many possible reasons for this, but presumably most of the improvement is due to:
+    -   Improvements in medical and agricultural technology.
+    -   Increasing globalization, allowing for increased trade and ultimately more wealth.
+    -   Improved relief efforts in natural disasters.
+    -   Improvements in public education.
 
-Including Plots
----------------
+The UN recorded GDP per capita in the available data, and therefore we can look to see how strong the correlation between wealth and life expectancy really is.
 
-You can also embed plots, for example:
+![](hw01_gapminder_files/figure-markdown_github-ascii_identifiers/Plot_2-1.png)
 
-![](hw01_gapminder_files/figure-markdown_github-ascii_identifiers/pressure-1.png)
+This data is difficult to interpret with the current axes, perhaps a log scale plot of GDP per capita will improve the visualization:
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+![](hw01_gapminder_files/figure-markdown_github-ascii_identifiers/Plot_3-1.png)
+
+This data suggests that there is a correlation between life expectancy and GDP per capita. We can see that rich countries tend to have long lifespans, but the correlation is anything but complete. There are plenty of poor countries with long life expectancies, so surely there are more variables at play!

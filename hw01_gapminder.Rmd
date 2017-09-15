@@ -5,26 +5,41 @@ date: "September 14, 2017"
 output: github_document
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+# Gapminder: UN statistics on countries
+
+Below is a plot of Life Expectancy vs year for all countries covered by UN demographics data, beginning in 1952 and running up to the year 2007 in five year incriments.
+
+```{r, Plot_1, message=FALSE, echo=FALSE}
+library(tidyverse)
+library(gapminder)
+
+
+plot(lifeExp ~ year, gapminder)
+title(main = "Life Expectancy vs Year")
+#plot(lifeExp ~ gdpPercap, gapminder)
 ```
 
-## R Markdown
+* Note the general trend towards longer life expectancies. 
+* There are many possible reasons for this, but presumably most of the improvement is due to:
+    + Improvements in medical and agricultural technology.
+    + Increasing globalization, allowing for increased trade and ultimately more wealth.
+    + Improved relief efforts in natural disasters.
+    + Improvements in public education.
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+The UN recorded GDP per capita in the available data, and therefore we can look to see how strong the correlation between wealth and life expectancy really is.
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars, echo=FALSE}
-summary(cars)
+```{r, Plot_2, message=FALSE, echo=FALSE}
+plot(lifeExp ~ gdpPercap, gapminder)
+title(main = "Life Expectancy vs Gross Domestic Product per Capita")
 ```
 
-## Including Plots
+This data is difficult to interpret with the current axes, perhaps a log scale plot of GDP per capita will improve the visualization:
 
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
+```{r, Plot_3, message=FALSE, echo=FALSE}
+plot(lifeExp ~ log(gdpPercap), gapminder)
+title(main = "Semilog scale: Life Expectancy vs Gross Domestic Product per Capita")
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+Much better! This data suggests that there is a correlation between life expectancy and GDP per capita. We can see that rich countries tend to have long lifespans, but the correlation is no guarentee of causation. There are many poor countries with long life expectancies, so surely there are more variables at play!
+
