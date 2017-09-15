@@ -25,4 +25,4 @@ This data is difficult to interpret with the current axes, perhaps a log scale p
 
 ![](hw01_gapminder_files/figure-markdown_github-ascii_identifiers/Plot_3-1.png)
 
-This data suggests that there is a correlation between life expectancy and GDP per capita. We can see that rich countries tend to have long lifespans, but the correlation is anything but complete. There are plenty of poor countries with long life expectancies, so surely there are more variables at play!
+Much better! This data suggests that there is a correlation between life expectancy and GDP per capita. We can see that rich countries tend to have long lifespans, but the correlation is no guarentee of causation. There are many poor countries with long life expectancies, so surely there are more variables at play!

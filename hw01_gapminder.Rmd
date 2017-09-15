@@ -42,4 +42,3 @@ title(main = "Semilog scale: Life Expectancy vs Gross Domestic Product per Capit
 
 
 Much better! This data suggests that there is a correlation between life expectancy and GDP per capita. We can see that rich countries tend to have long lifespans, but the correlation is no guarentee of causation. There are many poor countries with long life expectancies, so surely there are more variables at play!
-

@@ -20,5 +20,13 @@ Over the summer, I did research on __*Ab initio* Molecular Dynamics__. I worked 
 - The main website for STAT 545 created by that repository is found [here.](http://stat545.com/ "STAT 545 Main Webpage")
 - The Slack webpage for STAT 545 is found [here.](https://stat545-2017.slack.com "STAT 545 Slack Webpage")
 
+# ---------------------
+
+Thanks for visiting my repository! I'll leave you with a quote that has stuck with me over the years:
+
+> I mean, they say you die twice. One time when you stop breathing and a second 
+time, a bit later on, when somebody says your name for the last time.
+
+  \- Banksy
 
 
