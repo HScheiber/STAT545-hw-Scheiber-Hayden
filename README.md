@@ -10,7 +10,7 @@ My specialization within chemistry is now physical/computational chemistry. If y
 
 Over the summer, I did research on *Ab initio* Molecular Dynamics. I worked on developing a new faster method of calculating the electronic structure for the system of interest. My results, posted below, show that we were able to retain fairly good accuracy of bulk properties!
 
-![alt text](https://github.com/HScheiber/STAT545-hw01-Scheiber-Hayden/blob/master/research_results.png "This is a comparison of bulk system properties of water between a well-developed accurate calculation method (OT), and our new method called Absolutely Localized Molecular Orbitals (ALMO DFT)")
+![](research_results.png "This is a comparison of bulk system properties of water between a well-developed accurate calculation method (OT), and our new method called Absolutely Localized Molecular Orbitals (ALMO DFT)")
 
 
 ## Class Resources
