@@ -1,5 +1,3 @@
-Hayden Scheiber
-September 21, 2017
 
 STAT 545 - Homework Repository
 ==============================
@@ -27,18 +25,19 @@ Homework assignments
 
 | Homework                                                  | Due Date           | Completed | Link                                 |                                                     Peer review                                                    |
 |-----------------------------------------------------------|--------------------|:---------:|--------------------------------------|:------------------------------------------------------------------------------------------------------------------:|
-| [1](http://stat545.com/hw01_edit-README.html)             | September 19, 2017 |    Yes    | [HW01](/hw01/README.md "Homework 1") | [1](https://github.com/Maria815/STAT545-hw01-guo-maria) [2](https://github.com/sepkamal/STAT545-hw01-kamal-sepehr) |
-| [2](http://stat545.com/hw02_explore-gapminder-dplyr.html) | September 26, 2017 |     No    | HW02                                 |                                                         1 2                                                        |
-| 3                                                         | October 3, 2017    |     No    | HW03                                 |                                                         1 2                                                        |
-| 4                                                         | October 10, 2017   |     No    | HW04                                 |                                                         1 2                                                        |
-| 5                                                         | October 20, 2017   |     No    | HW05                                 |                                                         1 2                                                        |
+| [1](http://stat545.com/hw01_edit-README.html)             | September 19, 2017 |  - [x]  | [HW01](/hw01/README.md "Homework 1") | [1](https://github.com/Maria815/STAT545-hw01-guo-maria) [2](https://github.com/sepkamal/STAT545-hw01-kamal-sepehr) |
+| [2](http://stat545.com/hw02_explore-gapminder-dplyr.html) | September 26, 2017 |  - [ ]  | HW02                                 |                                                         1 2                                                        |
+| 3                                                         | October 3, 2017    |  - [ ]  | HW03                                 |                                                         1 2                                                        |
+| 4                                                         | October 10, 2017   |  - [ ]  | HW04                                 |                                                         1 2                                                        |
+| 5                                                         | October 20, 2017   |  - [ ]  | HW05                                 |                                                         1 2                                                        |
 
 How I made this repository
 --------------------------
 
-I make all files for the STAT 545 course using Rstudio, which I have syched to my Github account. For the markdown files, I usually start with an R markdown document, which I knit into markdown. Git makes version control a breeze, and allows me to access my files accross multiple devices. Git also acts as a conventient back-up, in case files are lost on my local machine.
+I make all files for the STAT 545 course using Rstudio, which I have syched to my Github account. This makes version control a breeze, and allows me to access my files accross multiple devices. Git also acts as a conventient back-up, in case files are lost on my local machine.
 
-- [ ] checkbox
+to do
+=====
 
 ------------------------------------------------------------------------
 
