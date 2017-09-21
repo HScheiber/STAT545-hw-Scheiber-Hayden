@@ -36,8 +36,6 @@ My specialization within chemistry is now physical/computational chemistry.
 ## How I made this repository
 I make all files for the STAT 545 course using Rstudio, which I have syched to my Github account. For the markdown files, I usually start with an R markdown document, which I knit into markdown. Git makes version control a breeze, and allows me to access my files accross multiple devices. Git also acts as a conventient back-up, in case files are lost on my local machine.
 
-- [ ] checkbox
-
 ---
 
 Thanks for visiting my repository! I'll leave you with a quote that has stuck with me over the years:

@@ -27,11 +27,11 @@ Homework assignments
 
 | Homework                                                  | Due Date           | Completed | Link                                 |                                                     Peer review                                                    |
 |-----------------------------------------------------------|--------------------|:---------:|--------------------------------------|:------------------------------------------------------------------------------------------------------------------:|
-| [1](http://stat545.com/hw01_edit-README.html)             | September 19, 2017 |    - [x]    | [HW01](/hw01/README.md "Homework 1") | [1](https://github.com/Maria815/STAT545-hw01-guo-maria) [2](https://github.com/sepkamal/STAT545-hw01-kamal-sepehr) |
-| [2](http://stat545.com/hw02_explore-gapminder-dplyr.html) | September 26, 2017 |    - [ ]    | HW02                                 |                                                         1 2                                                        |
-| 3                                                         | October 3, 2017    |    - [ ]    | HW03                                 |                                                         1 2                                                        |
-| 4                                                         | October 10, 2017   |    - [ ]   | HW04                                 |                                                         1 2                                                        |
-| 5                                                         | October 20, 2017   |    - [ ]   | HW05                                 |                                                         1 2                                                        |
+| [1](http://stat545.com/hw01_edit-README.html)             | September 19, 2017 |    Yes    | [HW01](/hw01/README.md "Homework 1") | [1](https://github.com/Maria815/STAT545-hw01-guo-maria) [2](https://github.com/sepkamal/STAT545-hw01-kamal-sepehr) |
+| [2](http://stat545.com/hw02_explore-gapminder-dplyr.html) | September 26, 2017 |     No    | HW02                                 |                                                         1 2                                                        |
+| 3                                                         | October 3, 2017    |     No    | HW03                                 |                                                         1 2                                                        |
+| 4                                                         | October 10, 2017   |     No    | HW04                                 |                                                         1 2                                                        |
+| 5                                                         | October 20, 2017   |     No    | HW05                                 |                                                         1 2                                                        |
 
 How I made this repository
 --------------------------
