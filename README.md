@@ -1,6 +1,3 @@
----
-output: github_document
----
 # STAT 545 - Homework Repository
 
 Welcome all visitors to my homework repository, my name is Hayden Scheiber! You can reach me at scheiber@chem.ubc.ca
@@ -30,9 +27,6 @@ My specialization within chemistry is now physical/computational chemistry.
 
 ## How I made this repository
 I make all files for the STAT 545 course using Rstudio, which I have syched to my Github account. This makes version control a breeze, and allows me to access my files accross multiple devices. Git also acts as a conventient back-up, in case files are lost on my local machine.
-
-
-# to do
 
 ---
 
