@@ -30,7 +30,7 @@ time, a bit later on, when somebody says your name for the last time.
   \- Banksy
 
 ## How I made this file
-This file is a description of how I made changes to my README.md and hw01_gapminder.Rmd files...
+This is a description of how I made changes to my README.md and hw01_gapminder.Rmd files.
 
 For the README.md file, I initially worked directly on github, making small edits and committing them within the repository. 
 I found this process cumbersome as I couldn't see whether or not the changes I made would properly be compiled by markdown. Soon after I switched to working in Rstudio and commiting/pushing to git fro there. I found that the workflow was much smoother.
