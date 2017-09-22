@@ -3,7 +3,7 @@ STAT 545 - Homework 2
 Hayden Scheiber
 September 21, 2017
 
-Welcome! This is an exploration of the Gapminder data frame, as part of STAT 545 assignment 2. Click [here](/hw02/README.md) to return to the HW02 main page, or [here](README.md) to return to the main repository.
+Welcome! This is an exploration of the Gapminder data frame, as part of STAT 545 assignment 2. Click [here](README.md) to return to the HW02 main page, or [here](https://github.com/HScheiber/STAT545-hw-Scheiber-Hayden/blob/master/README.md) to return to the main repository.
 
 First course of action is to load the `gapminder` dataset and the `tidyverse` package, as well as `knitr` for nicer table outputs.
 
