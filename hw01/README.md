@@ -2,7 +2,7 @@
 
 Welcome visitors to my repository, my name is Hayden Scheiber! You can reach me at scheiber@chem.ubc.ca
 
-This is assignment 1 for the UBC statistics course STAT 545, in the Fall 2017 term.
+This is assignment 1 for the UBC statistics course STAT 545, in the Fall 2017 term. Click [here](https://github.com/HScheiber/STAT545-hw-Scheiber-Hayden/blob/master/README.md "Home") to return to the main repository.
 
 ## About me
 I am a new chemistry PhD student at the University of British Columbia. I completed my undergrad in bio-organic chemistry at McGill University, graduating in December 2016.
