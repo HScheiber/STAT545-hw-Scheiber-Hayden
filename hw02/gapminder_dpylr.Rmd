@@ -1,0 +1,227 @@
+---
+title: "STAT 545 - Homework 2"
+author: "Hayden Scheiber"
+date: "September 21, 2017"
+output: github_document
+---
+
+Welcome! This is an exploration of the Gapminder data frame, as part of STAT 545 assignment 2. Click [here](/hw02/README.md) to return to the HW02 readme, or [here](README.md) to return to the main repository.
+
+First course of action is to load the dataset and the tidyverse package.
+
+```{r}
+library(gapminder)
+library(tidyverse)
+```
+
+## Smell test the data: Exploring the Gapminder data set
+
+
+#### Is it a data.frame, a matrix, a vector, a list?
+
+Now, we want to know the structure of the data we're working with!
+
+```{r}
+str(gapminder)
+```
+
+It looks like gapminder is a dataframe, or "tibble" since we loaded tidyverse. Let's find out more:
+
+```{r}
+typeof(gapminder)
+```
+It seems that tibbles are a type of list.
+
+#### What’s its class?
+```{r}
+class(gapminder)
+```
+So gapminder is a data frame, table, and tibble!
+
+#### What data type is each variable?
+```{r}
+names(gapminder)
+sapply(gapminder, class)
+```
+
+A healthy mix of various classes. And the data types:
+
+```{r}
+sapply(gapminder, typeof)
+```
+
+
+#### How many variables/columns? How many rows/observations?
+
+Number of rows can be easily shown using the `nrow` function, whereas rows are shown with `ncol`
+
+```{r}
+nrow(gapminder)
+ncol(gapminder)
+```
+
+#### Can you get these facts about “extent” or “size” in more than one way? Can you imagine different functions being useful in different - contexts?
+
+```{r}
+dim(gapminder) #lists both dimensions of a data frame
+length(gapminder) # also lists number of columns, may act differently for matrices
+dim(unique(gapminder)) # shows number of unique entries
+```
+
+Which function you use will depend on the needs of the particular script! In particular, using the `unique()` function could be a very effective way of sorting through data that contains a lot of repeated features.
+
+## Explore individual variables
+
+Here we will take a closer look at a few of the variables in the gapminder dataset.
+
+#### What are possible values (or range, whichever is appropriate) of each variable?
+
+Lets begin with countries. How many are listed?
+
+```{r}
+unique(gapminder$country) %>%
+  length()
+```
+So there are 142 countries in this dataset! We can list them nicely in alphabetical order with:
+
+```{r}
+unique(select(gapminder, country))
+```
+
+How about the range of years? What's in the earliest and latest year in the dataset?
+```{r}
+range(gapminder$year)
+```
+So the data set runs from 1952 to 2007.
+
+Let's havea look at the life expectancy variable. How far does it range?
+
+```{r}
+range(gapminder$lifeExp)
+```
+
+That is quite the range! How about the range just in 2007, separately for each continent?
+
+```{r}
+filter(gapminder, year == 2007) %>%
+  group_by(continent) %>%
+    summarize(minLifeExp2007=min(lifeExp), maxLifeExp2007=max(lifeExp))
+```
+
+
+#### What values are typical? What’s the spread? What’s the distribution? Etc., tailored to the variable at hand.
+
+Let's take a look at a summary of the life expectancy:
+```{r}
+summary(gapminder$lifeExp)
+```
+
+We can plot max life expectancy vs year separately for each continent:
+```{r}
+group_by(gapminder,continent,year) %>%
+  summarize(MaxLifeExp=max(lifeExp)) %>%
+  ggplot(aes(x=year, y=MaxLifeExp)) + 
+  geom_point(aes(colour=continent)) +
+  labs(title = "Max Life Expectancy vs Year by Continent", x = "Year", 
+       y = "Max Life Expectancy",caption = "Based on data from Gapminder")
+```
+
+Or this minimum life expectancy:
+```{r}
+group_by(gapminder,continent,year) %>%
+  summarize(MinLifeExp=min(lifeExp)) %>%
+  ggplot(aes(x=year, y=MinLifeExp)) + 
+  geom_point(aes(colour=continent)) +
+  labs(title = "Minimum Life Expectancy vs Year by Continent", x = "Year", 
+       y = "Minimum Life Expectancy",caption = "Based on data from Gapminder")
+```
+
+## Explore various plot types
+
+Why don't we try making a stripplot to see the spread of life expectancies for each continent. We can colour code by year, and overlay the average (red dot)!
+```{r}
+p <- ggplot(gapminder, aes(reorder(x = continent, lifeExp), y = lifeExp)) + 
+  geom_jitter(aes(colour=year), position = position_jitter(width = 0.2, height = 0),alpha=0.2) +
+  stat_summary(fun.y = mean, colour = "red", geom = "point", size = 3)
+p + labs(title = "Life Expectancy In continents", x = "Continent", y = "Life Expectancy",caption = "Based on data from Gapminder")
+```
+
+That's pretty cool! A definite trend towards higher life expectancy as the years go on.
+
+What about a histogram of life expectancy distribution in the 1990's, with colour overlay by continent?
+
+```{r}
+filter(gapminder, year > 1989 | year < 2000) %>%
+  ggplot(aes(x = lifeExp,fill = continent)) +
+  geom_histogram(binwidth = 1) +
+  labs(title = "Life Expectancy Distribution in the 90's", 
+       x = "Life Expectancy", y = "Count",caption = "Based on data from Gapminder")
+```
+
+It might look better to plot this as a density plot:
+```{r}
+filter(gapminder, year > 1989 | year < 2000) %>%
+  ggplot(aes(x = lifeExp,fill = continent)) +
+  geom_density(alpha = 0.2) +
+  labs(title = "Life Expectancy Distribution in the 90's", 
+       x = "Life Expectancy", y = "Count",caption = "Based on data from Gapminder")
+```
+
+Okay, I think we've seen enough of life expectancy per year, how about life expectancy vs GDP per capita, in 2002, where size is determined by the population size?
+
+```{r}
+jPch <- 21
+jDarkGray <- 'grey20'
+jXlim <- c(150, 115000)
+jYlim <- c(16, 100)
+
+ggplot(subset(gapminder, year == 2002),
+       aes(x = gdpPercap, y = lifeExp)) +
+  scale_x_log10(limits = jXlim) + ylim(jYlim) +
+  geom_point(aes(size = sqrt(pop)), pch = jPch, color = jDarkGray,
+             show.legend = FALSE, alpha=0.5) + 
+  scale_size_continuous(range=c(1,40)) +
+  facet_wrap(~ continent) + coord_fixed(ratio = 1/43) +
+  aes(fill = country) + scale_fill_manual(values = country_colors) +
+  theme_bw() + theme(strip.text = element_text(size = rel(1.1))) + 
+  labs(title = "Life Expectancy vs GDP per capita: 2002", 
+      x = "GDP per Capita", y = "Life Expectancy",caption = "Based on data from Gapminder")
+```
+
+How about a bar graph of number of countries in each continent:
+```{r}
+group_by(gapminder,continent) %>%
+  summarize(NumberofCountries = length(unique(country))) -> bardata
+
+ggplot(bardata, aes(x = continent, weight=NumberofCountries)) + geom_bar(fill="Red") +
+  labs(title = "Number of countries in the Continents", 
+      x = "Continent", y = "Number of Countries",caption = "Based on data from Gapminder")
+
+```
+
+Lastly, here's a bar plot of total wealth in each continent in 2007:
+```{r}
+filter(gapminder, year == 2007) %>%
+  group_by(country) %>%
+  summarize(continent, CountryWealth = gdpPercap*pop) %>%
+  group_by(continent) %>%
+  summarize(TotalWealth = round( sum(CountryWealth)/1e12,digits = 1) ) -> bardata2
+
+ggplot(bardata2, aes(x = continent, weight=TotalWealth)) + geom_bar(fill="Green") +
+  labs(title = "Total Wealth in the Continents (2007)", 
+      x = "Continent", y = "Total Wealth ($ Trillion)", caption = "Based on data from Gapminder")
+```
+
+## But I want to do more!
+
+Here is some code. The analyst’s intent was to get the data for Rwanda and Afghanistan
+```{r}
+filter(gapminder, country == c("Rwanda", "Afghanistan"))
+```
+
+This is not correct! Here are two possible ways to do it correctly:
+```{r}
+filter(gapminder, country %in% "Rwanda" | country == "Afghanistan")
+filter(gapminder, country == "Rwanda" | country == "Afghanistan")
+```
+
