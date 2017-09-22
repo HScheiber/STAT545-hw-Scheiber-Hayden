@@ -5,7 +5,7 @@ Welcome the homework 2 section of my repository.
 
 ## Links
 
-- [Return to main page.](README.md "Main page")
+- [Return to main page.](files/README.md "Main page")
 
 - [Homework 2 gapminder exploration with dpylr.](/hw02/gapminder_dpylr.md)
 
