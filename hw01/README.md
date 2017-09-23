@@ -13,7 +13,7 @@ Over the summer, I did research on __*Ab initio* Molecular Dynamics__. I worked 
 ![](research_results.png "This is a comparison of bulk system properties of water between a well-developed accurate calculation method (OT DFT), and our new method called Absolutely Localized Molecular Orbitals (ALMO DFT)")
 
 ## Gapminder Exploration
-[Here](hw01_gapminder.md "Gapminder Exploration") you can check out my exploration of the Gapminder dataset, which is a massive UN database that compares the populations, gdp per capita, and life expectancy for most countries in 5 year incriments between 1952 and 2007.
+[Here](hw01_gapminder.md "Gapminder Exploration") you can check out my exploration of the Gapminder dataset, which is a massive UN database that compares the populations, gdp per capita, and life expectancy for most countries in 5 year incriments between 1952 and 2007. The R markdown sourcecode can be found [here.](https://github.com/HScheiber/STAT545-hw-Scheiber-Hayden/blob/master/hw01/hw01_gapminder.Rmd)
 
 ## Class Resources
 - The Github repository for STAT 545 can be found here [here!](https://github.com/STAT545-UBC/STAT545-UBC.github.io.git "STAT 545 Respoitory")
