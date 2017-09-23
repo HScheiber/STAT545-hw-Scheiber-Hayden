@@ -382,7 +382,7 @@ filter(gapminder, country == c("Rwanda", "Afghanistan")) %>%
 This is not correct! Here are two possible ways to do it correctly:
 
 ``` r
-filter(gapminder, country %in% "Rwanda" | country == "Afghanistan") %>%
+filter(gapminder, country %in% c("Rwanda" , "Afghanistan")) %>%
   kable(digits = 2, align = rep("l", 10),padding = 10)
 ```
 
