@@ -1,4 +1,4 @@
-dHomework 3 Landing Page
+Homework 3 Landing Page
 ================
 Hayden Scheiber
 2017-09-26
@@ -11,12 +11,9 @@ Welcome the homework 3 section of my repository.
 Links
 -----
 
-```HTML
 <form action="https://github.com/HScheiber/STAT545-hw-Scheiber-Hayden/blob/master/README.md">
-    <input type="submit" value="Return to main page" />
+<input type="submit" value="Return to main page" />
 </form>
-```
-
 Progress Report
 ---------------
 

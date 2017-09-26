@@ -3,9 +3,13 @@ STAT 545 - Homework 2 Landing Page
 
 Welcome to the homework 2 section of my repository.
 
-## Links
+<form action="https://github.com/HScheiber/STAT545-hw-Scheiber-Hayden/blob/master/README.md">
+<input type="submit" value="Return to main page" />
+</form>
 
-- [Return to main page.](https://github.com/HScheiber/STAT545-hw-Scheiber-Hayden/blob/master/README.md "Main page")
+---
+
+## Links
 
 - [Homework 2 gapminder exploration with dpylr.](/hw02/gapminder_dpylr.md)
 
