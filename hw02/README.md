@@ -1,7 +1,7 @@
 STAT 545 - Homework 2 Landing Page
 ==============================
 
-Welcome the homework 2 section of my repository.
+Welcome to the homework 2 section of my repository.
 
 ## Links
 
