@@ -1,19 +1,15 @@
-Homework 3 Landing Page
-================
-Hayden Scheiber
-2017-09-26
-
 STAT 545 - Homework 3 Landing Page
-==================================
+================
+
+[Return to main page.](https://github.com/HScheiber/STAT545-hw-Scheiber-Hayden/blob/master/README.md "Main page")
+
+------------------------------------------------------------------------
 
 Welcome the homework 3 section of my repository.
 
 Links
 -----
 
-<form action="https://github.com/HScheiber/STAT545-hw-Scheiber-Hayden/blob/master/README.md">
-<input type="submit" value="Return to main page" />
-</form>
 Progress Report
 ---------------
 

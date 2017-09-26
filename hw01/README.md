@@ -1,8 +1,6 @@
 # STAT 545 - Homework Assignment 1
 
-<form action="https://github.com/HScheiber/STAT545-hw-Scheiber-Hayden/blob/master/README.md">
-<input type="submit" value="Return to main page" />
-</form>
+[Return to main page](https://github.com/HScheiber/STAT545-hw-Scheiber-Hayden/blob/master/README.md "Main page")
 
 ---
 

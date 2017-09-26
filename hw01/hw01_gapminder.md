@@ -3,7 +3,7 @@ Gapminder Exploration
 Hayden Scheiber
 September 14, 2017
 
-[Return to Homework 1 main page.](https://github.com/HScheiber/STAT545-hw-Scheiber-Hayden/blob/master/hw01/README.md)
+[Return to Homework 1 main page](https://github.com/HScheiber/STAT545-hw-Scheiber-Hayden/blob/master/hw01/README.md)
 
 Gapminder: UN statistics on countries
 =====================================

@@ -1,11 +1,11 @@
 STAT 545 - Homework 2 Landing Page
 ==============================
 
-Welcome to the homework 2 section of my repository.
+[Return to main page](https://github.com/HScheiber/STAT545-hw-Scheiber-Hayden/blob/master/README.md "Main page")
 
-<form action="https://github.com/HScheiber/STAT545-hw-Scheiber-Hayden/blob/master/README.md">
-<input type="submit" value="Return to main page" />
-</form>
+---
+
+Welcome to the homework 2 section of my repository.
 
 ---
 

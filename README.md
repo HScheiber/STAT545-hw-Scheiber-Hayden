@@ -48,6 +48,4 @@ Thanks for visiting my repository! I'll leave you with a quote that has stuck wi
 
 ------------------------------------------------------------------------
 
-<form action="https://github.com/HScheiber/STAT545-hw-Scheiber-Hayden/archive/master.zip">
-<input type="submit" value="Download Repository" />
-</form>
+[Click here to download this repository](https://github.com/HScheiber/STAT545-hw-Scheiber-Hayden/archive/master.zip "Download")
