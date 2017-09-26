@@ -48,5 +48,5 @@ time, a bit later on, when somebody says your name for the last time.
 ---
 
 <form action="https://github.com/HScheiber/STAT545-hw-Scheiber-Hayden/archive/master.zip">
-    <input type="submit" value="Download Repository" />
+<input type="submit" value="Download Repository" />
 </form>
