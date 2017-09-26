@@ -45,3 +45,10 @@ Thanks for visiting my repository! I'll leave you with a quote that has stuck wi
 > I mean, they say you die twice. One time when you stop breathing and a second time, a bit later on, when somebody says your name for the last time.
 
  - Banksy
+
+------------------------------------------------------------------------
+
+<form action="https://github.com/HScheiber/STAT545-hw-Scheiber-Hayden/archive/master.zip">
+    <input type="submit" value="Download Repository" />
+
+</form>
