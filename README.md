@@ -1,5 +1,5 @@
 Hayden Scheiber
-September 21, 2017
+September 27, 2017
 
 STAT 545 - Homework Repository
 ==============================
@@ -25,13 +25,13 @@ Class Resources
 Homework assignments
 --------------------
 
-| Homework                                                  | Due Date           | Completed | Link                                 |                                                     Peer review                                                    |
-|-----------------------------------------------------------|--------------------|:---------:|--------------------------------------|:------------------------------------------------------------------------------------------------------------------:|
-| [1](http://stat545.com/hw01_edit-README.html)             | September 19, 2017 |    Yes    | [HW01](/hw01/README.md "Homework 1") | [1](https://github.com/Maria815/STAT545-hw01-guo-maria) [2](https://github.com/sepkamal/STAT545-hw01-kamal-sepehr) |
-| [2](http://stat545.com/hw02_explore-gapminder-dplyr.html) | September 26, 2017 |    Yes    | [HW02](/hw02/README.md "Homework 2") |                                                         1 2                                                        |
-| [3](http://stat545.com/hw03_dplyr-and-more-ggplot2.html)  | October 3, 2017    |     No    | HW03                                 |                                                         1 2                                                        |
-| 4                                                         | October 10, 2017   |     No    | HW04                                 |                                                         1 2                                                        |
-| 5                                                         | October 20, 2017   |     No    | HW05                                 |                                                         1 2                                                        |
+| Homework                                                  | Due Date           | Completed | Link                                 |                                                                     Peer review                                                                    |
+|-----------------------------------------------------------|--------------------|:---------:|--------------------------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------:|
+| [1](http://stat545.com/hw01_edit-README.html)             | September 19, 2017 |    Yes    | [HW01](/hw01/README.md "Homework 1") |                 [1](https://github.com/Maria815/STAT545-hw01-guo-maria) [2](https://github.com/sepkamal/STAT545-hw01-kamal-sepehr)                 |
+| [2](http://stat545.com/hw02_explore-gapminder-dplyr.html) | September 26, 2017 |    Yes    | [HW02](/hw02/README.md "Homework 2") | [1](https://github.com/auduman/stat545-hw-uduman-aisha/tree/master/hw02) [2](https://github.com/qiaoyuet/STAT545-hw-Tang-Qiaoyue/tree/master/hw02) |
+| [3](http://stat545.com/hw03_dplyr-and-more-ggplot2.html)  | October 3, 2017    |     No    | [HW03](/hw03/README.md "Homework 3") |                                                                         1 2                                                                        |
+| 4                                                         | October 10, 2017   |     No    | HW04                                 |                                                                         1 2                                                                        |
+| 5                                                         | October 20, 2017   |     No    | HW05                                 |                                                                         1 2                                                                        |
 
 How I made this repository
 --------------------------
