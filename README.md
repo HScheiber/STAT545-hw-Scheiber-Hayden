@@ -21,6 +21,7 @@ Class Resources
 -   The Slack webpage for STAT 545 is found [here.](https://stat545-2017.slack.com "STAT 545 Slack Webpage")
 -   R markdown cheat-sheets can be found [here](https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf "Cheat-sheet 1") and [here.](https://www.rstudio.com/wp-content/uploads/2016/03/rmarkdown-cheatsheet-2.0.pdf "Cheat sheet 2")
 -   Markdown cheat-sheet can be found [here.](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet "Markdown Cheat-sheet")
+-   `ggplot2` cheatsheet can be found [here.](https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf "ggplot2 Cheat-sheet")
 
 Homework assignments
 --------------------
