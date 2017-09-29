@@ -1,18 +1,23 @@
 ---
 title: "Homework 3 - Gapminder Manipulation and Exploration with dplyr"
 author: "Hayden Scheiber"
-date: "September 26, 2017"
-output: github_document
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output: 
+  github_document:
+    toc: true
+---
+
 ---
 
 Welcome! This is an exploration of the Gapminder data frame, as part of STAT 545 assignment 2. Click [here](README.md) to return to the homework 3 landing page, or [here](https://github.com/HScheiber/STAT545-hw-Scheiber-Hayden/blob/master/README.md) to return repository home page.
 
-First we need to load the `gapminder` dataset and the `tidyverse` package, as well as `knitr` for nicer table outputs.
+First we need to load the `gapminder` dataset and the `tidyverse` package, as well as `knitr` for nicer table outputs. When making my plots I realized that I needed to re-shaped a data-frame using a function from `reshape2`, so I load that library as well.
 
-```{r,warning=FALSE,message=FALSE,error=FALSE}
-library(gapminder)
-library(tidyverse)
-library(knitr)
+```{r}
+suppressPackageStartupMessages(library(gapminder))
+suppressPackageStartupMessages(library(tidyverse))
+suppressPackageStartupMessages(library(knitr))
+suppressPackageStartupMessages(library(reshape2))
 ```
 
 Here's an example of how to use `knitr::kable()` to make nicer looking tables. The `head()` command outputs the first `n` rows of an input data frame.
@@ -20,24 +25,63 @@ Here's an example of how to use `knitr::kable()` to make nicer looking tables. T
 knitr::kable(head(gapminder,n=15))
 ```
 
-## Task Menu
+## 1. Task Menu
 
-#### Get the maximum and minimum of GDP per capita for all continents.
+#### 1.1 Get the maximum and minimum of GDP per capita for all continents.
 
 This can be acheived easily using the `group_by()` combined with `summarize()`. Below, I group the gapminder data frame by continent and pipe that result into the summarize function, where I utilize the `max()` and `min()` functions to find the range of GDP per capita for each continent.
 ```{r}
 p1 <- group_by(gapminder,continent) %>%
-  summarize(Max_GDPperCap=max(gdpPercap), Min_GPDperCap = min(gdpPercap))
+  summarize(Max_GDPperCap=max(gdpPercap), Min_GPDperCap = min(gdpPercap)) 
 knitr::kable(p1)
 ```
 
-Now we can plot this as a nice bar plot
+I want to compare the min and max gdp per capita on the same plot. In order to do this, i need to utilize `reshape2::melt()` to get both GDP minimum and maximum under the same variable. I'm not sure if this is the only solution to my problem, but I couldn't find any other way to easily do this.
 ```{r}
-group_by(gapminder,continent) %>%
-  summarize(NumberofCountries = length(unique(country))) -> bardata
+p2 <- reshape2::melt(p1,id = c("continent"))
 
-ggplot(bardata, aes(x = continent, weight=NumberofCountries)) + geom_bar(fill="Red") +
-  labs(title = "Number of countries in the Continents", 
-      x = "Continent", y = "Number of Countries",caption = "Based on data from Gapminder")
+knitr::kable(p2)
+```
+
+With above reorganized data frame, we can plot min and max GDP of each continent side-by side in the same bar plot. I took a lot of time to add theme changes here to spice things up a bit. I also spent some time to figure out how to include only some labels on the breaks of the y axis, as I used a log y-axis. Producing this plot was a learning experience for me. I even utilized a for loop!
+```{r}
+breakvector <- c(1:10 %o% 10^(0:4)) # Define a vector of values for the log scale break lines, %o% is the outer product of the two lists
+options(scipen=5) # Disable scientific notation
+labelvector = vector("list",length(breakvector)) # initialize a blank list of equal length for the labels of the breaks
+
+for (i in 1:length(labelvector)) { # Loop over all labels in 'labelvector' variable
+  if (i %% 10 == 0 | i == 1) {
+    labelvector[i] <- paste("$",toString(breakvector[i]),sep="") # Include the label for every 10th line break (ie $1, $10, $100...)
+  }else{
+    labelvector[i] <- "" # For all other line breaks, include blank label
+  }
+}
+
+p2 %>%
+  ggplot(aes(x = continent, y = value, fill = variable)) + 
+  geom_bar(stat="identity", position='dodge',color='black') + 
+  scale_fill_discrete("Legend", # Modifying legend title and labels
+      labels = c("Maximum GDP per capita",
+                 "Minimum GDP per capita")) + 
+  scale_y_log10(breaks=breakvector, # Adding log scale lines, keeping only some labels
+      labels=labelvector) +
+  theme_bw() + # black and white theme
+  theme(axis.title = element_text(size=14),
+      strip.text = element_text(size=14, face="bold"),
+      plot.title = element_text(hjust = 0.5)) +
+  labs(x = "Continent", 
+      y = "GDP Per Capita",
+      title = "Minimum and Maximum GDP per capita of the Continents: 1952 - 2007",
+      caption = "Based on data from Gapminder")
+```
+
+#### 1.2 Look at the spread of GDP per capita within the continents.
+
+For this, we need to group the data set by continent. Let's separate by decade: 50's 60's 70's 80's 90's 00's
+```{r}
+p3 <- group_by(gapminder,continent,year) %>%
+  filter(year > 2000)
+
+knitr::kable(p3)
 ```
 

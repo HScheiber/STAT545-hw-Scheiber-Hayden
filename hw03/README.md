@@ -10,6 +10,10 @@ Welcome the homework 3 section of my repository.
 Links
 -----
 
+-   [Homework 3 gapminder exploration with dpylr and ggplot2.](/hw03/dplyr_manipulation.md)
+
+-   [R markdown source code for Homework 3](/hw03/dplyr_manipulation.Rmd)
+
 Progress Report
 ---------------
 
