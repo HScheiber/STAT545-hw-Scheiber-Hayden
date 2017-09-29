@@ -17,11 +17,12 @@ I am a new chemistry PhD student at the University of British Columbia. I comple
 My specialization within chemistry is now physical/computational chemistry. 
 
 ## Class Resources
-- The Github repository for STAT 545 can be found here [here!](https://github.com/STAT545-UBC/STAT545-UBC.github.io.git "STAT 545 Respoitory")
+- The Github repository for STAT 545 can be found here [here.](https://github.com/STAT545-UBC/STAT545-UBC.github.io.git "STAT 545 Respoitory")
 - The main website for STAT 545 created by that repository is found [here.](http://stat545.com/ "STAT 545 Main Webpage")
 - The Slack webpage for STAT 545 is found [here.](https://stat545-2017.slack.com "STAT 545 Slack Webpage")
 - R markdown cheat-sheets can be found [here](https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf "Cheat-sheet 1") and [here.](https://www.rstudio.com/wp-content/uploads/2016/03/rmarkdown-cheatsheet-2.0.pdf "Cheat sheet 2")
 - Markdown cheat-sheet can be found [here.](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet "Markdown Cheat-sheet")
+- The `dplyr` and `tidyr` [cheat sheet.](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf "dylyr & tidyr Cheat-sheet")
 
 ## Homework assignments
 
