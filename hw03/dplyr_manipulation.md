@@ -1,15 +1,17 @@
 Homework 3 - Gapminder Manipulation and Exploration with dplyr
 ================
 Hayden Scheiber
-29 September, 2017
+30 September, 2017
 
--   [1. Task Menu](#task-menu)
-    -   [1.1 Get the maximum and minimum of GDP per capita for all continents.](#get-the-maximum-and-minimum-of-gdp-per-capita-for-all-continents.)
-    -   [1.2 Look at the spread of GDP per capita within the continents.](#look-at-the-spread-of-gdp-per-capita-within-the-continents.)
+-   [1. Get the maximum and minimum of GDP per capita for all continents.](#get-the-maximum-and-minimum-of-gdp-per-capita-for-all-continents.)
+-   [2. Look at the spread of GDP per capita within the continents.](#look-at-the-spread-of-gdp-per-capita-within-the-continents.)
+-   [3. Compute a trimmed mean of life expectancy for different years. Or a weighted mean, weighting by population. Just try something other than the plain vanilla mean.](#compute-a-trimmed-mean-of-life-expectancy-for-different-years.-or-a-weighted-mean-weighting-by-population.-just-try-something-other-than-the-plain-vanilla-mean.)
+-   [4. How is life expectancy changing over time on different continents?](#how-is-life-expectancy-changing-over-time-on-different-continents)
+-   [5. Report the relative abundance of countries with low life expectancy over time by continent](#report-the-relative-abundance-of-countries-with-low-life-expectancy-over-time-by-continent)
 
 ------------------------------------------------------------------------
 
-Welcome! This is an exploration of the Gapminder data frame, as part of STAT 545 assignment 2. Click [here](README.md) to return to the homework 3 landing page, or [here](https://github.com/HScheiber/STAT545-hw-Scheiber-Hayden/blob/master/README.md) to return repository home page.
+Welcome! This is an exploration of the Gapminder data frame using `ggplot2`, as part of STAT 545 assignment 3. Click [here](README.md) to return to the homework 3 landing page, or [here](https://github.com/HScheiber/STAT545-hw-Scheiber-Hayden/blob/master/README.md) to return repository home page.
 
 First we need to load the `gapminder` dataset and the `tidyverse` package, as well as `knitr` for nicer table outputs. When making my plots I realized that I needed to re-shaped a data-frame using a function from `reshape2`, so I load that library as well.
 
@@ -44,10 +46,7 @@ knitr::kable(head(gapminder,n=15))
 | Albania     | Europe    |  1957|   59.280|   1476505|  1942.2842|
 | Albania     | Europe    |  1962|   64.820|   1728137|  2312.8890|
 
-1. Task Menu
-------------
-
-#### 1.1 Get the maximum and minimum of GDP per capita for all continents.
+#### 1. Get the maximum and minimum of GDP per capita for all continents.
 
 This can be acheived easily using the `group_by()` combined with `summarize()`. Below, I group the gapminder data frame by continent and pipe that result into the summarize function, where I utilize the `max()` and `min()` functions to find the range of GDP per capita for each continent.
 
@@ -86,18 +85,24 @@ knitr::kable(p2)
 | Europe    | Min\_GPDperCap |     973.5332|
 | Oceania   | Min\_GPDperCap |   10039.5956|
 
-With above reorganized data frame, we can plot min and max GDP of each continent side-by side in the same bar plot. I took a lot of time to add theme changes here to spice things up a bit. I also spent some time to figure out how to include only some labels on the breaks of the y axis, as I used a log y-axis. Producing this plot was a learning experience for me. I even utilized a for loop!
+With above reorganized data frame, we can plot min and max GDP of each continent side-by side in the same bar plot. I took a lot of time to add theme changes here to spice things up a bit. I also spent some time to figure out how to include only some labels on the breaks of the y axis, as I used a log y-axis. Producing this plot was a learning experience for me. I even utilized a `for` loop!
 
 ``` r
-breakvector <- c(1:10 %o% 10^(0:4)) # Define a vector of values for the log scale break lines, %o% is the outer product of the two lists
-options(scipen=5) # Disable scientific notation
-labelvector = vector("list",length(breakvector)) # initialize a blank list of equal length for the labels of the breaks
+# Define a vector of values for the log scale break lines, %o% is the outer product of the two lists
+breakvector <- c(1:10 %o% 10^(0:4))
+# Disable scientific notation
+options(scipen=5)
+# initialize a blank list of equal length for the labels of the breaks
+labelvector = vector("list",length(breakvector))
 
-for (i in 1:length(labelvector)) { # Loop over all labels in 'labelvector' variable
+# Loop over all labels in 'labelvector' variable
+for (i in 1:length(labelvector)) {
   if (i %% 10 == 0 | i == 1) {
-    labelvector[i] <- paste("$",toString(breakvector[i]),sep="") # Include the label for every 10th line break (ie $1, $10, $100...)
+    # Include the label for every 10th line break (ie $1, $10, $100...)
+    labelvector[i] <- paste("$",toString(breakvector[i]),sep="")
   }else{
-    labelvector[i] <- "" # For all other line breaks, include blank label
+    # For all other line breaks, include blank label
+    labelvector[i] <- ""
   }
 }
 
@@ -107,12 +112,17 @@ p2 %>%
   scale_fill_discrete("Legend", # Modifying legend title and labels
       labels = c("Maximum GDP per capita",
                  "Minimum GDP per capita")) + 
-  scale_y_log10(breaks=breakvector, # Adding log scale lines, keeping only some labels
+  # Adding log scale lines, keeping only some labels
+  scale_y_log10(breaks=breakvector,
       labels=labelvector) +
   theme_bw() + # black and white theme
   theme(axis.title = element_text(size=14),
       strip.text = element_text(size=14, face="bold"),
-      plot.title = element_text(hjust = 0.5)) +
+      plot.title = element_text(size=14, face="bold",hjust = 0.49),
+      axis.text.x = element_text(size=12,face ="bold"),
+      axis.text.y = element_text(size=12,face ="bold"),
+      legend.title = element_text(size=14, face ="bold"),
+      legend.text = element_text(size=12, face ="bold")) +
   labs(x = "Continent", 
       y = "GDP Per Capita",
       title = "Minimum and Maximum GDP per capita of the Continents: 1952 - 2007",
@@ -121,300 +131,370 @@ p2 %>%
 
 ![](dplyr_manipulation_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-5-1.png)
 
-#### 1.2 Look at the spread of GDP per capita within the continents.
+#### 2. Look at the spread of GDP per capita within the continents.
 
-For this, we need to group the data set by continent. Let's separate by decade: 50's 60's 70's 80's 90's 00's
+For this, we need to group the data set by continent. I also want to define a new variable `decade` which is simply the decade that each data point occurs in. We can start with a table of minimum, maximum, mean, and standard deviation for some of the data, but it doesn't help visualize it very well.
 
 ``` r
-p3 <- group_by(gapminder,continent,year) %>%
-  filter(year > 2000)
+p3 <- gapminder %>%
+  mutate(decade = paste(substr(year, 1, 3),"0's",sep="")) %>% # Add a decade column by taking the 3rd digit of the year and pasting 0 to it.
+  group_by(continent, decade)
 
-knitr::kable(p3)
+p4 <- p3 %>% 
+  summarize(min_gdpPercap = min(gdpPercap), 
+    max_gdpPercap = max(gdpPercap), 
+    average = mean(gdpPercap), 
+    standard_dev = sd(gdpPercap))
+  
+knitr::kable(head(p4,n=10))
 ```
 
-| country                  | continent |  year|  lifeExp|         pop|   gdpPercap|
-|:-------------------------|:----------|-----:|--------:|-----------:|-----------:|
-| Afghanistan              | Asia      |  2002|   42.129|    25268405|    726.7341|
-| Afghanistan              | Asia      |  2007|   43.828|    31889923|    974.5803|
-| Albania                  | Europe    |  2002|   75.651|     3508512|   4604.2117|
-| Albania                  | Europe    |  2007|   76.423|     3600523|   5937.0295|
-| Algeria                  | Africa    |  2002|   70.994|    31287142|   5288.0404|
-| Algeria                  | Africa    |  2007|   72.301|    33333216|   6223.3675|
-| Angola                   | Africa    |  2002|   41.003|    10866106|   2773.2873|
-| Angola                   | Africa    |  2007|   42.731|    12420476|   4797.2313|
-| Argentina                | Americas  |  2002|   74.340|    38331121|   8797.6407|
-| Argentina                | Americas  |  2007|   75.320|    40301927|  12779.3796|
-| Australia                | Oceania   |  2002|   80.370|    19546792|  30687.7547|
-| Australia                | Oceania   |  2007|   81.235|    20434176|  34435.3674|
-| Austria                  | Europe    |  2002|   78.980|     8148312|  32417.6077|
-| Austria                  | Europe    |  2007|   79.829|     8199783|  36126.4927|
-| Bahrain                  | Asia      |  2002|   74.795|      656397|  23403.5593|
-| Bahrain                  | Asia      |  2007|   75.635|      708573|  29796.0483|
-| Bangladesh               | Asia      |  2002|   62.013|   135656790|   1136.3904|
-| Bangladesh               | Asia      |  2007|   64.062|   150448339|   1391.2538|
-| Belgium                  | Europe    |  2002|   78.320|    10311970|  30485.8838|
-| Belgium                  | Europe    |  2007|   79.441|    10392226|  33692.6051|
-| Benin                    | Africa    |  2002|   54.406|     7026113|   1372.8779|
-| Benin                    | Africa    |  2007|   56.728|     8078314|   1441.2849|
-| Bolivia                  | Americas  |  2002|   63.883|     8445134|   3413.2627|
-| Bolivia                  | Americas  |  2007|   65.554|     9119152|   3822.1371|
-| Bosnia and Herzegovina   | Europe    |  2002|   74.090|     4165416|   6018.9752|
-| Bosnia and Herzegovina   | Europe    |  2007|   74.852|     4552198|   7446.2988|
-| Botswana                 | Africa    |  2002|   46.634|     1630347|  11003.6051|
-| Botswana                 | Africa    |  2007|   50.728|     1639131|  12569.8518|
-| Brazil                   | Americas  |  2002|   71.006|   179914212|   8131.2128|
-| Brazil                   | Americas  |  2007|   72.390|   190010647|   9065.8008|
-| Bulgaria                 | Europe    |  2002|   72.140|     7661799|   7696.7777|
-| Bulgaria                 | Europe    |  2007|   73.005|     7322858|  10680.7928|
-| Burkina Faso             | Africa    |  2002|   50.650|    12251209|   1037.6452|
-| Burkina Faso             | Africa    |  2007|   52.295|    14326203|   1217.0330|
-| Burundi                  | Africa    |  2002|   47.360|     7021078|    446.4035|
-| Burundi                  | Africa    |  2007|   49.580|     8390505|    430.0707|
-| Cambodia                 | Asia      |  2002|   56.752|    12926707|    896.2260|
-| Cambodia                 | Asia      |  2007|   59.723|    14131858|   1713.7787|
-| Cameroon                 | Africa    |  2002|   49.856|    15929988|   1934.0114|
-| Cameroon                 | Africa    |  2007|   50.430|    17696293|   2042.0952|
-| Canada                   | Americas  |  2002|   79.770|    31902268|  33328.9651|
-| Canada                   | Americas  |  2007|   80.653|    33390141|  36319.2350|
-| Central African Republic | Africa    |  2002|   43.308|     4048013|    738.6906|
-| Central African Republic | Africa    |  2007|   44.741|     4369038|    706.0165|
-| Chad                     | Africa    |  2002|   50.525|     8835739|   1156.1819|
-| Chad                     | Africa    |  2007|   50.651|    10238807|   1704.0637|
-| Chile                    | Americas  |  2002|   77.860|    15497046|  10778.7838|
-| Chile                    | Americas  |  2007|   78.553|    16284741|  13171.6388|
-| China                    | Asia      |  2002|   72.028|  1280400000|   3119.2809|
-| China                    | Asia      |  2007|   72.961|  1318683096|   4959.1149|
-| Colombia                 | Americas  |  2002|   71.682|    41008227|   5755.2600|
-| Colombia                 | Americas  |  2007|   72.889|    44227550|   7006.5804|
-| Comoros                  | Africa    |  2002|   62.974|      614382|   1075.8116|
-| Comoros                  | Africa    |  2007|   65.152|      710960|    986.1479|
-| Congo, Dem. Rep.         | Africa    |  2002|   44.966|    55379852|    241.1659|
-| Congo, Dem. Rep.         | Africa    |  2007|   46.462|    64606759|    277.5519|
-| Congo, Rep.              | Africa    |  2002|   52.970|     3328795|   3484.0620|
-| Congo, Rep.              | Africa    |  2007|   55.322|     3800610|   3632.5578|
-| Costa Rica               | Americas  |  2002|   78.123|     3834934|   7723.4472|
-| Costa Rica               | Americas  |  2007|   78.782|     4133884|   9645.0614|
-| Cote d'Ivoire            | Africa    |  2002|   46.832|    16252726|   1648.8008|
-| Cote d'Ivoire            | Africa    |  2007|   48.328|    18013409|   1544.7501|
-| Croatia                  | Europe    |  2002|   74.876|     4481020|  11628.3890|
-| Croatia                  | Europe    |  2007|   75.748|     4493312|  14619.2227|
-| Cuba                     | Americas  |  2002|   77.158|    11226999|   6340.6467|
-| Cuba                     | Americas  |  2007|   78.273|    11416987|   8948.1029|
-| Czech Republic           | Europe    |  2002|   75.510|    10256295|  17596.2102|
-| Czech Republic           | Europe    |  2007|   76.486|    10228744|  22833.3085|
-| Denmark                  | Europe    |  2002|   77.180|     5374693|  32166.5001|
-| Denmark                  | Europe    |  2007|   78.332|     5468120|  35278.4187|
-| Djibouti                 | Africa    |  2002|   53.373|      447416|   1908.2609|
-| Djibouti                 | Africa    |  2007|   54.791|      496374|   2082.4816|
-| Dominican Republic       | Americas  |  2002|   70.847|     8650322|   4563.8082|
-| Dominican Republic       | Americas  |  2007|   72.235|     9319622|   6025.3748|
-| Ecuador                  | Americas  |  2002|   74.173|    12921234|   5773.0445|
-| Ecuador                  | Americas  |  2007|   74.994|    13755680|   6873.2623|
-| Egypt                    | Africa    |  2002|   69.806|    73312559|   4754.6044|
-| Egypt                    | Africa    |  2007|   71.338|    80264543|   5581.1810|
-| El Salvador              | Americas  |  2002|   70.734|     6353681|   5351.5687|
-| El Salvador              | Americas  |  2007|   71.878|     6939688|   5728.3535|
-| Equatorial Guinea        | Africa    |  2002|   49.348|      495627|   7703.4959|
-| Equatorial Guinea        | Africa    |  2007|   51.579|      551201|  12154.0897|
-| Eritrea                  | Africa    |  2002|   55.240|     4414865|    765.3500|
-| Eritrea                  | Africa    |  2007|   58.040|     4906585|    641.3695|
-| Ethiopia                 | Africa    |  2002|   50.725|    67946797|    530.0535|
-| Ethiopia                 | Africa    |  2007|   52.947|    76511887|    690.8056|
-| Finland                  | Europe    |  2002|   78.370|     5193039|  28204.5906|
-| Finland                  | Europe    |  2007|   79.313|     5238460|  33207.0844|
-| France                   | Europe    |  2002|   79.590|    59925035|  28926.0323|
-| France                   | Europe    |  2007|   80.657|    61083916|  30470.0167|
-| Gabon                    | Africa    |  2002|   56.761|     1299304|  12521.7139|
-| Gabon                    | Africa    |  2007|   56.735|     1454867|  13206.4845|
-| Gambia                   | Africa    |  2002|   58.041|     1457766|    660.5856|
-| Gambia                   | Africa    |  2007|   59.448|     1688359|    752.7497|
-| Germany                  | Europe    |  2002|   78.670|    82350671|  30035.8020|
-| Germany                  | Europe    |  2007|   79.406|    82400996|  32170.3744|
-| Ghana                    | Africa    |  2002|   58.453|    20550751|   1111.9846|
-| Ghana                    | Africa    |  2007|   60.022|    22873338|   1327.6089|
-| Greece                   | Europe    |  2002|   78.256|    10603863|  22514.2548|
-| Greece                   | Europe    |  2007|   79.483|    10706290|  27538.4119|
-| Guatemala                | Americas  |  2002|   68.978|    11178650|   4858.3475|
-| Guatemala                | Americas  |  2007|   70.259|    12572928|   5186.0500|
-| Guinea                   | Africa    |  2002|   53.676|     8807818|    945.5836|
-| Guinea                   | Africa    |  2007|   56.007|     9947814|    942.6542|
-| Guinea-Bissau            | Africa    |  2002|   45.504|     1332459|    575.7047|
-| Guinea-Bissau            | Africa    |  2007|   46.388|     1472041|    579.2317|
-| Haiti                    | Americas  |  2002|   58.137|     7607651|   1270.3649|
-| Haiti                    | Americas  |  2007|   60.916|     8502814|   1201.6372|
-| Honduras                 | Americas  |  2002|   68.565|     6677328|   3099.7287|
-| Honduras                 | Americas  |  2007|   70.198|     7483763|   3548.3308|
-| Hong Kong, China         | Asia      |  2002|   81.495|     6762476|  30209.0152|
-| Hong Kong, China         | Asia      |  2007|   82.208|     6980412|  39724.9787|
-| Hungary                  | Europe    |  2002|   72.590|    10083313|  14843.9356|
-| Hungary                  | Europe    |  2007|   73.338|     9956108|  18008.9444|
-| Iceland                  | Europe    |  2002|   80.500|      288030|  31163.2020|
-| Iceland                  | Europe    |  2007|   81.757|      301931|  36180.7892|
-| India                    | Asia      |  2002|   62.879|  1034172547|   1746.7695|
-| India                    | Asia      |  2007|   64.698|  1110396331|   2452.2104|
-| Indonesia                | Asia      |  2002|   68.588|   211060000|   2873.9129|
-| Indonesia                | Asia      |  2007|   70.650|   223547000|   3540.6516|
-| Iran                     | Asia      |  2002|   69.451|    66907826|   9240.7620|
-| Iran                     | Asia      |  2007|   70.964|    69453570|  11605.7145|
-| Iraq                     | Asia      |  2002|   57.046|    24001816|   4390.7173|
-| Iraq                     | Asia      |  2007|   59.545|    27499638|   4471.0619|
-| Ireland                  | Europe    |  2002|   77.783|     3879155|  34077.0494|
-| Ireland                  | Europe    |  2007|   78.885|     4109086|  40675.9964|
-| Israel                   | Asia      |  2002|   79.696|     6029529|  21905.5951|
-| Israel                   | Asia      |  2007|   80.745|     6426679|  25523.2771|
-| Italy                    | Europe    |  2002|   80.240|    57926999|  27968.0982|
-| Italy                    | Europe    |  2007|   80.546|    58147733|  28569.7197|
-| Jamaica                  | Americas  |  2002|   72.047|     2664659|   6994.7749|
-| Jamaica                  | Americas  |  2007|   72.567|     2780132|   7320.8803|
-| Japan                    | Asia      |  2002|   82.000|   127065841|  28604.5919|
-| Japan                    | Asia      |  2007|   82.603|   127467972|  31656.0681|
-| Jordan                   | Asia      |  2002|   71.263|     5307470|   3844.9172|
-| Jordan                   | Asia      |  2007|   72.535|     6053193|   4519.4612|
-| Kenya                    | Africa    |  2002|   50.992|    31386842|   1287.5147|
-| Kenya                    | Africa    |  2007|   54.110|    35610177|   1463.2493|
-| Korea, Dem. Rep.         | Asia      |  2002|   66.662|    22215365|   1646.7582|
-| Korea, Dem. Rep.         | Asia      |  2007|   67.297|    23301725|   1593.0655|
-| Korea, Rep.              | Asia      |  2002|   77.045|    47969150|  19233.9882|
-| Korea, Rep.              | Asia      |  2007|   78.623|    49044790|  23348.1397|
-| Kuwait                   | Asia      |  2002|   76.904|     2111561|  35110.1057|
-| Kuwait                   | Asia      |  2007|   77.588|     2505559|  47306.9898|
-| Lebanon                  | Asia      |  2002|   71.028|     3677780|   9313.9388|
-| Lebanon                  | Asia      |  2007|   71.993|     3921278|  10461.0587|
-| Lesotho                  | Africa    |  2002|   44.593|     2046772|   1275.1846|
-| Lesotho                  | Africa    |  2007|   42.592|     2012649|   1569.3314|
-| Liberia                  | Africa    |  2002|   43.753|     2814651|    531.4824|
-| Liberia                  | Africa    |  2007|   45.678|     3193942|    414.5073|
-| Libya                    | Africa    |  2002|   72.737|     5368585|   9534.6775|
-| Libya                    | Africa    |  2007|   73.952|     6036914|  12057.4993|
-| Madagascar               | Africa    |  2002|   57.286|    16473477|    894.6371|
-| Madagascar               | Africa    |  2007|   59.443|    19167654|   1044.7701|
-| Malawi                   | Africa    |  2002|   45.009|    11824495|    665.4231|
-| Malawi                   | Africa    |  2007|   48.303|    13327079|    759.3499|
-| Malaysia                 | Asia      |  2002|   73.044|    22662365|  10206.9779|
-| Malaysia                 | Asia      |  2007|   74.241|    24821286|  12451.6558|
-| Mali                     | Africa    |  2002|   51.818|    10580176|    951.4098|
-| Mali                     | Africa    |  2007|   54.467|    12031795|   1042.5816|
-| Mauritania               | Africa    |  2002|   62.247|     2828858|   1579.0195|
-| Mauritania               | Africa    |  2007|   64.164|     3270065|   1803.1515|
-| Mauritius                | Africa    |  2002|   71.954|     1200206|   9021.8159|
-| Mauritius                | Africa    |  2007|   72.801|     1250882|  10956.9911|
-| Mexico                   | Americas  |  2002|   74.902|   102479927|  10742.4405|
-| Mexico                   | Americas  |  2007|   76.195|   108700891|  11977.5750|
-| Mongolia                 | Asia      |  2002|   65.033|     2674234|   2140.7393|
-| Mongolia                 | Asia      |  2007|   66.803|     2874127|   3095.7723|
-| Montenegro               | Europe    |  2002|   73.981|      720230|   6557.1943|
-| Montenegro               | Europe    |  2007|   74.543|      684736|   9253.8961|
-| Morocco                  | Africa    |  2002|   69.615|    31167783|   3258.4956|
-| Morocco                  | Africa    |  2007|   71.164|    33757175|   3820.1752|
-| Mozambique               | Africa    |  2002|   44.026|    18473780|    633.6179|
-| Mozambique               | Africa    |  2007|   42.082|    19951656|    823.6856|
-| Myanmar                  | Asia      |  2002|   59.908|    45598081|    611.0000|
-| Myanmar                  | Asia      |  2007|   62.069|    47761980|    944.0000|
-| Namibia                  | Africa    |  2002|   51.479|     1972153|   4072.3248|
-| Namibia                  | Africa    |  2007|   52.906|     2055080|   4811.0604|
-| Nepal                    | Asia      |  2002|   61.340|    25873917|   1057.2063|
-| Nepal                    | Asia      |  2007|   63.785|    28901790|   1091.3598|
-| Netherlands              | Europe    |  2002|   78.530|    16122830|  33724.7578|
-| Netherlands              | Europe    |  2007|   79.762|    16570613|  36797.9333|
-| New Zealand              | Oceania   |  2002|   79.110|     3908037|  23189.8014|
-| New Zealand              | Oceania   |  2007|   80.204|     4115771|  25185.0091|
-| Nicaragua                | Americas  |  2002|   70.836|     5146848|   2474.5488|
-| Nicaragua                | Americas  |  2007|   72.899|     5675356|   2749.3210|
-| Niger                    | Africa    |  2002|   54.496|    11140655|    601.0745|
-| Niger                    | Africa    |  2007|   56.867|    12894865|    619.6769|
-| Nigeria                  | Africa    |  2002|   46.608|   119901274|   1615.2864|
-| Nigeria                  | Africa    |  2007|   46.859|   135031164|   2013.9773|
-| Norway                   | Europe    |  2002|   79.050|     4535591|  44683.9753|
-| Norway                   | Europe    |  2007|   80.196|     4627926|  49357.1902|
-| Oman                     | Asia      |  2002|   74.193|     2713462|  19774.8369|
-| Oman                     | Asia      |  2007|   75.640|     3204897|  22316.1929|
-| Pakistan                 | Asia      |  2002|   63.610|   153403524|   2092.7124|
-| Pakistan                 | Asia      |  2007|   65.483|   169270617|   2605.9476|
-| Panama                   | Americas  |  2002|   74.712|     2990875|   7356.0319|
-| Panama                   | Americas  |  2007|   75.537|     3242173|   9809.1856|
-| Paraguay                 | Americas  |  2002|   70.755|     5884491|   3783.6742|
-| Paraguay                 | Americas  |  2007|   71.752|     6667147|   4172.8385|
-| Peru                     | Americas  |  2002|   69.906|    26769436|   5909.0201|
-| Peru                     | Americas  |  2007|   71.421|    28674757|   7408.9056|
-| Philippines              | Asia      |  2002|   70.303|    82995088|   2650.9211|
-| Philippines              | Asia      |  2007|   71.688|    91077287|   3190.4810|
-| Poland                   | Europe    |  2002|   74.670|    38625976|  12002.2391|
-| Poland                   | Europe    |  2007|   75.563|    38518241|  15389.9247|
-| Portugal                 | Europe    |  2002|   77.290|    10433867|  19970.9079|
-| Portugal                 | Europe    |  2007|   78.098|    10642836|  20509.6478|
-| Puerto Rico              | Americas  |  2002|   77.778|     3859606|  18855.6062|
-| Puerto Rico              | Americas  |  2007|   78.746|     3942491|  19328.7090|
-| Reunion                  | Africa    |  2002|   75.744|      743981|   6316.1652|
-| Reunion                  | Africa    |  2007|   76.442|      798094|   7670.1226|
-| Romania                  | Europe    |  2002|   71.322|    22404337|   7885.3601|
-| Romania                  | Europe    |  2007|   72.476|    22276056|  10808.4756|
-| Rwanda                   | Africa    |  2002|   43.413|     7852401|    785.6538|
-| Rwanda                   | Africa    |  2007|   46.242|     8860588|    863.0885|
-| Sao Tome and Principe    | Africa    |  2002|   64.337|      170372|   1353.0924|
-| Sao Tome and Principe    | Africa    |  2007|   65.528|      199579|   1598.4351|
-| Saudi Arabia             | Asia      |  2002|   71.626|    24501530|  19014.5412|
-| Saudi Arabia             | Asia      |  2007|   72.777|    27601038|  21654.8319|
-| Senegal                  | Africa    |  2002|   61.600|    10870037|   1519.6353|
-| Senegal                  | Africa    |  2007|   63.062|    12267493|   1712.4721|
-| Serbia                   | Europe    |  2002|   73.213|    10111559|   7236.0753|
-| Serbia                   | Europe    |  2007|   74.002|    10150265|   9786.5347|
-| Sierra Leone             | Africa    |  2002|   41.012|     5359092|    699.4897|
-| Sierra Leone             | Africa    |  2007|   42.568|     6144562|    862.5408|
-| Singapore                | Asia      |  2002|   78.770|     4197776|  36023.1054|
-| Singapore                | Asia      |  2007|   79.972|     4553009|  47143.1796|
-| Slovak Republic          | Europe    |  2002|   73.800|     5410052|  13638.7784|
-| Slovak Republic          | Europe    |  2007|   74.663|     5447502|  18678.3144|
-| Slovenia                 | Europe    |  2002|   76.660|     2011497|  20660.0194|
-| Slovenia                 | Europe    |  2007|   77.926|     2009245|  25768.2576|
-| Somalia                  | Africa    |  2002|   45.936|     7753310|    882.0818|
-| Somalia                  | Africa    |  2007|   48.159|     9118773|    926.1411|
-| South Africa             | Africa    |  2002|   53.365|    44433622|   7710.9464|
-| South Africa             | Africa    |  2007|   49.339|    43997828|   9269.6578|
-| Spain                    | Europe    |  2002|   79.780|    40152517|  24835.4717|
-| Spain                    | Europe    |  2007|   80.941|    40448191|  28821.0637|
-| Sri Lanka                | Asia      |  2002|   70.815|    19576783|   3015.3788|
-| Sri Lanka                | Asia      |  2007|   72.396|    20378239|   3970.0954|
-| Sudan                    | Africa    |  2002|   56.369|    37090298|   1993.3983|
-| Sudan                    | Africa    |  2007|   58.556|    42292929|   2602.3950|
-| Swaziland                | Africa    |  2002|   43.869|     1130269|   4128.1169|
-| Swaziland                | Africa    |  2007|   39.613|     1133066|   4513.4806|
-| Sweden                   | Europe    |  2002|   80.040|     8954175|  29341.6309|
-| Sweden                   | Europe    |  2007|   80.884|     9031088|  33859.7484|
-| Switzerland              | Europe    |  2002|   80.620|     7361757|  34480.9577|
-| Switzerland              | Europe    |  2007|   81.701|     7554661|  37506.4191|
-| Syria                    | Asia      |  2002|   73.053|    17155814|   4090.9253|
-| Syria                    | Asia      |  2007|   74.143|    19314747|   4184.5481|
-| Taiwan                   | Asia      |  2002|   76.990|    22454239|  23235.4233|
-| Taiwan                   | Asia      |  2007|   78.400|    23174294|  28718.2768|
-| Tanzania                 | Africa    |  2002|   49.651|    34593779|    899.0742|
-| Tanzania                 | Africa    |  2007|   52.517|    38139640|   1107.4822|
-| Thailand                 | Asia      |  2002|   68.564|    62806748|   5913.1875|
-| Thailand                 | Asia      |  2007|   70.616|    65068149|   7458.3963|
-| Togo                     | Africa    |  2002|   57.561|     4977378|    886.2206|
-| Togo                     | Africa    |  2007|   58.420|     5701579|    882.9699|
-| Trinidad and Tobago      | Americas  |  2002|   68.976|     1101832|  11460.6002|
-| Trinidad and Tobago      | Americas  |  2007|   69.819|     1056608|  18008.5092|
-| Tunisia                  | Africa    |  2002|   73.042|     9770575|   5722.8957|
-| Tunisia                  | Africa    |  2007|   73.923|    10276158|   7092.9230|
-| Turkey                   | Europe    |  2002|   70.845|    67308928|   6508.0857|
-| Turkey                   | Europe    |  2007|   71.777|    71158647|   8458.2764|
-| Uganda                   | Africa    |  2002|   47.813|    24739869|    927.7210|
-| Uganda                   | Africa    |  2007|   51.542|    29170398|   1056.3801|
-| United Kingdom           | Europe    |  2002|   78.471|    59912431|  29478.9992|
-| United Kingdom           | Europe    |  2007|   79.425|    60776238|  33203.2613|
-| United States            | Americas  |  2002|   77.310|   287675526|  39097.0995|
-| United States            | Americas  |  2007|   78.242|   301139947|  42951.6531|
-| Uruguay                  | Americas  |  2002|   75.307|     3363085|   7727.0020|
-| Uruguay                  | Americas  |  2007|   76.384|     3447496|  10611.4630|
-| Venezuela                | Americas  |  2002|   72.766|    24287670|   8605.0478|
-| Venezuela                | Americas  |  2007|   73.747|    26084662|  11415.8057|
-| Vietnam                  | Asia      |  2002|   73.017|    80908147|   1764.4567|
-| Vietnam                  | Asia      |  2007|   74.249|    85262356|   2441.5764|
-| West Bank and Gaza       | Asia      |  2002|   72.370|     3389578|   4515.4876|
-| West Bank and Gaza       | Asia      |  2007|   73.422|     4018332|   3025.3498|
-| Yemen, Rep.              | Asia      |  2002|   60.308|    18701257|   2234.8208|
-| Yemen, Rep.              | Asia      |  2007|   62.698|    22211743|   2280.7699|
-| Zambia                   | Africa    |  2002|   39.193|    10595811|   1071.6139|
-| Zambia                   | Africa    |  2007|   42.384|    11746035|   1271.2116|
-| Zimbabwe                 | Africa    |  2002|   39.989|    11926563|    672.0386|
-| Zimbabwe                 | Africa    |  2007|   43.487|    12311143|    469.7093|
+| continent | decade |  min\_gdpPercap|  max\_gdpPercap|   average|  standard\_dev|
+|:----------|:-------|---------------:|---------------:|---------:|--------------:|
+| Africa    | 1950's |        298.8462|        5487.104|  1318.904|       1058.375|
+| Africa    | 1960's |        355.2032|       18772.752|  1824.221|       2263.875|
+| Africa    | 1970's |        464.0995|       21951.212|  2462.777|       3723.038|
+| Africa    | 1980's |        389.8762|       17364.275|  2382.131|       2911.674|
+| Africa    | 1990's |        312.1884|       14722.842|  2330.285|       2720.962|
+| Africa    | 2000's |        241.1659|       13206.485|  2844.209|       3304.233|
+| Americas  | 1950's |       1397.7171|       14847.127|  4347.553|       3140.187|
+| Americas  | 1960's |       1452.0577|       19530.366|  5284.898|       3790.048|
+| Americas  | 1970's |       1654.4569|       24072.632|  6921.671|       5030.810|
+| Americas  | 1980's |       1823.0160|       29884.350|  7650.069|       6063.011|
+
+I think the best way to visualize this data is to utilize `facet_grid` and plot the spread of GDP per capita for each continent and each decade. This way we can visualize the change in GDP per capita for each continent throughout the years.
+
+``` r
+ggplot(p3,aes(gdpPercap)) +
+  facet_grid(continent ~ decade, scales = "free_y") +
+  geom_density(fill="#33ccff") +
+  scale_y_continuous(breaks = NULL) +
+  scale_x_continuous(breaks = c(0,50000,100000),
+    labels = c('$0','$50k','$100k')) +
+  theme_bw() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1,size=12,face ="bold"),
+    plot.title = element_text(size=14,face ="bold",hjust = 0.5),
+    strip.background = element_rect(fill="#99ffeb"),
+    axis.title = element_text(size=14, face ="bold"),
+    strip.text = element_text(size=14, face="bold")) +
+  labs(x = "GDP per Capita", 
+    y = "Density of Countries (Relative to Continent)",
+    title = "Spread of GDP per Capita Through the Years - 1950's to 2000's",
+    caption = "Based on data from Gapminder")
+```
+
+![](dplyr_manipulation_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-7-1.png)
+
+I'm interested in seeing what the richest country in asia was during the 1950's...
+
+``` r
+gapminder %>%
+  filter(continent == "Asia" & (year > 1949 & year < 1960)) %>%
+  filter(gdpPercap == max(gdpPercap))
+```
+
+    ## # A tibble: 1 x 6
+    ##   country continent  year lifeExp    pop gdpPercap
+    ##    <fctr>    <fctr> <int>   <dbl>  <int>     <dbl>
+    ## 1  Kuwait      Asia  1957  58.033 212846  113523.1
+
+So it was Kuwait, which had a large oil boom during this time known as [the golden era.](https://en.wikipedia.org/wiki/History_of_Kuwait#Golden_Era_.281946.E2.80.931982.29)
+
+#### 3. Compute a trimmed mean of life expectancy for different years. Or a weighted mean, weighting by population. Just try something other than the plain vanilla mean.
+
+For this, I would like to compute a trimmed mean of life expectancy for each decade. This means that I will remove any data that "too far" from the traditional mean when calculating the trimmed mean.
+
+Once again, I will group by decade. This time I will not group by continent.
+
+``` r
+p5 <- gapminder %>%
+  mutate(decade = paste(substr(year, 1, 3),"0's",sep="")) %>%
+  group_by(decade)
+```
+
+Let's first plot the distribution of life expectancies for each decade to get an idea of what the outliers will look like.
+
+``` r
+ggplot(p5,aes(x = lifeExp)) +
+  facet_wrap(~decade, scales = "fixed") +
+  geom_histogram(fill="#33ccff", binwidth = 1) +
+  theme_bw() +
+  theme(axis.text.x = element_text(size=12,face ="bold"),
+    axis.text.y = element_text(size=12,face ="bold"),
+    plot.title = element_text(size=14,face ="bold",hjust = 0.5),
+    strip.background = element_rect(fill="#99ffeb"),
+    axis.title = element_text(size=14, face ="bold"),
+    strip.text = element_text(size=14, face="bold")) +
+  labs(x = "Life Expectancy", 
+    y = "Count",
+    title = "Spread of Life Expectancies by Decade 1952 - 2007",
+    caption = "Based on data from Gapminder")
+```
+
+![](dplyr_manipulation_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-10-1.png)
+
+We can also easily make a table of minimum, maximum, mean, median, and standard deviation for each decade.
+
+``` r
+summarize(p5, MinlifeExp = min(lifeExp),
+    MaxlifeExp = max(lifeExp),
+    meanlifeExp = mean(lifeExp),
+    medianlifeExp = median(lifeExp),
+    StdevlifeExp = sd(lifeExp)) %>%
+  knitr::kable()
+```
+
+| decade |  MinlifeExp|  MaxlifeExp|  meanlifeExp|  medianlifeExp|  StdevlifeExp|
+|:-------|-----------:|-----------:|------------:|--------------:|-------------:|
+| 1950's |      28.801|      73.470|     50.28251|        46.7855|      12.26851|
+| 1960's |      31.997|      74.160|     54.64377|        52.0755|      11.93358|
+| 1970's |      31.220|      76.110|     58.60877|        58.1360|      11.32589|
+| 1980's |      38.445|      78.670|     62.37290|        64.0910|      10.67832|
+| 1990's |      23.599|      80.690|     64.58751|        68.4415|      11.38252|
+| 2000's |      39.193|      82.603|     66.35117|        71.2135|      12.17309|
+
+Now I would like to remove the outliers (let's say anything beyond 1 standard deviation) and recompute this information.
+
+``` r
+p5_trimmed <- filter(p5,lifeExp > (mean(lifeExp) - sd(lifeExp)) & 
+  lifeExp < (mean(lifeExp) + sd(lifeExp)))
+```
+
+Once again, I want to plot the data just to see how it looks now!
+
+``` r
+ggplot(p5_trimmed,aes(x = lifeExp)) +
+  facet_wrap(~decade, scales = "fixed") +
+  geom_histogram(fill="#33ccff", binwidth = 1) +
+  theme_bw() +
+  theme(axis.text.x = element_text(size=12,face ="bold"),
+    axis.text.y = element_text(size=12,face ="bold"),
+    plot.title = element_text(size=14,face ="bold",hjust = 0.5),
+    strip.background = element_rect(fill="#99ffeb"),
+    axis.title = element_text(size=14, face ="bold"),
+    strip.text = element_text(size=14, face="bold")) +
+  labs(x = "Life Expectancy", 
+    y = "Count",
+    title = "Spread of Life Expectancies by Decade 1952 - 2007",
+    caption = "Based on data from Gapminder")
+```
+
+![](dplyr_manipulation_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-13-1.png)
+
+That's exactly what we were looking for. Now lets calculate statistics on the trimmed data.
+
+``` r
+sum_p5_trim <- summarize(p5_trimmed, MinlifeExp = min(lifeExp),
+    MaxlifeExp = max(lifeExp),
+    meanlifeExp = mean(lifeExp),
+    medianlifeExp = median(lifeExp),
+    StdevlifeExp = sd(lifeExp))
+    
+knitr::kable(sum_p5_trim)
+```
+
+| decade |  MinlifeExp|  MaxlifeExp|  meanlifeExp|  medianlifeExp|  StdevlifeExp|
+|:-------|-----------:|-----------:|------------:|--------------:|-------------:|
+| 1950's |      38.047|      62.485|     47.80925|        45.4230|      7.304273|
+| 1960's |      42.858|      66.220|     52.76322|        51.4260|      7.110893|
+| 1970's |      47.383|      69.860|     58.58125|        57.4560|      6.730020|
+| 1980's |      51.744|      72.770|     63.66046|        64.1425|      6.141846|
+| 1990's |      53.378|      75.970|     66.89730|        68.8015|      6.435332|
+| 2000's |      54.406|      78.471|     69.67332|        71.8780|      6.807111|
+
+Finally, just to visualize this last table, lets make a box plot of the trimmed statistics.
+
+``` r
+ggplot(p5_trimmed,aes(x = decade, y = lifeExp)) +
+  geom_boxplot(fill="gray") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(size=12,face ="bold"),
+    axis.text.y = element_text(size=12,face ="bold"),
+    plot.title = element_text(size=14,face ="bold",hjust = 0.5),
+    axis.title = element_text(size=14, face ="bold")) +
+  labs(x = "Decade", 
+    y = "World Average Life Expectancy (Trimmed)",
+    title = "World Trimmed Life Expectancy, by Decade",
+    caption = "Based on data from Gapminder")
+```
+
+![](dplyr_manipulation_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-15-1.png)
+
+Looks good! The world life expectancy is increasing steadily through each decade.
+
+#### 4. How is life expectancy changing over time on different continents?
+
+For this question, we start by grouping the data by continent and by year. The idea is to compute the average life expectancy of each continent at each year, so we can pipe this grouping right into `summarize` and we're already done, easy! Its hard to visualize this data with a table because there is more than 50 rows, but we can show data for just africa, as an example.
+
+``` r
+p6 <- group_by(gapminder, continent, year) %>%
+  summarize(meanlifeExp = mean(lifeExp))
+
+p6 %>%
+filter(continent == "Africa") %>%
+knitr::kable()
+```
+
+| continent |  year|  meanlifeExp|
+|:----------|-----:|------------:|
+| Africa    |  1952|     39.13550|
+| Africa    |  1957|     41.26635|
+| Africa    |  1962|     43.31944|
+| Africa    |  1967|     45.33454|
+| Africa    |  1972|     47.45094|
+| Africa    |  1977|     49.58042|
+| Africa    |  1982|     51.59287|
+| Africa    |  1987|     53.34479|
+| Africa    |  1992|     53.62958|
+| Africa    |  1997|     53.59827|
+| Africa    |  2002|     53.32523|
+| Africa    |  2007|     54.80604|
+
+To visualize this data, once again I will utilize `facet_wrap` so that we obtain a separate plot for each continent. I want to plot all the data points and include a smoother that traces the average at each year. I also colour all the points based on their GDP per capita, because that gives us a little more information. I found using a `log10` scale for the GDP per capita gradient better demonstrated the differences in wealth between countries.
+
+``` r
+gapminder %>%
+  group_by(continent) %>%
+  ggplot(aes(x = year, y = lifeExp, colour=log10(gdpPercap))) +
+  facet_wrap(~continent, scales = "fixed") +
+  geom_point(alpha=0.8) +
+  geom_smooth(method = 'loess',
+    colour="magenta", fill="white") +
+  scale_colour_continuous(name = "GDP per Capita",
+    low = "red", high = "green",
+    breaks = c(log10(max(gapminder$gdpPercap))*0.985, 
+    log10(min(gapminder$gdpPercap))*1.02), label = c("Wealthy","Poor")) +
+  scale_x_continuous(breaks = seq(1950, 2010, 10),
+    labels = as.character(seq(1950, 2010, 10)),
+    limits = c(1950, 2010),
+    minor_breaks = NULL) +
+  theme_dark() +
+  theme(axis.text.x = element_text(size=12,face ="bold", angle = 45, hjust = 1),
+    axis.text.y = element_text(size=12,face ="bold"),
+    plot.title = element_text(size=14,
+      face ="bold",hjust = 0.5),
+    axis.title = element_text(size=14, face ="bold"),
+    strip.background = element_rect(fill="black"),
+    strip.text = element_text(size=14, face="bold"),
+    legend.title = element_text(size=14, face ="bold"),
+    legend.text = element_text(size=12, face ="bold")) +
+  labs(x = "Year", 
+    y = "Life Expectancy",
+    title = "Life Expectancy of the Continents by Year",
+    caption = "Based on data from Gapminder")
+```
+
+![](dplyr_manipulation_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-17-1.png)
+
+Two data points stick out to me in the above plots. One is an outlier in life expectancy in one african country in the 1990s. Let's find out which one:
+
+``` r
+gapminder %>%
+  filter(continent == "Africa", year > 1989 & year < 2000) %>%
+  filter(lifeExp == min(lifeExp))
+```
+
+    ## # A tibble: 1 x 6
+    ##   country continent  year lifeExp     pop gdpPercap
+    ##    <fctr>    <fctr> <int>   <dbl>   <int>     <dbl>
+    ## 1  Rwanda    Africa  1992  23.599 7290203  737.0686
+
+So it was Rwanda in 1992, which went through the infamous [Rwanadan genocide](https://en.wikipedia.org/wiki/Rwandan_genocide) around that time.
+
+The other outlier is in Asia in the 1970's.
+
+``` r
+gapminder %>%
+  filter(continent == "Asia", year > 1969 & year < 1980) %>%
+  filter(lifeExp == min(lifeExp))
+```
+
+    ## # A tibble: 1 x 6
+    ##    country continent  year lifeExp     pop gdpPercap
+    ##     <fctr>    <fctr> <int>   <dbl>   <int>     <dbl>
+    ## 1 Cambodia      Asia  1977   31.22 6978607  524.9722
+
+This data point is from Cambodia in 1977. This data point was collected shortly after a civil war, during the [Cambodian Genocide](https://en.wikipedia.org/wiki/Cambodian_genocide).
+
+#### 5. Report the relative abundance of countries with low life expectancy over time by continent
+
+For this section I will choose the following metric for countries with low life expectancy: The world-average life expectancy in 2007 minus the standard deviation of life expectancy in 2007. Let's compute this number, while making sure to weight each country by its population in 2007.
+
+``` r
+p7 <- gapminder %>%
+  filter(year == 2007) %>%
+  mutate(LifeExp_bypop = lifeExp*pop)
+
+N <- sum(as.numeric(p7$pop)) # total population in 2007
+
+# population weighted average life expectancy in 2007
+Av_lifeExp_2007 <- sum(p7$LifeExp_bypop)/N
+
+# population weighted standard deviation
+sd_lifeExp_2007 <- sqrt(sum(((Av_lifeExp_2007 - p7$lifeExp)^2)*p7$pop)/(N-1))
+  
+Cutoff <- Av_lifeExp_2007 - sd_lifeExp_2007
+Cutoff
+```
+
+    ## [1] 60.06371
+
+So I will consider any country with average life expectancy below `60.06371` as "low life expectancy". Now we can find the ratio of countries with low life expectancy, separately for each continent at each year. This produces a long table, so I'll only tabulate data for Africa as an example.
+
+``` r
+p8 <- gapminder %>%
+  mutate(LowLifeExp = (lifeExp < Cutoff)) %>%
+  group_by(continent,year) %>%
+  summarize(LowLifeExp_ratio = sum(LowLifeExp == TRUE)/(sum(LowLifeExp %in% c(TRUE, FALSE))))
+
+filter(p8,continent == "Africa") %>%
+  knitr::kable()
+```
+
+| continent |  year|  LowLifeExp\_ratio|
+|:----------|-----:|------------------:|
+| Africa    |  1952|          1.0000000|
+| Africa    |  1957|          1.0000000|
+| Africa    |  1962|          0.9807692|
+| Africa    |  1967|          0.9615385|
+| Africa    |  1972|          0.9615385|
+| Africa    |  1977|          0.9615385|
+| Africa    |  1982|          0.8461538|
+| Africa    |  1987|          0.7692308|
+| Africa    |  1992|          0.7500000|
+| Africa    |  1997|          0.7500000|
+| Africa    |  2002|          0.7884615|
+| Africa    |  2007|          0.7884615|
+
+Let's plot this as a line plot, separately for each continent using `facet_wrap`.
+
+``` r
+ggplot(p8,aes(x = year, y = LowLifeExp_ratio)) +
+  facet_wrap(~continent, scales = "fixed") +
+  geom_line(colour = "red") +
+  
+  scale_x_continuous(breaks = seq(1950, 2010, 10),
+    labels = as.character(seq(1950, 2010, 10)),
+    limits = c(1950, 2010),
+    minor_breaks = NULL) +
+  theme_bw() +
+  theme(axis.text.x = element_text(size=12,face ="bold", angle = 45, hjust = 1),
+    axis.text.y = element_text(size=12,face ="bold"),
+    plot.title = element_text(size=14,
+      face ="bold",hjust = 0.5),
+    axis.title = element_text(size=14, face ="bold"),
+    strip.background = element_rect(fill="orange"),
+    strip.text = element_text(size=14, face="bold"),
+    legend.title = element_text(size=14, face ="bold"),
+    legend.text = element_text(size=12, face ="bold")) +
+  labs(x = "Year", 
+    y = "Countries with Low Life Expectancy / Total Countries",
+    title = "Relative Amount of Countries with Low Life Expectancy by Year",
+    caption = "Based on data from Gapminder")
+```
+
+![](dplyr_manipulation_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-22-1.png)
+
+Interesting line shapes! Looks like life expectancy in Oceania has been above 60 years for all countries since 1952.
+
+<a href="#top">Back to top</a>

@@ -9,7 +9,7 @@ output:
 
 ---
 
-Welcome! This is an exploration of the Gapminder data frame, as part of STAT 545 assignment 2. Click [here](README.md) to return to the homework 3 landing page, or [here](https://github.com/HScheiber/STAT545-hw-Scheiber-Hayden/blob/master/README.md) to return repository home page.
+Welcome! This is an exploration of the Gapminder data frame using `ggplot2`, as part of STAT 545 assignment 3. Click [here](README.md) to return to the homework 3 landing page, or [here](https://github.com/HScheiber/STAT545-hw-Scheiber-Hayden/blob/master/README.md) to return repository home page.
 
 First we need to load the `gapminder` dataset and the `tidyverse` package, as well as `knitr` for nicer table outputs. When making my plots I realized that I needed to re-shaped a data-frame using a function from `reshape2`, so I load that library as well.
 
@@ -25,9 +25,7 @@ Here's an example of how to use `knitr::kable()` to make nicer looking tables. T
 knitr::kable(head(gapminder,n=15))
 ```
 
-## 1. Task Menu
-
-#### 1.1 Get the maximum and minimum of GDP per capita for all continents.
+#### 1. Get the maximum and minimum of GDP per capita for all continents.
 
 This can be acheived easily using the `group_by()` combined with `summarize()`. Below, I group the gapminder data frame by continent and pipe that result into the summarize function, where I utilize the `max()` and `min()` functions to find the range of GDP per capita for each continent.
 ```{r}
@@ -43,17 +41,23 @@ p2 <- reshape2::melt(p1,id = c("continent"))
 knitr::kable(p2)
 ```
 
-With above reorganized data frame, we can plot min and max GDP of each continent side-by side in the same bar plot. I took a lot of time to add theme changes here to spice things up a bit. I also spent some time to figure out how to include only some labels on the breaks of the y axis, as I used a log y-axis. Producing this plot was a learning experience for me. I even utilized a for loop!
-```{r}
-breakvector <- c(1:10 %o% 10^(0:4)) # Define a vector of values for the log scale break lines, %o% is the outer product of the two lists
-options(scipen=5) # Disable scientific notation
-labelvector = vector("list",length(breakvector)) # initialize a blank list of equal length for the labels of the breaks
+With above reorganized data frame, we can plot min and max GDP of each continent side-by side in the same bar plot. I took a lot of time to add theme changes here to spice things up a bit. I also spent some time to figure out how to include only some labels on the breaks of the y axis, as I used a log y-axis. Producing this plot was a learning experience for me. I even utilized a `for` loop!
+```{r,fig.width=10}
+# Define a vector of values for the log scale break lines, %o% is the outer product of the two lists
+breakvector <- c(1:10 %o% 10^(0:4))
+# Disable scientific notation
+options(scipen=5)
+# initialize a blank list of equal length for the labels of the breaks
+labelvector = vector("list",length(breakvector))
 
-for (i in 1:length(labelvector)) { # Loop over all labels in 'labelvector' variable
+# Loop over all labels in 'labelvector' variable
+for (i in 1:length(labelvector)) {
   if (i %% 10 == 0 | i == 1) {
-    labelvector[i] <- paste("$",toString(breakvector[i]),sep="") # Include the label for every 10th line break (ie $1, $10, $100...)
+    # Include the label for every 10th line break (ie $1, $10, $100...)
+    labelvector[i] <- paste("$",toString(breakvector[i]),sep="")
   }else{
-    labelvector[i] <- "" # For all other line breaks, include blank label
+    # For all other line breaks, include blank label
+    labelvector[i] <- ""
   }
 }
 
@@ -63,25 +67,283 @@ p2 %>%
   scale_fill_discrete("Legend", # Modifying legend title and labels
       labels = c("Maximum GDP per capita",
                  "Minimum GDP per capita")) + 
-  scale_y_log10(breaks=breakvector, # Adding log scale lines, keeping only some labels
+  # Adding log scale lines, keeping only some labels
+  scale_y_log10(breaks=breakvector,
       labels=labelvector) +
   theme_bw() + # black and white theme
   theme(axis.title = element_text(size=14),
       strip.text = element_text(size=14, face="bold"),
-      plot.title = element_text(hjust = 0.5)) +
+      plot.title = element_text(size=14, face="bold",hjust = 0.49),
+      axis.text.x = element_text(size=12,face ="bold"),
+      axis.text.y = element_text(size=12,face ="bold"),
+      legend.title = element_text(size=14, face ="bold"),
+      legend.text = element_text(size=12, face ="bold")) +
   labs(x = "Continent", 
       y = "GDP Per Capita",
       title = "Minimum and Maximum GDP per capita of the Continents: 1952 - 2007",
       caption = "Based on data from Gapminder")
 ```
 
-#### 1.2 Look at the spread of GDP per capita within the continents.
+#### 2. Look at the spread of GDP per capita within the continents.
 
-For this, we need to group the data set by continent. Let's separate by decade: 50's 60's 70's 80's 90's 00's
+For this, we need to group the data set by continent. I also want to define a new variable `decade` which is simply the decade that each data point occurs in. We can start with a table of minimum, maximum, mean, and standard deviation for some of the data, but it doesn't help visualize it very well.
 ```{r}
-p3 <- group_by(gapminder,continent,year) %>%
-  filter(year > 2000)
+p3 <- gapminder %>%
+  mutate(decade = paste(substr(year, 1, 3),"0's",sep="")) %>% # Add a decade column by taking the 3rd digit of the year and pasting 0 to it.
+  group_by(continent, decade)
 
-knitr::kable(p3)
+p4 <- p3 %>% 
+  summarize(min_gdpPercap = min(gdpPercap), 
+    max_gdpPercap = max(gdpPercap), 
+    average = mean(gdpPercap), 
+    standard_dev = sd(gdpPercap))
+  
+knitr::kable(head(p4,n=10))
 ```
 
+I think the best way to visualize this data is to utilize `facet_grid` and plot the spread of GDP per capita for each continent and each decade. This way we can visualize the change in GDP per capita for each continent throughout the years.
+```{r,fig.width=10, fig.height=10}
+ggplot(p3,aes(gdpPercap)) +
+  facet_grid(continent ~ decade, scales = "free_y") +
+  geom_density(fill="#33ccff") +
+  scale_y_continuous(breaks = NULL) +
+  scale_x_continuous(breaks = c(0,50000,100000),
+    labels = c('$0','$50k','$100k')) +
+  theme_bw() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1,size=12,face ="bold"),
+    plot.title = element_text(size=14,face ="bold",hjust = 0.5),
+    strip.background = element_rect(fill="#99ffeb"),
+    axis.title = element_text(size=14, face ="bold"),
+    strip.text = element_text(size=14, face="bold")) +
+  labs(x = "GDP per Capita", 
+    y = "Density of Countries (Relative to Continent)",
+    title = "Spread of GDP per Capita Through the Years - 1950's to 2000's",
+    caption = "Based on data from Gapminder")
+```
+
+I'm interested in seeing what the richest country in asia was during the 1950's...
+```{r}
+gapminder %>%
+  filter(continent == "Asia" & (year > 1949 & year < 1960)) %>%
+  filter(gdpPercap == max(gdpPercap))
+```
+
+So it was Kuwait, which had a large oil boom during this time known as [the golden era.](https://en.wikipedia.org/wiki/History_of_Kuwait#Golden_Era_.281946.E2.80.931982.29)
+
+#### 3. Compute a trimmed mean of life expectancy for different years. Or a weighted mean, weighting by population. Just try something other than the plain vanilla mean.
+
+For this, I would like to compute a trimmed mean of life expectancy for each decade. This means that I will remove any data that "too far" from the traditional mean when calculating the trimmed mean.
+
+Once again, I will group by decade. This time I will not group by continent.
+
+```{r}
+p5 <- gapminder %>%
+  mutate(decade = paste(substr(year, 1, 3),"0's",sep="")) %>%
+  group_by(decade)
+  
+```
+
+Let's first plot the distribution of life expectancies for each decade to get an idea of what the outliers will look like.
+```{r,fig.width=10}
+ggplot(p5,aes(x = lifeExp)) +
+  facet_wrap(~decade, scales = "fixed") +
+  geom_histogram(fill="#33ccff", binwidth = 1) +
+  theme_bw() +
+  theme(axis.text.x = element_text(size=12,face ="bold"),
+    axis.text.y = element_text(size=12,face ="bold"),
+    plot.title = element_text(size=14,face ="bold",hjust = 0.5),
+    strip.background = element_rect(fill="#99ffeb"),
+    axis.title = element_text(size=14, face ="bold"),
+    strip.text = element_text(size=14, face="bold")) +
+  labs(x = "Life Expectancy", 
+    y = "Count",
+    title = "Spread of Life Expectancies by Decade 1952 - 2007",
+    caption = "Based on data from Gapminder")
+```
+
+We can also easily make a table of minimum, maximum, mean, median, and standard deviation for each decade.
+```{r,fig.width=8}
+summarize(p5, MinlifeExp = min(lifeExp),
+    MaxlifeExp = max(lifeExp),
+    meanlifeExp = mean(lifeExp),
+    medianlifeExp = median(lifeExp),
+    StdevlifeExp = sd(lifeExp)) %>%
+  knitr::kable()
+```
+
+Now I would like to remove the outliers (let's say anything beyond 1 standard deviation) and recompute this information.
+```{r}
+p5_trimmed <- filter(p5,lifeExp > (mean(lifeExp) - sd(lifeExp)) & 
+  lifeExp < (mean(lifeExp) + sd(lifeExp)))
+```
+
+Once again, I want to plot the data just to see how it looks now!
+```{r,fig.width=10}
+ggplot(p5_trimmed,aes(x = lifeExp)) +
+  facet_wrap(~decade, scales = "fixed") +
+  geom_histogram(fill="#33ccff", binwidth = 1) +
+  theme_bw() +
+  theme(axis.text.x = element_text(size=12,face ="bold"),
+    axis.text.y = element_text(size=12,face ="bold"),
+    plot.title = element_text(size=14,face ="bold",hjust = 0.5),
+    strip.background = element_rect(fill="#99ffeb"),
+    axis.title = element_text(size=14, face ="bold"),
+    strip.text = element_text(size=14, face="bold")) +
+  labs(x = "Life Expectancy", 
+    y = "Count",
+    title = "Spread of Life Expectancies by Decade 1952 - 2007",
+    caption = "Based on data from Gapminder")
+```
+
+That's exactly what we were looking for. Now lets calculate statistics on the trimmed data.
+```{r,fig.width=8}
+sum_p5_trim <- summarize(p5_trimmed, MinlifeExp = min(lifeExp),
+    MaxlifeExp = max(lifeExp),
+    meanlifeExp = mean(lifeExp),
+    medianlifeExp = median(lifeExp),
+    StdevlifeExp = sd(lifeExp))
+    
+knitr::kable(sum_p5_trim)
+```
+
+Finally, just to visualize this last table, lets make a box plot of the trimmed statistics.
+```{r,fig.width=10}
+ggplot(p5_trimmed,aes(x = decade, y = lifeExp)) +
+  geom_boxplot(fill="gray") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(size=12,face ="bold"),
+    axis.text.y = element_text(size=12,face ="bold"),
+    plot.title = element_text(size=14,face ="bold",hjust = 0.5),
+    axis.title = element_text(size=14, face ="bold")) +
+  labs(x = "Decade", 
+    y = "World Average Life Expectancy (Trimmed)",
+    title = "World Trimmed Life Expectancy, by Decade",
+    caption = "Based on data from Gapminder")
+```
+
+Looks good! The world life expectancy is increasing steadily through each decade.
+
+#### 4. How is life expectancy changing over time on different continents?
+
+For this question, we start by grouping the data by continent and by year. The idea is to compute the average life expectancy of each continent at each year, so we can pipe this grouping right into `summarize` and we're already done, easy! Its hard to visualize this data with a table because there is more than 50 rows, but we can show data for just africa, as an example.
+```{r}
+p6 <- group_by(gapminder, continent, year) %>%
+  summarize(meanlifeExp = mean(lifeExp))
+
+p6 %>%
+filter(continent == "Africa") %>%
+knitr::kable()
+```
+
+To visualize this data, once again I will utilize `facet_wrap` so that we obtain a separate plot for each continent. I want to plot all the data points and include a smoother that traces the average at each year. I also colour all the points based on their GDP per capita, because that gives us a little more information. I found using a `log10` scale for the GDP per capita gradient better demonstrated the differences in wealth between countries.
+```{r,fig.width=10,fig.height=8}
+gapminder %>%
+  group_by(continent) %>%
+  ggplot(aes(x = year, y = lifeExp, colour=log10(gdpPercap))) +
+  facet_wrap(~continent, scales = "fixed") +
+  geom_point(alpha=0.8) +
+  geom_smooth(method = 'loess',
+    colour="magenta", fill="white") +
+  scale_colour_continuous(name = "GDP per Capita",
+    low = "red", high = "green",
+    breaks = c(log10(max(gapminder$gdpPercap))*0.985, 
+    log10(min(gapminder$gdpPercap))*1.02), label = c("Wealthy","Poor")) +
+  scale_x_continuous(breaks = seq(1950, 2010, 10),
+    labels = as.character(seq(1950, 2010, 10)),
+    limits = c(1950, 2010),
+    minor_breaks = NULL) +
+  theme_dark() +
+  theme(axis.text.x = element_text(size=12,face ="bold", angle = 45, hjust = 1),
+    axis.text.y = element_text(size=12,face ="bold"),
+    plot.title = element_text(size=14,
+      face ="bold",hjust = 0.5),
+    axis.title = element_text(size=14, face ="bold"),
+    strip.background = element_rect(fill="black"),
+    strip.text = element_text(size=14, face="bold"),
+    legend.title = element_text(size=14, face ="bold"),
+    legend.text = element_text(size=12, face ="bold")) +
+  labs(x = "Year", 
+    y = "Life Expectancy",
+    title = "Life Expectancy of the Continents by Year",
+    caption = "Based on data from Gapminder")
+```
+
+Two data points stick out to me in the above plots. One is an outlier in life expectancy in one african country in the 1990s. Let's find out which one:
+```{r}
+gapminder %>%
+  filter(continent == "Africa", year > 1989 & year < 2000) %>%
+  filter(lifeExp == min(lifeExp))
+```
+
+So it was Rwanda in 1992, which went through the infamous [Rwanadan genocide](https://en.wikipedia.org/wiki/Rwandan_genocide) around that time.
+
+The other outlier is in Asia in the 1970's.
+```{r}
+gapminder %>%
+  filter(continent == "Asia", year > 1969 & year < 1980) %>%
+  filter(lifeExp == min(lifeExp))
+```
+
+This data point is from Cambodia in 1977. This data point was collected shortly after a civil war, during the [Cambodian Genocide](https://en.wikipedia.org/wiki/Cambodian_genocide).
+
+
+#### 5. Report the relative abundance of countries with low life expectancy over time by continent
+
+For this section I will choose the following metric for countries with low life expectancy: The world-average life expectancy in 2007 minus the standard deviation of life expectancy in 2007. Let's compute this number, while making sure to weight each country by its population in 2007.
+```{r}
+p7 <- gapminder %>%
+  filter(year == 2007) %>%
+  mutate(LifeExp_bypop = lifeExp*pop)
+
+N <- sum(as.numeric(p7$pop)) # total population in 2007
+
+# population weighted average life expectancy in 2007
+Av_lifeExp_2007 <- sum(p7$LifeExp_bypop)/N
+
+# population weighted standard deviation
+sd_lifeExp_2007 <- sqrt(sum(((Av_lifeExp_2007 - p7$lifeExp)^2)*p7$pop)/(N-1))
+  
+Cutoff <- Av_lifeExp_2007 - sd_lifeExp_2007
+Cutoff
+```
+
+So I will consider any country with average life expectancy below `60.06371` as "low life expectancy". Now we can find the ratio of countries with low life expectancy, separately for each continent at each year. This produces a long table, so I'll only tabulate data for Africa as an example.
+```{r}
+p8 <- gapminder %>%
+  mutate(LowLifeExp = (lifeExp < Cutoff)) %>%
+  group_by(continent,year) %>%
+  summarize(LowLifeExp_ratio = sum(LowLifeExp == TRUE)/(sum(LowLifeExp %in% c(TRUE, FALSE))))
+
+filter(p8,continent == "Africa") %>%
+  knitr::kable()
+```
+
+Let's plot this as a line plot, separately for each continent using `facet_wrap`.
+```{r,fig.width=10,fig.height=8}
+ggplot(p8,aes(x = year, y = LowLifeExp_ratio)) +
+  facet_wrap(~continent, scales = "fixed") +
+  geom_line(colour = "red") +
+  
+  scale_x_continuous(breaks = seq(1950, 2010, 10),
+    labels = as.character(seq(1950, 2010, 10)),
+    limits = c(1950, 2010),
+    minor_breaks = NULL) +
+  theme_bw() +
+  theme(axis.text.x = element_text(size=12,face ="bold", angle = 45, hjust = 1),
+    axis.text.y = element_text(size=12,face ="bold"),
+    plot.title = element_text(size=14,
+      face ="bold",hjust = 0.5),
+    axis.title = element_text(size=14, face ="bold"),
+    strip.background = element_rect(fill="orange"),
+    strip.text = element_text(size=14, face="bold"),
+    legend.title = element_text(size=14, face ="bold"),
+    legend.text = element_text(size=12, face ="bold")) +
+  labs(x = "Year", 
+    y = "Countries with Low Life Expectancy / Total Countries",
+    title = "Relative Amount of Countries with Low Life Expectancy by Year",
+    caption = "Based on data from Gapminder")
+```
+
+Interesting line shapes! Looks like life expectancy in Oceania has been above 60 years for all countries since 1952.
+
+ <a href="#top">Back to top</a>
