@@ -1,11 +1,10 @@
 ---
 title: "Homework 3 - Gapminder Manipulation and Exploration with dplyr"
-author: "Hayden Scheiber"
+author: "Hayden Scheiber -"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 output: 
   github_document
 ---
-
 
 [Return to Main Page](https://github.com/HScheiber/STAT545-hw-Scheiber-Hayden/blob/master/README.md)
 
