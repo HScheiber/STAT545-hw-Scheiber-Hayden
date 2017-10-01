@@ -5,7 +5,7 @@ Hayden Scheiber
 
 -   [1. Get the maximum and minimum of GDP per capita for all continents.](#1-get-the-maximum-and-minimum-of-gdp-per-capita-for-all-continents)
 -   [2. Look at the spread of GDP per capita within the continents.](#2-look-at-the-spread-of-gdp-per-capita-within-the-continents)
--   [3. Compute a trimmed mean of life expectancy for different years. Or a weighted mean, weighting by population. Just try something other than the plain vanilla mean.](#3-compute-a-trimmed-mean-of-life-expectancy-for-different-years.-or-a-weighted-mean-weighting-by-population.-just-try-something-other-than-the-plain-vanilla-mean)
+-   [3. Compute a trimmed mean of life expectancy for different years. Or a weighted mean, weighting by population. Just try something other than the plain vanilla mean.](#3-compute-a-trimmed-mean-of-life-expectancy-for-different-years-or-a-weighted-mean-weighting-by-population.-just-try-something-other-than-the-plain-vanilla-mean)
 -   [4. How is life expectancy changing over time on different continents?](#4-how-is-life-expectancy-changing-over-time-on-different-continents)
 -   [5. Report the relative abundance of countries with low life expectancy over time by continent](#5-report-the-relative-abundance-of-countries-with-low-life-expectancy-over-time-by-continent)
 
