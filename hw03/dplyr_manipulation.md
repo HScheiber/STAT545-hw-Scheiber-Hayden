@@ -3,21 +3,21 @@ Homework 3 - Gapminder Manipulation and Exploration with dplyr
 Hayden Scheiber
 30 September, 2017
 
--   [1 - Get the maximum and minimum of GDP per capita for all continents](#1---get-the-maximum-and-minimum-of-GDP-per-capita-for-all-continents)
+[Return to Main Page](https://github.com/HScheiber/STAT545-hw-Scheiber-Hayden/blob/master/README.md)
 
--   [2 - Look at the spread of GDP per capita within the continents](#2---look-at-the-spread-of-GDP-per-capita-within-the-continents)
+[Return to Homework 3 Landing Page](README.md)
+
+------------------------------------------------------------------------
+
+-   [1 - Get the maximum and minimum of GDP per capita for all continents](#1---get-the-maximum-and-minimum-of-gdp-per-capita-for-all-continents)
+
+-   [2 - Look at the spread of GDP per capita within the continents](#2---look-at-the-spread-of-gdp-per-capita-within-the-continents)
 
 -   [3 - Compute a trimmed mean of life expectancy for different years](#3---compute-a-trimmed-mean-of-life-expectancy-for-different-years)
 
 -   [4 - How is life expectancy changing over time on different continents?](#4---how-is-life-expectancy-changing-over-time-on-different-continents?)
 
 -   [5 - Report the relative abundance of countries with low life expectancy over time by continent](#5---report-the-relative-abundance-of-countries-with-low-life-expectancy-over-time-by-continent)
-
-------------------------------------------------------------------------
-
-[Return to Main Page](https://github.com/HScheiber/STAT545-hw-Scheiber-Hayden/blob/master/README.md)
-
-[Return to Homework 3 Landing Page](README.md)
 
 ------------------------------------------------------------------------
 
