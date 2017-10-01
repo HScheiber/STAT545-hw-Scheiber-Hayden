@@ -3,15 +3,19 @@ Homework 3 - Gapminder Manipulation and Exploration with dplyr
 Hayden Scheiber
 30 September, 2017
 
--   [1. Get the maximum and minimum of GDP per capita for all continents.](#get-the-maximum-and-minimum-of-gdp-per-capita-for-all-continents.)
--   [2. Look at the spread of GDP per capita within the continents.](#look-at-the-spread-of-gdp-per-capita-within-the-continents.)
--   [3. Compute a trimmed mean of life expectancy for different years. Or a weighted mean, weighting by population. Just try something other than the plain vanilla mean.](#compute-a-trimmed-mean-of-life-expectancy-for-different-years.-or-a-weighted-mean-weighting-by-population.-just-try-something-other-than-the-plain-vanilla-mean.)
--   [4. How is life expectancy changing over time on different continents?](#how-is-life-expectancy-changing-over-time-on-different-continents)
--   [5. Report the relative abundance of countries with low life expectancy over time by continent](#report-the-relative-abundance-of-countries-with-low-life-expectancy-over-time-by-continent)
+-   [1 - Get the maximum and minimum of GDP per capita for all continents](#get-the-maximum-and-minimum-of-gdp-per-capita-for-all-continents)
+-   [2 - Look at the spread of GDP per capita within the continents](#look-at-the-spread-of-gdp-per-capita-within-the-continents)
+-   [3 - Compute a trimmed mean of life expectancy for different years](#compute-a-trimmed-mean-of-life-expectancy-for-different-years)
+-   [4 - How is life expectancy changing over time on different continents?](#how-is-life-expectancy-changing-over-time-on-different-continents)
+-   [5 - Report the relative abundance of countries with low life expectancy over time by continent](#report-the-relative-abundance-of-countries-with-low-life-expectancy-over-time-by-continent)
+
+[Return to Main Page](https://github.com/HScheiber/STAT545-hw-Scheiber-Hayden/blob/master/README.md)
+
+[Return to Homework 3 Landing Page](README.md)
 
 ------------------------------------------------------------------------
 
-Welcome! This is an exploration of the Gapminder data frame using `ggplot2`, as part of STAT 545 assignment 3. Click [here](README.md) to return to the homework 3 landing page, or [here](https://github.com/HScheiber/STAT545-hw-Scheiber-Hayden/blob/master/README.md) to return repository home page.
+Welcome! This is an exploration of the Gapminder data frame using `ggplot2`, as part of STAT 545 assignment 3.
 
 First we need to load the `gapminder` dataset and the `tidyverse` package, as well as `knitr` for nicer table outputs. When making my plots I realized that I needed to re-shaped a data-frame using a function from `reshape2`, so I load that library as well.
 
@@ -46,7 +50,9 @@ knitr::kable(head(gapminder,n=15))
 | Albania     | Europe    |  1957|   59.280|   1476505|  1942.2842|
 | Albania     | Europe    |  1962|   64.820|   1728137|  2312.8890|
 
-#### 1. Get the maximum and minimum of GDP per capita for all continents.
+#### 1 - Get the maximum and minimum of GDP per capita for all continents
+
+<a href="#top">Back to top</a>
 
 This can be acheived easily using the `group_by()` combined with `summarize()`. Below, I group the gapminder data frame by continent and pipe that result into the summarize function, where I utilize the `max()` and `min()` functions to find the range of GDP per capita for each continent.
 
@@ -131,7 +137,9 @@ p2 %>%
 
 ![](dplyr_manipulation_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-5-1.png)
 
-#### 2. Look at the spread of GDP per capita within the continents.
+#### 2 - Look at the spread of GDP per capita within the continents
+
+<a href="#top">Back to top</a>
 
 For this, we need to group the data set by continent. I also want to define a new variable `decade` which is simply the decade that each data point occurs in. We can start with a table of minimum, maximum, mean, and standard deviation for some of the data, but it doesn't help visualize it very well.
 
@@ -200,7 +208,9 @@ gapminder %>%
 
 So it was Kuwait, which had a large oil boom during this time known as [the golden era.](https://en.wikipedia.org/wiki/History_of_Kuwait#Golden_Era_.281946.E2.80.931982.29)
 
-#### 3. Compute a trimmed mean of life expectancy for different years. Or a weighted mean, weighting by population. Just try something other than the plain vanilla mean.
+#### 3 - Compute a trimmed mean of life expectancy for different years
+
+<a href="#top">Back to top</a>
 
 For this, I would like to compute a trimmed mean of life expectancy for each decade. This means that I will remove any data that "too far" from the traditional mean when calculating the trimmed mean.
 
@@ -322,7 +332,9 @@ ggplot(p5_trimmed,aes(x = decade, y = lifeExp)) +
 
 Looks good! The world life expectancy is increasing steadily through each decade.
 
-#### 4. How is life expectancy changing over time on different continents?
+#### 4 - How is life expectancy changing over time on different continents?
+
+<a href="#top">Back to top</a>
 
 For this question, we start by grouping the data by continent and by year. The idea is to compute the average life expectancy of each continent at each year, so we can pipe this grouping right into `summarize` and we're already done, easy! Its hard to visualize this data with a table because there is more than 50 rows, but we can show data for just africa, as an example.
 
@@ -416,7 +428,9 @@ gapminder %>%
 
 This data point is from Cambodia in 1977. This data point was collected shortly after a civil war, during the [Cambodian Genocide](https://en.wikipedia.org/wiki/Cambodian_genocide).
 
-#### 5. Report the relative abundance of countries with low life expectancy over time by continent
+#### 5 - Report the relative abundance of countries with low life expectancy over time by continent
+
+<a href="#top">Back to top</a>
 
 For this section I will choose the following metric for countries with low life expectancy: The world-average life expectancy in 2007 minus the standard deviation of life expectancy in 2007. Let's compute this number, while making sure to weight each country by its population in 2007.
 
