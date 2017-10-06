@@ -12,7 +12,7 @@ output:
 
 ---
 
-- [1 - Get the maximum and minimum of GDP per capita for all continents](#1---get-the-maximum-and-minimum-of-gdp-per-capita-for-all-continents)
+- [General data reshaping and relationship to aggregation](#General-data-reshaping-and-relationship-to-aggregation)
 
 - [2 - Look at the spread of GDP per capita within the continents](#2---look-at-the-spread-of-gdp-per-capita-within-the-continents)
 
@@ -34,3 +34,6 @@ suppressPackageStartupMessages(library(tidyverse))
 suppressPackageStartupMessages(library(knitr))
 suppressPackageStartupMessages(library(reshape2))
 ```
+
+## General data reshaping and relationship to aggregation
+
