@@ -18,15 +18,14 @@ Hayden Scheiber -
 
 ------------------------------------------------------------------------
 
-Welcome! This is the data wrangling and reshaping skills development, as part of STAT 545 assignment 4.
+Welcome! This is my attempt at developing my data wrangling and reshaping skills, as part of STAT 545 assignment 4.
 
-First we need to load the `gapminder` dataset and the `tidyverse` package, as well as `knitr` for nicer table outputs. I included the `reshape2` library to compare the functions available there with those available in the `tidyverse`. I use `readr` to help import a comma separated data file.
+First I need to load the `gapminder` dataset and the `tidyverse` package, as well as `knitr` for nicer table outputs. I also loaded `readr` to help import a comma separated data file.
 
 ``` r
 suppressPackageStartupMessages(library(gapminder))
 suppressPackageStartupMessages(library(tidyverse))
 suppressPackageStartupMessages(library(knitr))
-suppressPackageStartupMessages(library(reshape2))
 suppressPackageStartupMessages(library(readr))
 ```
 
@@ -37,7 +36,7 @@ General data reshaping and relationship to aggregation
 
 <a href="#top">Back to top</a>
 
-Let's compare life expectancy of *Canada*, *Rwanada*, and *China*. I begin by selecting data only from those countries using `filter`. Then, using `select` I retain only the columns I want to keep. I'll show the first 5 rows of this table to give an idea of what it looks like.
+Let's compare life expectancy of **Canada**, **Rwanada**, and **China**. I begin by selecting data only from those countries using `filter`. Then, using `select` I retain only the columns I want to keep. I'll show the first 5 rows of this table to give an idea of what it looks like.
 
 ``` r
 data.selected.long <- gapminder %>%
@@ -55,7 +54,7 @@ knitr::kable(head(data.selected.long,n=5))
 | Canada  |  1967|    72.13|
 | Canada  |  1972|    72.88|
 
-Now it's time to reshape this data into the form we want. The `spread` function is used to convert a single column into multiple columns. This is useful for our *country* column because there are only three values present there, which will become the three new columns in the reshaped dataframe.
+Now it's time to reshape this data into the form I want. The `spread` function is used to convert a single column into multiple columns. This is useful to use on the **country** column because there are only three values present there. The three values will become new columns in the reshaped dataframe.
 
 ``` r
 data.selected.wide <- data.selected.long %>%
@@ -161,7 +160,7 @@ knitr::kable(data.selected.wide,col.names =
 </tbody>
 </table>
 
-I found that it was easier to use the long format to make a scatterplot comparison of the selected country's life expectancies vs year.
+This is a very human-readable table. However, I found that it was easier to use the long format to make a scatterplot comparison of the selected country's life expectancies vs year.
 
 ``` r
 data.selected.long %>%
@@ -488,7 +487,7 @@ Oceania
 </tr>
 </tbody>
 </table>
-To exchange columns for rows is very easy in R. Just use the transpose function `t()`.
+To exchange columns for rows is very easy in R. Just use the transpose function `t`.
 
 ``` r
 data.lifeExp.wide.t <- t(data.lifeExp.wide)
