@@ -334,7 +334,7 @@ glimpse(gapminder.energy.semi)
 ```
 
 #### Anti Join
-This is another joining function. It is the inverse of `semi_join` and keeps only data points in the first argument *without* matches in the second.
+This is another joining function. It is the inverse of `semi_join` and keeps only data points in the first argument _without_ matches in the second.
 ```{r}
 gapminder.energy.anti <- anti_join(my.gap,data.energy.long, by = c("country","year"))
 
