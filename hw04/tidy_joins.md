@@ -1384,7 +1384,9 @@ Japan
 </tr>
 </tbody>
 </table>
-Join, merge, look up
+
+## Join, merge, look up
+
 --------------------
 
 ### Create a second data frame, complementary to Gapminder. Join this with part of Gapminder
