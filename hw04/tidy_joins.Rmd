@@ -24,13 +24,14 @@ output:
 
 Welcome! This is the data wrangling and reshaping skills development, as part of STAT 545 assignment 4.
 
-First we need to load the `gapminder` dataset and the `tidyverse` package, as well as `knitr` for nicer table outputs. When making my plots I realized that I needed to re-shaped a data-frame using a function from `reshape2`, so I load that library as well.
+First we need to load the `gapminder` dataset and the `tidyverse` package, as well as `knitr` for nicer table outputs. I included the `reshape2` library to compare the functions available there with those available in the `tidyverse`. I use `readr` to help import a comma separated data file.
 
 ```{r}
 suppressPackageStartupMessages(library(gapminder))
 suppressPackageStartupMessages(library(tidyverse))
 suppressPackageStartupMessages(library(knitr))
 suppressPackageStartupMessages(library(reshape2))
+suppressPackageStartupMessages(library(readr))
 ```
 
 ## General data reshaping and relationship to aggregation
@@ -228,9 +229,113 @@ knitr::kable(data.lifeExp.Asia.grouped,
   caption = "<h4>Highest and Lowest Life Expectancy by Year in Asia (Years)</h4>")
 ```
 
+
 ## Join, merge, look up
 
 ### Create a second data frame, complementary to Gapminder. Join this with part of Gapminder
 <a href="#top">Back to top</a>
 
-Hello.
+For this section, I downloaded a list of energy consumption per capita for 1960 to 2016 from the [world bank](https://data.worldbank.org/indicator/EG.USE.PCAP.KG.OE). I saved it as a `.csv` file and import it with the following command. Let's have a look at it's structure.
+```{r}
+data.energy <- read.csv("Energy_use.csv")
+
+knitr::kable(head(data.energy), 
+  align = 'c',
+  format = 'html', 
+  caption = "<h4>Energy Use in Kg of Oil Equivalent per Capita</h4>")
+```
+
+There are a few things wrong with this data. To start with, I want to remove columns 2, 3, and 4. There's no data for 2016, so I'll remove that too. I also need to change the other headings so that they will match those in `gapminder`.
+```{r}
+# Remove columns 2:4 plus the last column for 2016
+data.energy <- data.energy %>%
+  select(ï..Country.Name, num_range("X", 1960:2015))
+
+# Rename the columns
+names(data.energy) <- c("country",1960:2015)
+
+knitr::kable(head(data.energy), 
+  align = 'c',
+  format = 'html', 
+  caption = "<h4>Energy Use in Kg of Oil Equivalent per Capita</h4>")
+```
+
+So now the data frame looks less ugly, but it still won't match up with `gapminder` as it is. We need to have the years consolidated into a single column, with countries repeated for each year. Looks like a job for `gather`. At this point I will also remove any missing data points, there's really no point in keeping them!
+```{r}
+data.energy.long <- data.energy %>%
+  gather(year, Energy.Use.Per.Capita, 2:ncol(data.energy)) %>%
+  filter(!is.na(Energy.Use.Per.Capita))
+
+# Need to have year column as numeric
+data.energy.long$year <- as.numeric(data.energy.long$year)
+
+knitr::kable(head(data.energy.long), 
+  align = 'c',
+  format = 'html', 
+  caption = "<h4>Energy Use in Kg of Oil Equivalent per Capita</h4>")
+```
+
+Finally, the data frame is in the shape I needed! Let's try joining it with gapminder using the various `_join` functions.
+
+#### Left join
+I'll join this new data frame `data.energy.long` to gapminder using `left_join`. This type of join preserves all data in the first data frame (`gapminder` in this case) and adds new columns from the second data frame to matching rows. If there is no match for a row in the second data frame to the first, that data point will be excluded.
+```{r}
+gapminder.energy.left <- left_join(gapminder,data.energy.long, by = c("country","year"))
+
+glimpse(gapminder.energy.left)
+```
+
+The warning comes about because the `country` columns in `gapminder` and `data.energy.long` are not just a character vectors, but instead have associated numbers: They are class `factor`. The numbers from the matching countries do not necessarily match between these lists, resulting in a warning being thrown. We can convert the columns to character vectors with `as.character` to get rid of the warning.
+```{r}
+my.gap <- gapminder
+my.gap$country <- as.character(my.gap$country)
+data.energy.long$country <- as.character(data.energy.long$country)
+
+gapminder.energy.left <- left_join(my.gap,data.energy.long, by = c("country","year"))
+
+glimpse(gapminder.energy.left)
+```
+
+#### Right Join
+Same as `left_join` but changed the arguments around. All of the observations of `data.energy.long,` are obtained
+```{r}
+gapminder.energy.right <- right_join(my.gap,data.energy.long, by = c("country","year"))
+
+glimpse(gapminder.energy.right)
+```
+
+So now all data from `data.energy.long` has been retained, and columns from gapminder have been added. Data from gapminder has been kept where it matches the country and year in `data.energy.long`.
+
+#### Inner Join
+`inner_join` retains only data found in both sets. There should be no missing data points here.
+```{r}
+gapminder.energy.inner <- inner_join(my.gap,data.energy.long, by = c("country","year"))
+
+glimpse(gapminder.energy.inner)
+```
+
+#### Full Join
+This function retains all data points from both data sets.
+```{r}
+gapminder.energy.full <- full_join(my.gap,data.energy.long, by = c("country","year"))
+
+glimpse(gapminder.energy.full)
+```
+
+#### Semi Join
+`semi_Join` is a way of filtering out the data in the first argument by keeping only the data points that have matches in the second argument. In this case, no `Energy.user.Per.Capita` columns are added.
+```{r}
+gapminder.energy.semi <- semi_join(my.gap,data.energy.long, by = c("country","year"))
+
+glimpse(gapminder.energy.semi)
+```
+
+#### Anti Join
+This is another joining function. It is the inverse of `semi_join` and keeps only data points in the first argument *without* matches in the second.
+```{r}
+gapminder.energy.anti <- anti_join(my.gap,data.energy.long, by = c("country","year"))
+
+glimpse(gapminder.energy.anti)
+```
+
+ <a href="#top">Back to top</a>

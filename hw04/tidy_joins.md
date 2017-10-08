@@ -20,13 +20,14 @@ Hayden Scheiber -
 
 Welcome! This is the data wrangling and reshaping skills development, as part of STAT 545 assignment 4.
 
-First we need to load the `gapminder` dataset and the `tidyverse` package, as well as `knitr` for nicer table outputs. When making my plots I realized that I needed to re-shaped a data-frame using a function from `reshape2`, so I load that library as well.
+First we need to load the `gapminder` dataset and the `tidyverse` package, as well as `knitr` for nicer table outputs. I included the `reshape2` library to compare the functions available there with those available in the `tidyverse`. I use `readr` to help import a comma separated data file.
 
 ``` r
 suppressPackageStartupMessages(library(gapminder))
 suppressPackageStartupMessages(library(tidyverse))
 suppressPackageStartupMessages(library(knitr))
 suppressPackageStartupMessages(library(reshape2))
+suppressPackageStartupMessages(library(readr))
 ```
 
 General data reshaping and relationship to aggregation
@@ -1390,4 +1391,2833 @@ Join, merge, look up
 
 <a href="#top">Back to top</a>
 
-Hello.
+For this section, I downloaded a list of energy consumption per capita for 1960 to 2016 from the [world bank](https://data.worldbank.org/indicator/EG.USE.PCAP.KG.OE). I saved it as a `.csv` file and import it with the following command. Let's have a look at it's structure.
+
+``` r
+data.energy <- read.csv("Energy_use.csv")
+
+knitr::kable(head(data.energy), 
+  align = 'c',
+  format = 'html', 
+  caption = "<h4>Energy Use in Kg of Oil Equivalent per Capita</h4>")
+```
+
+<table>
+<caption>
+<h4>
+Energy Use in Kg of Oil Equivalent per Capita
+</h4>
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+ï..Country.Name
+</th>
+<th style="text-align:center;">
+Country.Code
+</th>
+<th style="text-align:center;">
+Indicator.Name
+</th>
+<th style="text-align:center;">
+Indicator.Code
+</th>
+<th style="text-align:center;">
+X1960
+</th>
+<th style="text-align:center;">
+X1961
+</th>
+<th style="text-align:center;">
+X1962
+</th>
+<th style="text-align:center;">
+X1963
+</th>
+<th style="text-align:center;">
+X1964
+</th>
+<th style="text-align:center;">
+X1965
+</th>
+<th style="text-align:center;">
+X1966
+</th>
+<th style="text-align:center;">
+X1967
+</th>
+<th style="text-align:center;">
+X1968
+</th>
+<th style="text-align:center;">
+X1969
+</th>
+<th style="text-align:center;">
+X1970
+</th>
+<th style="text-align:center;">
+X1971
+</th>
+<th style="text-align:center;">
+X1972
+</th>
+<th style="text-align:center;">
+X1973
+</th>
+<th style="text-align:center;">
+X1974
+</th>
+<th style="text-align:center;">
+X1975
+</th>
+<th style="text-align:center;">
+X1976
+</th>
+<th style="text-align:center;">
+X1977
+</th>
+<th style="text-align:center;">
+X1978
+</th>
+<th style="text-align:center;">
+X1979
+</th>
+<th style="text-align:center;">
+X1980
+</th>
+<th style="text-align:center;">
+X1981
+</th>
+<th style="text-align:center;">
+X1982
+</th>
+<th style="text-align:center;">
+X1983
+</th>
+<th style="text-align:center;">
+X1984
+</th>
+<th style="text-align:center;">
+X1985
+</th>
+<th style="text-align:center;">
+X1986
+</th>
+<th style="text-align:center;">
+X1987
+</th>
+<th style="text-align:center;">
+X1988
+</th>
+<th style="text-align:center;">
+X1989
+</th>
+<th style="text-align:center;">
+X1990
+</th>
+<th style="text-align:center;">
+X1991
+</th>
+<th style="text-align:center;">
+X1992
+</th>
+<th style="text-align:center;">
+X1993
+</th>
+<th style="text-align:center;">
+X1994
+</th>
+<th style="text-align:center;">
+X1995
+</th>
+<th style="text-align:center;">
+X1996
+</th>
+<th style="text-align:center;">
+X1997
+</th>
+<th style="text-align:center;">
+X1998
+</th>
+<th style="text-align:center;">
+X1999
+</th>
+<th style="text-align:center;">
+X2000
+</th>
+<th style="text-align:center;">
+X2001
+</th>
+<th style="text-align:center;">
+X2002
+</th>
+<th style="text-align:center;">
+X2003
+</th>
+<th style="text-align:center;">
+X2004
+</th>
+<th style="text-align:center;">
+X2005
+</th>
+<th style="text-align:center;">
+X2006
+</th>
+<th style="text-align:center;">
+X2007
+</th>
+<th style="text-align:center;">
+X2008
+</th>
+<th style="text-align:center;">
+X2009
+</th>
+<th style="text-align:center;">
+X2010
+</th>
+<th style="text-align:center;">
+X2011
+</th>
+<th style="text-align:center;">
+X2012
+</th>
+<th style="text-align:center;">
+X2013
+</th>
+<th style="text-align:center;">
+X2014
+</th>
+<th style="text-align:center;">
+X2015
+</th>
+<th style="text-align:center;">
+X2016
+</th>
+<th style="text-align:center;">
+X
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+Aruba
+</td>
+<td style="text-align:center;">
+ABW
+</td>
+<td style="text-align:center;">
+Energy use (kg of oil equivalent per capita)
+</td>
+<td style="text-align:center;">
+EG.USE.PCAP.KG.OE
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Afghanistan
+</td>
+<td style="text-align:center;">
+AFG
+</td>
+<td style="text-align:center;">
+Energy use (kg of oil equivalent per capita)
+</td>
+<td style="text-align:center;">
+EG.USE.PCAP.KG.OE
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Angola
+</td>
+<td style="text-align:center;">
+AGO
+</td>
+<td style="text-align:center;">
+Energy use (kg of oil equivalent per capita)
+</td>
+<td style="text-align:center;">
+EG.USE.PCAP.KG.OE
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+555.8826
+</td>
+<td style="text-align:center;">
+584.3152
+</td>
+<td style="text-align:center;">
+567.5612
+</td>
+<td style="text-align:center;">
+564.5783
+</td>
+<td style="text-align:center;">
+536.4042
+</td>
+<td style="text-align:center;">
+515.4481
+</td>
+<td style="text-align:center;">
+493.8022
+</td>
+<td style="text-align:center;">
+527.3258
+</td>
+<td style="text-align:center;">
+518.2229
+</td>
+<td style="text-align:center;">
+510.9863
+</td>
+<td style="text-align:center;">
+496.8536
+</td>
+<td style="text-align:center;">
+472.8293
+</td>
+<td style="text-align:center;">
+468.8811
+</td>
+<td style="text-align:center;">
+457.7808
+</td>
+<td style="text-align:center;">
+470.3735
+</td>
+<td style="text-align:center;">
+462.1985
+</td>
+<td style="text-align:center;">
+460.8183
+</td>
+<td style="text-align:center;">
+467.2142
+</td>
+<td style="text-align:center;">
+464.9752
+</td>
+<td style="text-align:center;">
+483.3574
+</td>
+<td style="text-align:center;">
+479.8715
+</td>
+<td style="text-align:center;">
+467.1092
+</td>
+<td style="text-align:center;">
+468.0538
+</td>
+<td style="text-align:center;">
+459.4536
+</td>
+<td style="text-align:center;">
+445.3262
+</td>
+<td style="text-align:center;">
+445.3477
+</td>
+<td style="text-align:center;">
+442.7813
+</td>
+<td style="text-align:center;">
+429.8326
+</td>
+<td style="text-align:center;">
+438.8703
+</td>
+<td style="text-align:center;">
+437.3376
+</td>
+<td style="text-align:center;">
+442.0004
+</td>
+<td style="text-align:center;">
+446.9038
+</td>
+<td style="text-align:center;">
+465.5403
+</td>
+<td style="text-align:center;">
+462.1575
+</td>
+<td style="text-align:center;">
+430.9351
+</td>
+<td style="text-align:center;">
+456.2469
+</td>
+<td style="text-align:center;">
+469.6202
+</td>
+<td style="text-align:center;">
+490.5364
+</td>
+<td style="text-align:center;">
+514.4114
+</td>
+<td style="text-align:center;">
+520.6751
+</td>
+<td style="text-align:center;">
+521.8258
+</td>
+<td style="text-align:center;">
+552.6229
+</td>
+<td style="text-align:center;">
+534.1191
+</td>
+<td style="text-align:center;">
+545.0405
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Albania
+</td>
+<td style="text-align:center;">
+ALB
+</td>
+<td style="text-align:center;">
+Energy use (kg of oil equivalent per capita)
+</td>
+<td style="text-align:center;">
+EG.USE.PCAP.KG.OE
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+785.1615
+</td>
+<td style="text-align:center;">
+865.5925
+</td>
+<td style="text-align:center;">
+762.7254
+</td>
+<td style="text-align:center;">
+776.9347
+</td>
+<td style="text-align:center;">
+826.9521
+</td>
+<td style="text-align:center;">
+890.9534
+</td>
+<td style="text-align:center;">
+923.7289
+</td>
+<td style="text-align:center;">
+1010.8192
+</td>
+<td style="text-align:center;">
+864.1995
+</td>
+<td style="text-align:center;">
+1149.5361
+</td>
+<td style="text-align:center;">
+989.2001
+</td>
+<td style="text-align:center;">
+966.6833
+</td>
+<td style="text-align:center;">
+1000.1220
+</td>
+<td style="text-align:center;">
+1018.2631
+</td>
+<td style="text-align:center;">
+916.5552
+</td>
+<td style="text-align:center;">
+963.9272
+</td>
+<td style="text-align:center;">
+921.8930
+</td>
+<td style="text-align:center;">
+927.7445
+</td>
+<td style="text-align:center;">
+896.4378
+</td>
+<td style="text-align:center;">
+813.2557
+</td>
+<td style="text-align:center;">
+572.7818
+</td>
+<td style="text-align:center;">
+418.2866
+</td>
+<td style="text-align:center;">
+412.3789
+</td>
+<td style="text-align:center;">
+441.2493
+</td>
+<td style="text-align:center;">
+417.0348
+</td>
+<td style="text-align:center;">
+447.8489
+</td>
+<td style="text-align:center;">
+384.5950
+</td>
+<td style="text-align:center;">
+426.6828
+</td>
+<td style="text-align:center;">
+576.1836
+</td>
+<td style="text-align:center;">
+580.4948
+</td>
+<td style="text-align:center;">
+597.2653
+</td>
+<td style="text-align:center;">
+660.0480
+</td>
+<td style="text-align:center;">
+648.1684
+</td>
+<td style="text-align:center;">
+715.4145
+</td>
+<td style="text-align:center;">
+719.5844
+</td>
+<td style="text-align:center;">
+706.8594
+</td>
+<td style="text-align:center;">
+679.8618
+</td>
+<td style="text-align:center;">
+710.7485
+</td>
+<td style="text-align:center;">
+732.3167
+</td>
+<td style="text-align:center;">
+729.1544
+</td>
+<td style="text-align:center;">
+764.9686
+</td>
+<td style="text-align:center;">
+687.8963
+</td>
+<td style="text-align:center;">
+801.3300
+</td>
+<td style="text-align:center;">
+808.4558
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Andorra
+</td>
+<td style="text-align:center;">
+AND
+</td>
+<td style="text-align:center;">
+Energy use (kg of oil equivalent per capita)
+</td>
+<td style="text-align:center;">
+EG.USE.PCAP.KG.OE
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Arab World
+</td>
+<td style="text-align:center;">
+ARB
+</td>
+<td style="text-align:center;">
+Energy use (kg of oil equivalent per capita)
+</td>
+<td style="text-align:center;">
+EG.USE.PCAP.KG.OE
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+406.1678
+</td>
+<td style="text-align:center;">
+410.4821
+</td>
+<td style="text-align:center;">
+440.5221
+</td>
+<td style="text-align:center;">
+457.1755
+</td>
+<td style="text-align:center;">
+481.3987
+</td>
+<td style="text-align:center;">
+522.1277
+</td>
+<td style="text-align:center;">
+558.3905
+</td>
+<td style="text-align:center;">
+623.6959
+</td>
+<td style="text-align:center;">
+724.8316
+</td>
+<td style="text-align:center;">
+788.4030
+</td>
+<td style="text-align:center;">
+880.3153
+</td>
+<td style="text-align:center;">
+950.8273
+</td>
+<td style="text-align:center;">
+993.7204
+</td>
+<td style="text-align:center;">
+986.2326
+</td>
+<td style="text-align:center;">
+1011.0255
+</td>
+<td style="text-align:center;">
+1027.1002
+</td>
+<td style="text-align:center;">
+1080.9201
+</td>
+<td style="text-align:center;">
+1141.2954
+</td>
+<td style="text-align:center;">
+1167.7726
+</td>
+<td style="text-align:center;">
+1070.6197
+</td>
+<td style="text-align:center;">
+1083.6925
+</td>
+<td style="text-align:center;">
+1138.1892
+</td>
+<td style="text-align:center;">
+1172.2285
+</td>
+<td style="text-align:center;">
+1203.5922
+</td>
+<td style="text-align:center;">
+1257.3779
+</td>
+<td style="text-align:center;">
+1279.5050
+</td>
+<td style="text-align:center;">
+1299.8090
+</td>
+<td style="text-align:center;">
+1290.7673
+</td>
+<td style="text-align:center;">
+1276.0132
+</td>
+<td style="text-align:center;">
+1278.8408
+</td>
+<td style="text-align:center;">
+1345.5626
+</td>
+<td style="text-align:center;">
+1381.5320
+</td>
+<td style="text-align:center;">
+1373.7458
+</td>
+<td style="text-align:center;">
+1422.6147
+</td>
+<td style="text-align:center;">
+1477.4704
+</td>
+<td style="text-align:center;">
+1543.8137
+</td>
+<td style="text-align:center;">
+1575.1605
+</td>
+<td style="text-align:center;">
+1658.9650
+</td>
+<td style="text-align:center;">
+1704.6123
+</td>
+<td style="text-align:center;">
+1764.5284
+</td>
+<td style="text-align:center;">
+1730.3434
+</td>
+<td style="text-align:center;">
+1840.1761
+</td>
+<td style="text-align:center;">
+1796.9440
+</td>
+<td style="text-align:center;">
+1953.2867
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+</tr>
+</tbody>
+</table>
+There are a few things wrong with this data. To start with, I want to remove columns 2, 3, and 4. There's no data for 2016, so I'll remove that too. I also need to change the other headings so that they will match those in `gapminder`.
+
+``` r
+# Remove columns 2:4 plus the last column for 2016
+data.energy <- data.energy %>%
+  select(ï..Country.Name, num_range("X", 1960:2015))
+
+# Rename the columns
+names(data.energy) <- c("country",1960:2015)
+
+knitr::kable(head(data.energy), 
+  align = 'c',
+  format = 'html', 
+  caption = "<h4>Energy Use in Kg of Oil Equivalent per Capita</h4>")
+```
+
+<table>
+<caption>
+<h4>
+Energy Use in Kg of Oil Equivalent per Capita
+</h4>
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+country
+</th>
+<th style="text-align:center;">
+1960
+</th>
+<th style="text-align:center;">
+1961
+</th>
+<th style="text-align:center;">
+1962
+</th>
+<th style="text-align:center;">
+1963
+</th>
+<th style="text-align:center;">
+1964
+</th>
+<th style="text-align:center;">
+1965
+</th>
+<th style="text-align:center;">
+1966
+</th>
+<th style="text-align:center;">
+1967
+</th>
+<th style="text-align:center;">
+1968
+</th>
+<th style="text-align:center;">
+1969
+</th>
+<th style="text-align:center;">
+1970
+</th>
+<th style="text-align:center;">
+1971
+</th>
+<th style="text-align:center;">
+1972
+</th>
+<th style="text-align:center;">
+1973
+</th>
+<th style="text-align:center;">
+1974
+</th>
+<th style="text-align:center;">
+1975
+</th>
+<th style="text-align:center;">
+1976
+</th>
+<th style="text-align:center;">
+1977
+</th>
+<th style="text-align:center;">
+1978
+</th>
+<th style="text-align:center;">
+1979
+</th>
+<th style="text-align:center;">
+1980
+</th>
+<th style="text-align:center;">
+1981
+</th>
+<th style="text-align:center;">
+1982
+</th>
+<th style="text-align:center;">
+1983
+</th>
+<th style="text-align:center;">
+1984
+</th>
+<th style="text-align:center;">
+1985
+</th>
+<th style="text-align:center;">
+1986
+</th>
+<th style="text-align:center;">
+1987
+</th>
+<th style="text-align:center;">
+1988
+</th>
+<th style="text-align:center;">
+1989
+</th>
+<th style="text-align:center;">
+1990
+</th>
+<th style="text-align:center;">
+1991
+</th>
+<th style="text-align:center;">
+1992
+</th>
+<th style="text-align:center;">
+1993
+</th>
+<th style="text-align:center;">
+1994
+</th>
+<th style="text-align:center;">
+1995
+</th>
+<th style="text-align:center;">
+1996
+</th>
+<th style="text-align:center;">
+1997
+</th>
+<th style="text-align:center;">
+1998
+</th>
+<th style="text-align:center;">
+1999
+</th>
+<th style="text-align:center;">
+2000
+</th>
+<th style="text-align:center;">
+2001
+</th>
+<th style="text-align:center;">
+2002
+</th>
+<th style="text-align:center;">
+2003
+</th>
+<th style="text-align:center;">
+2004
+</th>
+<th style="text-align:center;">
+2005
+</th>
+<th style="text-align:center;">
+2006
+</th>
+<th style="text-align:center;">
+2007
+</th>
+<th style="text-align:center;">
+2008
+</th>
+<th style="text-align:center;">
+2009
+</th>
+<th style="text-align:center;">
+2010
+</th>
+<th style="text-align:center;">
+2011
+</th>
+<th style="text-align:center;">
+2012
+</th>
+<th style="text-align:center;">
+2013
+</th>
+<th style="text-align:center;">
+2014
+</th>
+<th style="text-align:center;">
+2015
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+Aruba
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Afghanistan
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Angola
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+555.8826
+</td>
+<td style="text-align:center;">
+584.3152
+</td>
+<td style="text-align:center;">
+567.5612
+</td>
+<td style="text-align:center;">
+564.5783
+</td>
+<td style="text-align:center;">
+536.4042
+</td>
+<td style="text-align:center;">
+515.4481
+</td>
+<td style="text-align:center;">
+493.8022
+</td>
+<td style="text-align:center;">
+527.3258
+</td>
+<td style="text-align:center;">
+518.2229
+</td>
+<td style="text-align:center;">
+510.9863
+</td>
+<td style="text-align:center;">
+496.8536
+</td>
+<td style="text-align:center;">
+472.8293
+</td>
+<td style="text-align:center;">
+468.8811
+</td>
+<td style="text-align:center;">
+457.7808
+</td>
+<td style="text-align:center;">
+470.3735
+</td>
+<td style="text-align:center;">
+462.1985
+</td>
+<td style="text-align:center;">
+460.8183
+</td>
+<td style="text-align:center;">
+467.2142
+</td>
+<td style="text-align:center;">
+464.9752
+</td>
+<td style="text-align:center;">
+483.3574
+</td>
+<td style="text-align:center;">
+479.8715
+</td>
+<td style="text-align:center;">
+467.1092
+</td>
+<td style="text-align:center;">
+468.0538
+</td>
+<td style="text-align:center;">
+459.4536
+</td>
+<td style="text-align:center;">
+445.3262
+</td>
+<td style="text-align:center;">
+445.3477
+</td>
+<td style="text-align:center;">
+442.7813
+</td>
+<td style="text-align:center;">
+429.8326
+</td>
+<td style="text-align:center;">
+438.8703
+</td>
+<td style="text-align:center;">
+437.3376
+</td>
+<td style="text-align:center;">
+442.0004
+</td>
+<td style="text-align:center;">
+446.9038
+</td>
+<td style="text-align:center;">
+465.5403
+</td>
+<td style="text-align:center;">
+462.1575
+</td>
+<td style="text-align:center;">
+430.9351
+</td>
+<td style="text-align:center;">
+456.2469
+</td>
+<td style="text-align:center;">
+469.6202
+</td>
+<td style="text-align:center;">
+490.5364
+</td>
+<td style="text-align:center;">
+514.4114
+</td>
+<td style="text-align:center;">
+520.6751
+</td>
+<td style="text-align:center;">
+521.8258
+</td>
+<td style="text-align:center;">
+552.6229
+</td>
+<td style="text-align:center;">
+534.1191
+</td>
+<td style="text-align:center;">
+545.0405
+</td>
+<td style="text-align:center;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Albania
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+785.1615
+</td>
+<td style="text-align:center;">
+865.5925
+</td>
+<td style="text-align:center;">
+762.7254
+</td>
+<td style="text-align:center;">
+776.9347
+</td>
+<td style="text-align:center;">
+826.9521
+</td>
+<td style="text-align:center;">
+890.9534
+</td>
+<td style="text-align:center;">
+923.7289
+</td>
+<td style="text-align:center;">
+1010.8192
+</td>
+<td style="text-align:center;">
+864.1995
+</td>
+<td style="text-align:center;">
+1149.5361
+</td>
+<td style="text-align:center;">
+989.2001
+</td>
+<td style="text-align:center;">
+966.6833
+</td>
+<td style="text-align:center;">
+1000.1220
+</td>
+<td style="text-align:center;">
+1018.2631
+</td>
+<td style="text-align:center;">
+916.5552
+</td>
+<td style="text-align:center;">
+963.9272
+</td>
+<td style="text-align:center;">
+921.8930
+</td>
+<td style="text-align:center;">
+927.7445
+</td>
+<td style="text-align:center;">
+896.4378
+</td>
+<td style="text-align:center;">
+813.2557
+</td>
+<td style="text-align:center;">
+572.7818
+</td>
+<td style="text-align:center;">
+418.2866
+</td>
+<td style="text-align:center;">
+412.3789
+</td>
+<td style="text-align:center;">
+441.2493
+</td>
+<td style="text-align:center;">
+417.0348
+</td>
+<td style="text-align:center;">
+447.8489
+</td>
+<td style="text-align:center;">
+384.5950
+</td>
+<td style="text-align:center;">
+426.6828
+</td>
+<td style="text-align:center;">
+576.1836
+</td>
+<td style="text-align:center;">
+580.4948
+</td>
+<td style="text-align:center;">
+597.2653
+</td>
+<td style="text-align:center;">
+660.0480
+</td>
+<td style="text-align:center;">
+648.1684
+</td>
+<td style="text-align:center;">
+715.4145
+</td>
+<td style="text-align:center;">
+719.5844
+</td>
+<td style="text-align:center;">
+706.8594
+</td>
+<td style="text-align:center;">
+679.8618
+</td>
+<td style="text-align:center;">
+710.7485
+</td>
+<td style="text-align:center;">
+732.3167
+</td>
+<td style="text-align:center;">
+729.1544
+</td>
+<td style="text-align:center;">
+764.9686
+</td>
+<td style="text-align:center;">
+687.8963
+</td>
+<td style="text-align:center;">
+801.3300
+</td>
+<td style="text-align:center;">
+808.4558
+</td>
+<td style="text-align:center;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Andorra
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Arab World
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+406.1678
+</td>
+<td style="text-align:center;">
+410.4821
+</td>
+<td style="text-align:center;">
+440.5221
+</td>
+<td style="text-align:center;">
+457.1755
+</td>
+<td style="text-align:center;">
+481.3987
+</td>
+<td style="text-align:center;">
+522.1277
+</td>
+<td style="text-align:center;">
+558.3905
+</td>
+<td style="text-align:center;">
+623.6959
+</td>
+<td style="text-align:center;">
+724.8316
+</td>
+<td style="text-align:center;">
+788.4030
+</td>
+<td style="text-align:center;">
+880.3153
+</td>
+<td style="text-align:center;">
+950.8273
+</td>
+<td style="text-align:center;">
+993.7204
+</td>
+<td style="text-align:center;">
+986.2326
+</td>
+<td style="text-align:center;">
+1011.0255
+</td>
+<td style="text-align:center;">
+1027.1002
+</td>
+<td style="text-align:center;">
+1080.9201
+</td>
+<td style="text-align:center;">
+1141.2954
+</td>
+<td style="text-align:center;">
+1167.7726
+</td>
+<td style="text-align:center;">
+1070.6197
+</td>
+<td style="text-align:center;">
+1083.6925
+</td>
+<td style="text-align:center;">
+1138.1892
+</td>
+<td style="text-align:center;">
+1172.2285
+</td>
+<td style="text-align:center;">
+1203.5922
+</td>
+<td style="text-align:center;">
+1257.3779
+</td>
+<td style="text-align:center;">
+1279.5050
+</td>
+<td style="text-align:center;">
+1299.8090
+</td>
+<td style="text-align:center;">
+1290.7673
+</td>
+<td style="text-align:center;">
+1276.0132
+</td>
+<td style="text-align:center;">
+1278.8408
+</td>
+<td style="text-align:center;">
+1345.5626
+</td>
+<td style="text-align:center;">
+1381.5320
+</td>
+<td style="text-align:center;">
+1373.7458
+</td>
+<td style="text-align:center;">
+1422.6147
+</td>
+<td style="text-align:center;">
+1477.4704
+</td>
+<td style="text-align:center;">
+1543.8137
+</td>
+<td style="text-align:center;">
+1575.1605
+</td>
+<td style="text-align:center;">
+1658.9650
+</td>
+<td style="text-align:center;">
+1704.6123
+</td>
+<td style="text-align:center;">
+1764.5284
+</td>
+<td style="text-align:center;">
+1730.3434
+</td>
+<td style="text-align:center;">
+1840.1761
+</td>
+<td style="text-align:center;">
+1796.9440
+</td>
+<td style="text-align:center;">
+1953.2867
+</td>
+<td style="text-align:center;">
+NA
+</td>
+</tr>
+</tbody>
+</table>
+So now the data frame looks less ugly, but it still won't match up with `gapminder` as it is. We need to have the years consolidated into a single column, with countries repeated for each year. Looks like a job for `gather`. At this point I will also remove any missing data points, there's really no point in keeping them!
+
+``` r
+data.energy.long <- data.energy %>%
+  gather(year, Energy.Use.Per.Capita, 2:ncol(data.energy)) %>%
+  filter(!is.na(Energy.Use.Per.Capita))
+
+# Need to have year column as numeric
+data.energy.long$year <- as.numeric(data.energy.long$year)
+
+knitr::kable(head(data.energy.long), 
+  align = 'c',
+  format = 'html', 
+  caption = "<h4>Energy Use in Kg of Oil Equivalent per Capita</h4>")
+```
+
+<table>
+<caption>
+<h4>
+Energy Use in Kg of Oil Equivalent per Capita
+</h4>
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+country
+</th>
+<th style="text-align:center;">
+year
+</th>
+<th style="text-align:center;">
+Energy.Use.Per.Capita
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+Australia
+</td>
+<td style="text-align:center;">
+1960
+</td>
+<td style="text-align:center;">
+3063.554
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Austria
+</td>
+<td style="text-align:center;">
+1960
+</td>
+<td style="text-align:center;">
+1546.261
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Belgium
+</td>
+<td style="text-align:center;">
+1960
+</td>
+<td style="text-align:center;">
+2519.497
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Canada
+</td>
+<td style="text-align:center;">
+1960
+</td>
+<td style="text-align:center;">
+4251.436
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Switzerland
+</td>
+<td style="text-align:center;">
+1960
+</td>
+<td style="text-align:center;">
+1398.655
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Germany
+</td>
+<td style="text-align:center;">
+1960
+</td>
+<td style="text-align:center;">
+1952.589
+</td>
+</tr>
+</tbody>
+</table>
+Finally, the data frame is in the shape I needed! Let's try joining it with gapminder using the various `_join` functions.
+
+#### Left join
+
+I'll join this new data frame `data.energy.long` to gapminder using `left_join`. This type of join preserves all data in the first data frame (`gapminder` in this case) and adds new columns from the second data frame to matching rows. If there is no match for a row in the second data frame to the first, that data point will be excluded.
+
+``` r
+gapminder.energy.left <- left_join(gapminder,data.energy.long, by = c("country","year"))
+```
+
+    ## Warning: Column `country` joining factors with different levels, coercing
+    ## to character vector
+
+``` r
+glimpse(gapminder.energy.left)
+```
+
+    ## Observations: 1,704
+    ## Variables: 7
+    ## $ country               <chr> "Afghanistan", "Afghanistan", "Afghanist...
+    ## $ continent             <fctr> Asia, Asia, Asia, Asia, Asia, Asia, Asi...
+    ## $ year                  <dbl> 1952, 1957, 1962, 1967, 1972, 1977, 1982...
+    ## $ lifeExp               <dbl> 28.801, 30.332, 31.997, 34.020, 36.088, ...
+    ## $ pop                   <int> 8425333, 9240934, 10267083, 11537966, 13...
+    ## $ gdpPercap             <dbl> 779.4453, 820.8530, 853.1007, 836.1971, ...
+    ## $ Energy.Use.Per.Capita <dbl> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, ...
+
+The warning comes about because the `country` columns in `gapminder` and `data.energy.long` are not just a character vectors, but instead have associated numbers: They are class `factor`. The numbers from the matching countries do not necessarily match between these lists, resulting in a warning being thrown. We can convert the columns to character vectors with `as.character` to get rid of the warning.
+
+``` r
+my.gap <- gapminder
+my.gap$country <- as.character(my.gap$country)
+data.energy.long$country <- as.character(data.energy.long$country)
+
+gapminder.energy.left <- left_join(my.gap,data.energy.long, by = c("country","year"))
+
+glimpse(gapminder.energy.left)
+```
+
+    ## Observations: 1,704
+    ## Variables: 7
+    ## $ country               <chr> "Afghanistan", "Afghanistan", "Afghanist...
+    ## $ continent             <fctr> Asia, Asia, Asia, Asia, Asia, Asia, Asi...
+    ## $ year                  <dbl> 1952, 1957, 1962, 1967, 1972, 1977, 1982...
+    ## $ lifeExp               <dbl> 28.801, 30.332, 31.997, 34.020, 36.088, ...
+    ## $ pop                   <int> 8425333, 9240934, 10267083, 11537966, 13...
+    ## $ gdpPercap             <dbl> 779.4453, 820.8530, 853.1007, 836.1971, ...
+    ## $ Energy.Use.Per.Capita <dbl> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, ...
+
+#### Right Join
+
+Same as `left_join` but changed the arguments around. All of the observations of `data.energy.long,` are obtained
+
+``` r
+gapminder.energy.right <- right_join(my.gap,data.energy.long, by = c("country","year"))
+
+glimpse(gapminder.energy.right)
+```
+
+    ## Observations: 7,884
+    ## Variables: 7
+    ## $ country               <chr> "Australia", "Austria", "Belgium", "Cana...
+    ## $ continent             <fctr> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,...
+    ## $ year                  <dbl> 1960, 1960, 1960, 1960, 1960, 1960, 1960...
+    ## $ lifeExp               <dbl> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, ...
+    ## $ pop                   <int> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, ...
+    ## $ gdpPercap             <dbl> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, ...
+    ## $ Energy.Use.Per.Capita <dbl> 3063.5543, 1546.2615, 2519.4973, 4251.43...
+
+So now all data from `data.energy.long` has been retained, and columns from gapminder have been added. Data from gapminder has been kept where it matches the country and year in `data.energy.long`.
+
+#### Inner Join
+
+`inner_join` retains only data found in both sets. There should be no missing data points here.
+
+``` r
+gapminder.energy.inner <- inner_join(my.gap,data.energy.long, by = c("country","year"))
+
+glimpse(gapminder.energy.inner)
+```
+
+    ## Observations: 880
+    ## Variables: 7
+    ## $ country               <chr> "Albania", "Albania", "Albania", "Albani...
+    ## $ continent             <fctr> Europe, Europe, Europe, Europe, Europe,...
+    ## $ year                  <dbl> 1972, 1977, 1982, 1987, 1992, 1997, 2002...
+    ## $ lifeExp               <dbl> 67.690, 68.930, 70.420, 72.000, 71.581, ...
+    ## $ pop                   <int> 2263554, 2509048, 2780097, 3075321, 3326...
+    ## $ gdpPercap             <dbl> 3313.422, 3533.004, 3630.881, 3738.933, ...
+    ## $ Energy.Use.Per.Capita <dbl> 865.5925, 923.7289, 966.6833, 921.8930, ...
+
+#### Full Join
+
+This function retains all data points from both data sets.
+
+``` r
+gapminder.energy.full <- full_join(my.gap,data.energy.long, by = c("country","year"))
+
+glimpse(gapminder.energy.full)
+```
+
+    ## Observations: 8,708
+    ## Variables: 7
+    ## $ country               <chr> "Afghanistan", "Afghanistan", "Afghanist...
+    ## $ continent             <fctr> Asia, Asia, Asia, Asia, Asia, Asia, Asi...
+    ## $ year                  <dbl> 1952, 1957, 1962, 1967, 1972, 1977, 1982...
+    ## $ lifeExp               <dbl> 28.801, 30.332, 31.997, 34.020, 36.088, ...
+    ## $ pop                   <int> 8425333, 9240934, 10267083, 11537966, 13...
+    ## $ gdpPercap             <dbl> 779.4453, 820.8530, 853.1007, 836.1971, ...
+    ## $ Energy.Use.Per.Capita <dbl> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, ...
+
+#### Semi Join
+
+`semi_Join` is a way of filtering out the data in the first argument by keeping only the data points that have matches in the second argument. In this case, no `Energy.user.Per.Capita` columns are added.
+
+``` r
+gapminder.energy.semi <- semi_join(my.gap,data.energy.long, by = c("country","year"))
+
+glimpse(gapminder.energy.semi)
+```
+
+    ## Observations: 880
+    ## Variables: 6
+    ## $ country   <chr> "Albania", "Albania", "Albania", "Albania", "Albania...
+    ## $ continent <fctr> Europe, Europe, Europe, Europe, Europe, Europe, Eur...
+    ## $ year      <int> 1972, 1977, 1982, 1987, 1992, 1997, 2002, 2007, 1972...
+    ## $ lifeExp   <dbl> 67.690, 68.930, 70.420, 72.000, 71.581, 72.950, 75.6...
+    ## $ pop       <int> 2263554, 2509048, 2780097, 3075321, 3326498, 3428038...
+    ## $ gdpPercap <dbl> 3313.422, 3533.004, 3630.881, 3738.933, 2497.438, 31...
+
+#### Anti Join
+
+This is another joining function. It is the inverse of `semi_join` and keeps only data points in the first argument *without* matches in the second.
+
+``` r
+gapminder.energy.anti <- anti_join(my.gap,data.energy.long, by = c("country","year"))
+
+glimpse(gapminder.energy.anti)
+```
+
+    ## Observations: 824
+    ## Variables: 6
+    ## $ country   <chr> "Afghanistan", "Afghanistan", "Afghanistan", "Afghan...
+    ## $ continent <fctr> Asia, Asia, Asia, Asia, Asia, Asia, Asia, Asia, Asi...
+    ## $ year      <int> 1952, 1957, 1962, 1967, 1972, 1977, 1982, 1987, 1992...
+    ## $ lifeExp   <dbl> 28.801, 30.332, 31.997, 34.020, 36.088, 38.438, 39.8...
+    ## $ pop       <int> 8425333, 9240934, 10267083, 11537966, 13079460, 1488...
+    ## $ gdpPercap <dbl> 779.4453, 820.8530, 853.1007, 836.1971, 739.9811, 78...
+
+<a href="#top">Back to top</a>
