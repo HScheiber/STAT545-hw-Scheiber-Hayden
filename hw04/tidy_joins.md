@@ -1125,7 +1125,7 @@ Japan
 </tr>
 </tbody>
 </table>
-I would like to reshape this data so that there is only one row per year. I think there is probably an easier way of doing this, but I found a way that worked! I added new columns that indicated the maximum and minimum life expectancy of each year group, then cut away the previous and removed the duplicates.
+I would like to reshape this data so that there is only one row per year. I think there is probably an easier way of doing this, but I found a way that worked! I added new columns that indicated the maximum and minimum life expectancy of each year grouping, then cut away the previous columns and removed the duplicated data points.
 
 ``` r
 data.lifeExp.Asia.grouped <- data.lifeExp.Asia %>%
@@ -1384,8 +1384,10 @@ Japan
 </tr>
 </tbody>
 </table>
+This is what I wanted!
 
-## Join, merge, look up
+Join, merge, look up
+--------------------
 
 ### Create a second data frame, complementary to Gapminder. Join this with part of Gapminder
 
