@@ -41,9 +41,9 @@ Let's compare life expectancy of **Canada**, **Rwanada**, and **China**. I begin
 ``` r
 data.selected.long <- gapminder %>%
         filter(country %in% c('Canada', 'Rwanda', 'China')) %>%
-        select(country, year,lifeExp)
+        select(country, year, lifeExp)
 
-knitr::kable(head(data.selected.long,n=5))
+knitr::kable(head(data.selected.long, n = 5))
 ```
 
 | country |  year|  lifeExp|
@@ -54,7 +54,7 @@ knitr::kable(head(data.selected.long,n=5))
 | Canada  |  1967|    72.13|
 | Canada  |  1972|    72.88|
 
-Now it's time to reshape this data into the form I want. The `spread` function is used to convert a single column into multiple columns. This is useful to use on the **country** column because there are only three values present there. The three values will become new columns in the reshaped dataframe.
+Now it's time to reshape this data into a different form. The `spread` function is used to convert a single column into multiple columns. This is useful to use on the **country** column because there are only three values present there. The three values will become new columns in the reshaped dataframe.
 
 ``` r
 data.selected.wide <- data.selected.long %>%
@@ -195,7 +195,7 @@ data.selected.long %>%
 
 <a href="#top">Back to top</a>
 
-In this section, I have decided that I will compute the median life expectancy for each continent at each year.
+In this section, I decided to compute the median life expectancy for each continent at each year.
 
 ``` r
 data.lifeExp.wide <- gapminder %>%
@@ -496,6 +496,9 @@ data.lifeExp.wide.t <- t(data.lifeExp.wide)
 data.lifeExp.wide.t.table <- rbind(formatC(data.lifeExp.wide.t[1,],format="d"),
         data.lifeExp.wide.t[-1,])
 
+# Previous command removed the year label. Re-added it manually.
+row.names(data.lifeExp.wide.t.table)[1] <- 'Year'
+
 knitr::kable(data.lifeExp.wide.t.table, 
         col.names = NULL,
         align = 'c',
@@ -512,6 +515,7 @@ Median Life Expectancy by Continent (Years)
 <tbody>
 <tr>
 <td style="text-align:left;">
+Year
 </td>
 <td style="text-align:center;">
 1952
@@ -757,7 +761,7 @@ Oceania
 </tr>
 </tbody>
 </table>
-This type of data format is human readable, but it isn't the best format for `ggplot`. The only types of plots I could *maybe* see being easier with these formats are comparisons between different years or different continents. Even then, it seems to make colouring points by continent more awkward.
+This type of data format is human readable, but it isn't the best format for `ggplot`. The only types of plots I could *maybe* see being easier with these formats are comparisons between different years or different continents. However, it seems to make colouring points by continent very awkward.
 
 ``` r
 ggplot(data.lifeExp.wide,aes(x = year)) +
@@ -783,7 +787,7 @@ ggplot(data.lifeExp.wide,aes(x = year)) +
 
 ![](tidy_joins_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-7-1.png)
 
-If we use data in long format, as below, only a single layer of `geom_point` is required, but I also have to `filter` the data first. I think this method is better simply because of the colour aesthetic, which automatically maps to continent. In the previous example I had to manually map it, which just felt wrong.
+If I use data in long format, as below, only a single layer of `geom_point` is required, but I also have to `filter` the data first. I think this method is better simply because of the colour aesthetic, which automatically maps to continent. In the previous example I had to manually map it, which just felt wrong.
 
 ``` r
 # Same process as before, but without spread
@@ -1124,7 +1128,7 @@ Japan
 </tr>
 </tbody>
 </table>
-I would like to reshape this data so that there is only one row per year. I think there is probably an easier way of doing this, but I found a way that worked! I added new columns that indicated the maximum and minimum life expectancy of each year grouping, then cut away the previous columns and removed the duplicated data points.
+I would like to reshape this data so that there is only one row per year. There must be an easier way of doing this, but the way I chose worked! First I added new columns that indicated the maximum and minimum life expectancy of each grouping of year, then cut away the previous columns with `select` and removed the now repeated data points with `unique`.
 
 ``` r
 data.lifeExp.Asia.grouped <- data.lifeExp.Asia %>%
@@ -1392,7 +1396,7 @@ Join, merge, look up
 
 <a href="#top">Back to top</a>
 
-For this section, I downloaded a list of energy consumption per capita for 1960 to 2016 from the [world bank](https://data.worldbank.org/indicator/EG.USE.PCAP.KG.OE). I saved it as a `.csv` file and import it with the following command. Let's have a look at it's structure.
+For this section, I downloaded a list of energy consumption per capita for 1960 to 2016 from the [world bank](https://data.worldbank.org/indicator/EG.USE.PCAP.KG.OE). I saved it as a `.csv` file and imported it with `read.csv`. Let's have a look at it's structure.
 
 ``` r
 data.energy <- read.csv("Energy_use.csv")
@@ -2730,7 +2734,7 @@ NA
 </tr>
 </tbody>
 </table>
-There are a few things wrong with this data. To start with, I want to remove columns 2, 3, and 4. There's no data for 2016, so I'll remove that too. I also need to change the other headings so that they will match those in `gapminder`.
+This is very ugly looking data! There are a few things wrong with it: I want to remove columns 2, 3, and 4. There's no data for 2016, so I'll remove that too. I also need to change the other headings so that they will match those in `gapminder`. After that's all done we can reshape it to match the shape of `gapminder`, and remove all those `NA` data points.
 
 ``` r
 # Remove columns 2:4 plus the last column for 2016
@@ -3978,7 +3982,7 @@ data.energy.long <- data.energy %>%
 # Need to have year column as numeric
 data.energy.long$year <- as.numeric(data.energy.long$year)
 
-knitr::kable(head(data.energy.long), 
+knitr::kable(head(data.energy.long,n=10), 
   align = 'c',
   format = 'html', 
   caption = "<h4>Energy Use in Kg of Oil Equivalent per Capita</h4>")
@@ -4012,7 +4016,7 @@ Australia
 1960
 </td>
 <td style="text-align:center;">
-3063.554
+3063.5543
 </td>
 </tr>
 <tr>
@@ -4023,7 +4027,7 @@ Austria
 1960
 </td>
 <td style="text-align:center;">
-1546.261
+1546.2615
 </td>
 </tr>
 <tr>
@@ -4034,7 +4038,7 @@ Belgium
 1960
 </td>
 <td style="text-align:center;">
-2519.497
+2519.4973
 </td>
 </tr>
 <tr>
@@ -4045,7 +4049,7 @@ Canada
 1960
 </td>
 <td style="text-align:center;">
-4251.436
+4251.4359
 </td>
 </tr>
 <tr>
@@ -4056,7 +4060,7 @@ Switzerland
 1960
 </td>
 <td style="text-align:center;">
-1398.655
+1398.6548
 </td>
 </tr>
 <tr>
@@ -4067,12 +4071,56 @@ Germany
 1960
 </td>
 <td style="text-align:center;">
-1952.589
+1952.5886
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Denmark
+</td>
+<td style="text-align:center;">
+1960
+</td>
+<td style="text-align:center;">
+1922.9737
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Euro area
+</td>
+<td style="text-align:center;">
+1960
+</td>
+<td style="text-align:center;">
+1402.8731
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Spain
+</td>
+<td style="text-align:center;">
+1960
+</td>
+<td style="text-align:center;">
+530.6648
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+European Union
+</td>
+<td style="text-align:center;">
+1960
+</td>
+<td style="text-align:center;">
+1720.3166
 </td>
 </tr>
 </tbody>
 </table>
-Finally, the data frame is in the shape I needed! Let's try joining it with gapminder using the various `_join` functions.
+Finally, the data frame is in the shape I needed! Let's try joining it with gapminder using the various `join` functions.
 
 #### Left join
 
@@ -4099,7 +4147,7 @@ glimpse(gapminder.energy.left)
     ## $ gdpPercap             <dbl> 779.4453, 820.8530, 853.1007, 836.1971, ...
     ## $ Energy.Use.Per.Capita <dbl> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, ...
 
-The warning comes about because the `country` columns in `gapminder` and `data.energy.long` are not just a character vectors, but instead have associated numbers: They are class `factor`. The numbers from the matching countries do not necessarily match between these lists, resulting in a warning being thrown. We can convert the columns to character vectors with `as.character` to get rid of the warning.
+The warning comes about because the `country` columns in `gapminder` and `data.energy.long` are not just character vectors, but also have associated numbers: they are in the class `factor`. The numbers from the matching country strings do not necessarily match between these lists, resulting in a warning. We can convert the columns to character vectors with `as.character` to get rid of the warning.
 
 ``` r
 my.gap <- gapminder
@@ -4123,7 +4171,7 @@ glimpse(gapminder.energy.left)
 
 #### Right Join
 
-Same as `left_join` but changed the arguments around. All of the observations of `data.energy.long,` are obtained
+Same as `left_join` but changed the arguments around.
 
 ``` r
 gapminder.energy.right <- right_join(my.gap,data.energy.long, by = c("country","year"))
@@ -4141,11 +4189,11 @@ glimpse(gapminder.energy.right)
     ## $ gdpPercap             <dbl> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, ...
     ## $ Energy.Use.Per.Capita <dbl> 3063.5543, 1546.2615, 2519.4973, 4251.43...
 
-So now all data from `data.energy.long` has been retained, and columns from gapminder have been added. Data from gapminder has been kept where it matches the country and year in `data.energy.long`.
+So now all data from `data.energy.long` has been retained, and columns from gapminder have been added. Data from gapminder has been added only where it matches the country and year in `data.energy.long`.
 
 #### Inner Join
 
-`inner_join` retains only data found in both sets. There should be no missing data points here.
+`inner_join` retains only data found in both sets. There should be no empty data points here.
 
 ``` r
 gapminder.energy.inner <- inner_join(my.gap,data.energy.long, by = c("country","year"))
@@ -4165,7 +4213,7 @@ glimpse(gapminder.energy.inner)
 
 #### Full Join
 
-This function retains all data points from both data sets.
+This function retains all data points from both data sets. This will result in the largest data frame, with lots of empty data points.
 
 ``` r
 gapminder.energy.full <- full_join(my.gap,data.energy.long, by = c("country","year"))
@@ -4185,7 +4233,7 @@ glimpse(gapminder.energy.full)
 
 #### Semi Join
 
-`semi_Join` is a way of filtering out the data in the first argument by keeping only the data points that have matches in the second argument. In this case, no `Energy.user.Per.Capita` columns are added.
+`semi_Join` is a way of filtering out the data in the first argument by keeping only the data points that have matches in the second argument. In this case, no columns from `Energy.user.Per.Capita` are added.
 
 ``` r
 gapminder.energy.semi <- semi_join(my.gap,data.energy.long, by = c("country","year"))
@@ -4220,5 +4268,7 @@ glimpse(gapminder.energy.anti)
     ## $ lifeExp   <dbl> 28.801, 30.332, 31.997, 34.020, 36.088, 38.438, 39.8...
     ## $ pop       <int> 8425333, 9240934, 10267083, 11537966, 13079460, 1488...
     ## $ gdpPercap <dbl> 779.4453, 820.8530, 853.1007, 836.1971, 739.9811, 78...
+
+That's all of the `join` functions!
 
 <a href="#top">Back to top</a>
