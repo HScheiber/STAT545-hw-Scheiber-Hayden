@@ -1,7 +1,7 @@
 Homework 3 - Gapminder Manipulation and Exploration with dplyr
 ================
 Hayden Scheiber -
-06 October, 2017
+07 October, 2017
 
 [Return to Main Page](https://github.com/HScheiber/STAT545-hw-Scheiber-Hayden/blob/master/README.md)
 
