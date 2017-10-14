@@ -6,6 +6,8 @@ input: GFM
 output: github_document
 ---
 
+![](20160729_133912.jpg)
+
 # STAT 545 - Homework Repository
 
 Welcome all visitors to my homework repository, my name is Hayden Scheiber! You can reach me at scheiber@chem.ubc.ca

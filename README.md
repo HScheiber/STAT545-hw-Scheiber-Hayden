@@ -1,6 +1,8 @@
 Hayden Scheiber
 September 27, 2017
 
+![](20160729_133912.jpg)
+
 STAT 545 - Homework Repository
 ==============================
 
