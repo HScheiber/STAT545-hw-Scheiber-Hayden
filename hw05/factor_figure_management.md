@@ -41,8 +41,6 @@ Factor Management
 
 #### Goals
 
-<a href="#top">Back to top</a>
-
 -   Define factor variables
 -   Drop factor / levels
 -   Reorder levels based on knowledge from data
@@ -155,7 +153,7 @@ length(gap.continent.rmlevel.oceania)
 
 <a href="#top">Back to top</a>
 
-Use the forcats package to change the order of the factor levels, based on a principled summary of one of the quantitative variables. Consider experimenting with a summary statistic beyond the most basic choice of the median.
+Goal: Use the forcats package to change the order of the factor levels, based on a principled summary of one of the quantitative variables. Consider experimenting with a summary statistic beyond the most basic choice of the median.
 
 For this question, I have decided to use the range of life expectancy for each country over the years on record as my summary statistic. I calculate this below and show the first 10 entries in descending order.
 
@@ -893,18 +891,14 @@ Reloading it and comparing the structure before and after:
 ``` r
 copied.data.rds <- readRDS(tmp2)
 
-str(copied.data.rds)
+unique(copied.data.rds == gap.countries.LERange)
 ```
 
-    ## Classes 'tbl_df', 'tbl' and 'data.frame':    142 obs. of  5 variables:
-    ##  $ country        : Factor w/ 142 levels "Oman","Vietnam",..: 1 2 3 4 5 6 7 8 9 10 ...
-    ##  $ continent      : Factor w/ 5 levels "Africa","Americas",..: 3 3 3 3 1 3 2 3 3 1 ...
-    ##  $ lifeExp.Range  : num  38.1 33.8 33.2 32.9 31.2 ...
-    ##  $ pop.Range      : num  2.70e+06 5.90e+07 1.41e+08 2.36e+07 5.02e+06 ...
-    ##  $ gdpPercap.Range: num  20488 1837 2791 27708 19564 ...
+    ##      country continent lifeExp.Range pop.Range gdpPercap.Range
+    ## [1,]    TRUE      TRUE          TRUE      TRUE            TRUE
 
 ``` r
-str(gap.countries.LERange)
+str(copied.data.rds)
 ```
 
     ## Classes 'tbl_df', 'tbl' and 'data.frame':    142 obs. of  5 variables:
@@ -1070,7 +1064,7 @@ Visualization design
 
 <a href="#top">Back to top</a>
 
-In this section, I've decided to `join` some outside data with the `gapminder` dataframe in order to make an interesting plot. In [homework 4](https://github.com/HScheiber/STAT545-hw-Scheiber-Hayden/blob/master/hw04/tidy_joins.md#create-a-second-data-frame-complementary-to-gapminder-join-this-with-part-of-gapminder) I obtained a data set from the [world bank](https://data.worldbank.org/indicator/EG.USE.PCAP.KG.OE) that lists energy consumption per capita for 1960 to 2016. Below I re-load that data. I saved the column names for the file using `saveRDS` (not shown), so I load them first into a variable `col.metadata`.
+In this section, I've decided to `join` some outside data with the `gapminder` dataframe in order to make some interesting plots. In [homework 4](https://github.com/HScheiber/STAT545-hw-Scheiber-Hayden/blob/master/hw04/tidy_joins.md#create-a-second-data-frame-complementary-to-gapminder-join-this-with-part-of-gapminder) I obtained a data set from the [world bank](https://data.worldbank.org/indicator/EG.USE.PCAP.KG.OE) that lists energy consumption per capita for 1960 to 2016. Below I re-load that data. I saved the column names for the file using `saveRDS` (not shown), so I load them first into a variable `col.metadata`.
 
 ``` r
 col.metadata <- readRDS("metadata_energy.rds")
@@ -1089,7 +1083,7 @@ Here's a look at what the data frame looks like:
 
 ``` r
 data.energy %>%
-  head(n=5) %>%
+  head(n=3) %>%
   knitr::kable( 
         align = 'c',
         format = 'html', 
@@ -1845,376 +1839,6 @@ NA
 NA
 </td>
 </tr>
-<tr>
-<td style="text-align:center;">
-Albania
-</td>
-<td style="text-align:center;">
-ALB
-</td>
-<td style="text-align:center;">
-Energy use (kg of oil equivalent per capita)
-</td>
-<td style="text-align:center;">
-EG.USE.PCAP.KG.OE
-</td>
-<td style="text-align:center;">
-NA
-</td>
-<td style="text-align:center;">
-NA
-</td>
-<td style="text-align:center;">
-NA
-</td>
-<td style="text-align:center;">
-NA
-</td>
-<td style="text-align:center;">
-NA
-</td>
-<td style="text-align:center;">
-NA
-</td>
-<td style="text-align:center;">
-NA
-</td>
-<td style="text-align:center;">
-NA
-</td>
-<td style="text-align:center;">
-NA
-</td>
-<td style="text-align:center;">
-NA
-</td>
-<td style="text-align:center;">
-NA
-</td>
-<td style="text-align:center;">
-785.1615
-</td>
-<td style="text-align:center;">
-865.5925
-</td>
-<td style="text-align:center;">
-762.7254
-</td>
-<td style="text-align:center;">
-776.9347
-</td>
-<td style="text-align:center;">
-826.9521
-</td>
-<td style="text-align:center;">
-890.9534
-</td>
-<td style="text-align:center;">
-923.7289
-</td>
-<td style="text-align:center;">
-1010.8192
-</td>
-<td style="text-align:center;">
-864.1995
-</td>
-<td style="text-align:center;">
-1149.5361
-</td>
-<td style="text-align:center;">
-989.2001
-</td>
-<td style="text-align:center;">
-966.6833
-</td>
-<td style="text-align:center;">
-1000.1220
-</td>
-<td style="text-align:center;">
-1018.2631
-</td>
-<td style="text-align:center;">
-916.5552
-</td>
-<td style="text-align:center;">
-963.9272
-</td>
-<td style="text-align:center;">
-921.8930
-</td>
-<td style="text-align:center;">
-927.7445
-</td>
-<td style="text-align:center;">
-896.4378
-</td>
-<td style="text-align:center;">
-813.2557
-</td>
-<td style="text-align:center;">
-572.7818
-</td>
-<td style="text-align:center;">
-418.2866
-</td>
-<td style="text-align:center;">
-412.3789
-</td>
-<td style="text-align:center;">
-441.2493
-</td>
-<td style="text-align:center;">
-417.0348
-</td>
-<td style="text-align:center;">
-447.8489
-</td>
-<td style="text-align:center;">
-384.5950
-</td>
-<td style="text-align:center;">
-426.6828
-</td>
-<td style="text-align:center;">
-576.1836
-</td>
-<td style="text-align:center;">
-580.4948
-</td>
-<td style="text-align:center;">
-597.2653
-</td>
-<td style="text-align:center;">
-660.0480
-</td>
-<td style="text-align:center;">
-648.1684
-</td>
-<td style="text-align:center;">
-715.4145
-</td>
-<td style="text-align:center;">
-719.5844
-</td>
-<td style="text-align:center;">
-706.8594
-</td>
-<td style="text-align:center;">
-679.8618
-</td>
-<td style="text-align:center;">
-710.7485
-</td>
-<td style="text-align:center;">
-732.3167
-</td>
-<td style="text-align:center;">
-729.1544
-</td>
-<td style="text-align:center;">
-764.9686
-</td>
-<td style="text-align:center;">
-687.8963
-</td>
-<td style="text-align:center;">
-801.3300
-</td>
-<td style="text-align:center;">
-808.4558
-</td>
-<td style="text-align:center;">
-NA
-</td>
-<td style="text-align:center;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:center;">
-Andorra
-</td>
-<td style="text-align:center;">
-AND
-</td>
-<td style="text-align:center;">
-Energy use (kg of oil equivalent per capita)
-</td>
-<td style="text-align:center;">
-EG.USE.PCAP.KG.OE
-</td>
-<td style="text-align:center;">
-NA
-</td>
-<td style="text-align:center;">
-NA
-</td>
-<td style="text-align:center;">
-NA
-</td>
-<td style="text-align:center;">
-NA
-</td>
-<td style="text-align:center;">
-NA
-</td>
-<td style="text-align:center;">
-NA
-</td>
-<td style="text-align:center;">
-NA
-</td>
-<td style="text-align:center;">
-NA
-</td>
-<td style="text-align:center;">
-NA
-</td>
-<td style="text-align:center;">
-NA
-</td>
-<td style="text-align:center;">
-NA
-</td>
-<td style="text-align:center;">
-NA
-</td>
-<td style="text-align:center;">
-NA
-</td>
-<td style="text-align:center;">
-NA
-</td>
-<td style="text-align:center;">
-NA
-</td>
-<td style="text-align:center;">
-NA
-</td>
-<td style="text-align:center;">
-NA
-</td>
-<td style="text-align:center;">
-NA
-</td>
-<td style="text-align:center;">
-NA
-</td>
-<td style="text-align:center;">
-NA
-</td>
-<td style="text-align:center;">
-NA
-</td>
-<td style="text-align:center;">
-NA
-</td>
-<td style="text-align:center;">
-NA
-</td>
-<td style="text-align:center;">
-NA
-</td>
-<td style="text-align:center;">
-NA
-</td>
-<td style="text-align:center;">
-NA
-</td>
-<td style="text-align:center;">
-NA
-</td>
-<td style="text-align:center;">
-NA
-</td>
-<td style="text-align:center;">
-NA
-</td>
-<td style="text-align:center;">
-NA
-</td>
-<td style="text-align:center;">
-NA
-</td>
-<td style="text-align:center;">
-NA
-</td>
-<td style="text-align:center;">
-NA
-</td>
-<td style="text-align:center;">
-NA
-</td>
-<td style="text-align:center;">
-NA
-</td>
-<td style="text-align:center;">
-NA
-</td>
-<td style="text-align:center;">
-NA
-</td>
-<td style="text-align:center;">
-NA
-</td>
-<td style="text-align:center;">
-NA
-</td>
-<td style="text-align:center;">
-NA
-</td>
-<td style="text-align:center;">
-NA
-</td>
-<td style="text-align:center;">
-NA
-</td>
-<td style="text-align:center;">
-NA
-</td>
-<td style="text-align:center;">
-NA
-</td>
-<td style="text-align:center;">
-NA
-</td>
-<td style="text-align:center;">
-NA
-</td>
-<td style="text-align:center;">
-NA
-</td>
-<td style="text-align:center;">
-NA
-</td>
-<td style="text-align:center;">
-NA
-</td>
-<td style="text-align:center;">
-NA
-</td>
-<td style="text-align:center;">
-NA
-</td>
-<td style="text-align:center;">
-NA
-</td>
-<td style="text-align:center;">
-NA
-</td>
-<td style="text-align:center;">
-NA
-</td>
-<td style="text-align:center;">
-NA
-</td>
-<td style="text-align:center;">
-NA
-</td>
-<td style="text-align:center;">
-NA
-</td>
-</tr>
 </tbody>
 </table>
 I want to remove columns 2:4, as well as the column for 2016, because it contains no data. I also need to rename `Country Name` to `country` so I can `join` it with `gapminder`. Finally, I also convert it into long format and remove any missing data points.
@@ -2353,7 +1977,7 @@ glimpse(gapminder.energy)
     ## $ gdpPercap             <dbl> 3313.422, 3533.004, 3630.881, 3738.933, ...
     ## $ Energy.Use.Per.Capita <dbl> 865.5925, 923.7289, 966.6833, 921.8930, ...
 
-Now we can do some interesting plots. How about the correlation between GDP per capita and Energy use per capita? We can compare it with life Expectancy vs energy usage on the same plot.
+Well, the `country` variable is no longer a factor, but that is okay for my purposes. Now I can make some interesting plots. How about the correlation between GDP per capita and Energy use per capita? We can compare it with life Expectancy vs energy usage on the same image using `grid.arrange`.
 
 ``` r
 numcountries <- length(unique(gapminder.energy$country)) %>%
@@ -2459,10 +2083,12 @@ gapminder.energy %>%
 
 ![](factor_figure_management_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-24-1.png)
 
-Over the last 6 or so weeks I have learned to plot beautiful images using `ggplot`. The above plots a result of the design knowledge accumulated from in-class examples and experience from previous assignments. I'm pretty happy with how my plots look now!
+Over the last 6 or so weeks I have learned how to plot beautiful images using `ggplot`. The above plots are a result of the design knowledge accumulated from in-class examples and experience from previous assignments. I'm pretty happy with how my plots look now!
 
 Writing Figures to File
 -----------------------
+
+<a href="#top">Back to top</a>
 
 We already have two plots assigned to variables from the previous section. Let's save one as a `PNG` image, and the other as an `pdf` image. Note that pdf images are vectorized, so their "resolution" scales as needed!
 
@@ -2481,13 +2107,13 @@ ggsave("energy_vs_lifeExp.pdf",
   height = 7)
 ```
 
-It seems that the `eps` format cannot encode some elements of the image. I should also note that explicitly telling `ggsave` each argument is good practice, otherwise the order of the arguments will be the only way in which `ggsave` can interpret the inputs.
+I should also note that explicitly telling `ggsave` each argument is good practice, otherwise the order of the arguments will be the only way in which `ggsave` can interpret the inputs.
 
 It's simple enough to re-insert the saved images back into the page. This is done outside of a code chunk with `![alt text](image/path.filetype)`.
 
 !['Energy vs GDP'](energy_vs_gdp.png)
 
-This embedded image is higher resolution than the rendered source image!
+This embedded image is actually higher resolution than the rendered source image!
 
 Unfortunately, `pdf` images cannot be embedded in markdown files. Instead, you can click on [this link](energy_vs_lifeExp.pdf) to load it separately!
 

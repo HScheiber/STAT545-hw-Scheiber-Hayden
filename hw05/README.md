@@ -19,7 +19,7 @@ Progress Report
 At this point, I feel pretty confortable using various aspects of the `tidyverse` to manipulate data. I generally refer back to previous homeowrks as well as the [ggplot cheat sheet](https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf) whenever I forget how to do something (which is constantly). I'm starting to see the power of the R language. It seems that `for` loops are almost never necessary. 
 
 Things I found difficult in this assignment:
-- It took me a while to figure out how to actually show the numerical indeces of factors. I finally figured out that using `as.numeric` works. This required a bit of googline around. Getting rid of factor levels was super easy though.
+- It took me a while to figure out how to actually show the numerical indices of factors. I finally figured out that using `as.numeric` works. This required a bit of googline around. Getting rid of factor levels was super easy though.
 - Figuring out how the various types of saves were different, and why it mattered. Took a lot of trial and error mostly.
 
 Some helpful sources:

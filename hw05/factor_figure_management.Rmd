@@ -40,7 +40,6 @@ suppressPackageStartupMessages(library(gridExtra))
 <a href="#top">Back to top</a>
 
 #### Goals
-<a href="#top">Back to top</a>
 
 - Define factor variables
 - Drop factor / levels
@@ -109,7 +108,7 @@ length(gap.continent.rmlevel.oceania)
 #### Reorder the levels of country or continent
 <a href="#top">Back to top</a>
 
-Use the forcats package to change the order of the factor levels, based on a principled summary of one of the quantitative variables. Consider experimenting with a summary statistic beyond the most basic choice of the median.
+Goal: Use the forcats package to change the order of the factor levels, based on a principled summary of one of the quantitative variables. Consider experimenting with a summary statistic beyond the most basic choice of the median.
  
 For this question, I have decided to use the range of life expectancy for each country over the years on record as my summary statistic. I calculate this below and show the first 10 entries in descending order.
 ```{r}
@@ -227,8 +226,8 @@ Reloading it and comparing the structure before and after:
 ```{r}
 copied.data.rds <- readRDS(tmp2)
 
+unique(copied.data.rds == gap.countries.LERange)
 str(copied.data.rds)
-str(gap.countries.LERange)
 ```
 
 The file is completely identical. Factors and their indices are intact. Another way of saving data is using the `dput` function. This type of write method saves an R object as an ASCII text representation, which may be useful when passing the object to different environments which may not be able to read `.rds` filetypes.
@@ -253,7 +252,7 @@ It seems that `dput` maintains the structure of factors as well.
 ## Visualization design
 <a href="#top">Back to top</a>
 
-In this section, I've decided to `join` some outside data with the `gapminder` dataframe in order to make an interesting plot. In [homework 4](https://github.com/HScheiber/STAT545-hw-Scheiber-Hayden/blob/master/hw04/tidy_joins.md#create-a-second-data-frame-complementary-to-gapminder-join-this-with-part-of-gapminder) I obtained a data set from the [world bank](https://data.worldbank.org/indicator/EG.USE.PCAP.KG.OE) that lists energy consumption per capita for 1960 to 2016. Below I re-load that data. I saved the column names for the file using `saveRDS` (not shown), so I load them first into a variable `col.metadata`.
+In this section, I've decided to `join` some outside data with the `gapminder` dataframe in order to make some interesting plots. In [homework 4](https://github.com/HScheiber/STAT545-hw-Scheiber-Hayden/blob/master/hw04/tidy_joins.md#create-a-second-data-frame-complementary-to-gapminder-join-this-with-part-of-gapminder) I obtained a data set from the [world bank](https://data.worldbank.org/indicator/EG.USE.PCAP.KG.OE) that lists energy consumption per capita for 1960 to 2016. Below I re-load that data. I saved the column names for the file using `saveRDS` (not shown), so I load them first into a variable `col.metadata`.
 ```{r}
 col.metadata <- readRDS("metadata_energy.rds")
 
@@ -269,7 +268,7 @@ data.energy <- data.energy[-length(data.energy)]
 Here's a look at what the data frame looks like:
 ```{r}
 data.energy %>%
-  head(n=5) %>%
+  head(n=3) %>%
   knitr::kable( 
         align = 'c',
         format = 'html', 
@@ -307,7 +306,7 @@ gapminder.energy <- inner_join(gapminder,data.energy.long, by = c("country","yea
 glimpse(gapminder.energy)
 ```
 
-Now we can do some interesting plots. How about the correlation between GDP per capita and Energy use per capita? We can compare it with life Expectancy vs energy usage on the same plot.
+Well, the `country` variable is no longer a factor, but that is okay for my purposes. Now I can make some interesting plots. How about the correlation between GDP per capita and Energy use per capita? We can compare it with life Expectancy vs energy usage on the same image using `grid.arrange`.
 ```{r fig.width = 10, fig.height = 15}
 numcountries <- length(unique(gapminder.energy$country)) %>%
   as.character()
@@ -409,9 +408,10 @@ gapminder.energy %>%
   guides(fill=FALSE)
 ```
 
-Over the last 6 or so weeks I have learned to plot beautiful images using `ggplot`. The above plots a result of the design knowledge accumulated from in-class examples and experience from previous assignments. I'm pretty happy with how my plots look now!
+Over the last 6 or so weeks I have learned how to plot beautiful images using `ggplot`. The above plots are a result of the design knowledge accumulated from in-class examples and experience from previous assignments. I'm pretty happy with how my plots look now!
 
 ## Writing Figures to File
+<a href="#top">Back to top</a>
 
 We already have two plots assigned to variables from the previous section. Let's save one as a `PNG` image, and the other as an `pdf` image. Note that pdf images are vectorized, so their "resolution" scales as needed!
 ```{r}
@@ -430,14 +430,14 @@ ggsave("energy_vs_lifeExp.pdf",
 
 ```
 
-It seems that the `eps` format cannot encode some elements of the image. I should also note that explicitly telling `ggsave` each argument is good practice, otherwise the order of the arguments will be the only way in which `ggsave` can interpret the inputs. 
+I should also note that explicitly telling `ggsave` each argument is good practice, otherwise the order of the arguments will be the only way in which `ggsave` can interpret the inputs. 
 
 It's simple enough to re-insert the saved images back into the page. This is done outside of a code chunk with `![alt text](image/path.filetype)`.
 
 !['Energy vs GDP'](energy_vs_gdp.png)
 
 
-This embedded image is higher resolution than the rendered source image!
+This embedded image is actually higher resolution than the rendered source image!
 
 Unfortunately, `pdf` images cannot be embedded in markdown files. Instead, you can click on [this link](energy_vs_lifeExp.pdf) to load it separately!
 
