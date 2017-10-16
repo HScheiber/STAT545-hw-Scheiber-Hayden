@@ -2483,9 +2483,11 @@ ggsave("energy_vs_lifeExp.pdf",
 
 It seems that the `eps` format cannot encode some elements of the image. I should also note that explicitly telling `ggsave` each argument is good practice, otherwise the order of the arguments will be the only way in which `ggsave` can interpret the inputs.
 
-It's simple enough to re-insert the saved images back into the page. This is done outside of a code chunk with `[alt text](image/path.filetype)`.
+It's simple enough to re-insert the saved images back into the page. This is done outside of a code chunk with `![alt text](image/path.filetype)`.
 
 !['Energy vs GDP'](energy_vs_gdp.png)
+
+This embedded image is higher resolution than the rendered source image!
 
 Unfortunately, `pdf` images cannot be embedded in markdown files. Instead, you can click on [this link](energy_vs_lifeExp.pdf) to load it separately!
 
