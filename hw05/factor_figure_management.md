@@ -1,7 +1,7 @@
 Homework 5 - Factor and figure management; Repo hygiene
 ================
 Hayden Scheiber -
-15 October, 2017
+19 October, 2017
 
 [Return to Main Page](https://github.com/HScheiber/STAT545-hw-Scheiber-Hayden/blob/master/README.md)
 
@@ -16,6 +16,7 @@ Hayden Scheiber -
 -   [File I/O](#file-io)
 -   [Visualization design](#visualization-design)
 -   [Writing Figures to File](#writing-figures-to-file)
+-   [But I want to do more!](#but-i-want-to-do-more)
 
 ------------------------------------------------------------------------
 
@@ -2116,5 +2117,164 @@ It's simple enough to re-insert the saved images back into the page. This is don
 This embedded image is actually higher resolution than the rendered source image!
 
 Unfortunately, `pdf` images cannot be embedded in markdown files. Instead, you can click on [this link](energy_vs_lifeExp.pdf) to load it separately!
+
+But I want to do more!
+----------------------
+
+<a href="#top">Back to top</a>
+
+I wish to explore the functionality of `forcats` a little bit more. I found a list of the national sports of a few countries online from [Top End Sports](http://www.topendsports.com/sport/national-sports.htm). I used a parsing program to save the table as a `.csv` file which I called `Country_Sports.csv`. First I have to load the new data into memory. I show the first few entries below.
+
+``` r
+columnsetting = cols(
+  Country = col_character(),
+  Sport = col_character())
+
+Country.sports <- read_csv("Country_sports.csv",col_types = columnsetting)
+
+# need to re-name the country column to match Gapminder
+names(Country.sports) <- c("country","Sport")
+
+# Assign country column to be a factor
+Country.sports$country <- as_factor(Country.sports$country)
+
+knitr::kable(head(Country.sports,10), 
+  align = 'c',
+  format = 'html', 
+  caption = "<h4>Official Sports of Countries</h4>")
+```
+
+<table>
+<caption>
+<h4>
+Official Sports of Countries
+</h4>
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+country
+</th>
+<th style="text-align:center;">
+Sport
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+Afghanistan
+</td>
+<td style="text-align:center;">
+Buzkashi
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Anguilla
+</td>
+<td style="text-align:center;">
+Yacht racing
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Antigua and Barbuda
+</td>
+<td style="text-align:center;">
+Cricket
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Argentina
+</td>
+<td style="text-align:center;">
+Pato
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Australia
+</td>
+<td style="text-align:center;">
+Cricket, AFL
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Bangladesh
+</td>
+<td style="text-align:center;">
+Kabaddi
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Bhutan
+</td>
+<td style="text-align:center;">
+Archery
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Brazil
+</td>
+<td style="text-align:center;">
+Capoeira
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Canada
+</td>
+<td style="text-align:center;">
+Ice hockey
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Chile
+</td>
+<td style="text-align:center;">
+Chilean rodeo
+</td>
+</tr>
+</tbody>
+</table>
+Now I want to match the factors of the countries in `Country.sports` with the country factors in `Gapminder`. I can use the argument `levels` from the function `factor` to help with this. I use `semi_join` first to remove any countries in `Country.sports` that do not have a matching factor in `gapminder`.
+
+``` r
+Country.sports <- semi_join(Country.sports,gapminder, by = c("country"))
+Country.sports$country <- factor(Country.sports$country, 
+  levels = levels(gapminder$country))
+```
+
+Now that the factors levels match, I want to take only the countries in `gapminder` that have matches in `Country.sports`. The correct function to use here is again `semi_join`.
+
+``` r
+gapminder.sports <- semi_join(gapminder,Country.sports, by = c("country"))
+```
+
+Now I want to add another factor variable to this subsetted data frame. I want to take the country factor from my subsetted gapminder data frame and relabel the levesl to the sports from `Country.sports`.
+
+``` r
+gapminder.sports$sports <- droplevels(gapminder.sports$country)
+levels(gapminder.sports$sports) <- Country.sports$Sport
+glimpse(gapminder.sports)
+```
+
+    ## Observations: 408
+    ## Variables: 7
+    ## $ country   <fctr> Afghanistan, Afghanistan, Afghanistan, Afghanistan,...
+    ## $ continent <fctr> Asia, Asia, Asia, Asia, Asia, Asia, Asia, Asia, Asi...
+    ## $ year      <int> 1952, 1957, 1962, 1967, 1972, 1977, 1982, 1987, 1992...
+    ## $ lifeExp   <dbl> 28.801, 30.332, 31.997, 34.020, 36.088, 38.438, 39.8...
+    ## $ pop       <int> 8425333, 9240934, 10267083, 11537966, 13079460, 1488...
+    ## $ gdpPercap <dbl> 779.4453, 820.8530, 853.1007, 836.1971, 739.9811, 78...
+    ## $ sports    <fctr> Buzkashi, Buzkashi, Buzkashi, Buzkashi, Buzkashi, B...
+
+Now all of the countries have their national sport mapped to them!
 
 <a href="#top">Back to top</a>

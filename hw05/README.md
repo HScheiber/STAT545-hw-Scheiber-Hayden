@@ -21,6 +21,7 @@ At this point, I feel pretty confortable using various aspects of the `tidyverse
 Things I found difficult in this assignment:
 - It took me a while to figure out how to actually show the numerical indices of factors. I finally figured out that using `as.numeric` works. This required a bit of googline around. Getting rid of factor levels was super easy though.
 - Figuring out how the various types of saves were different, and why it mattered. Took a lot of trial and error mostly.
+- I struggled for a long time on the "I want to do more!" section. I almost gave up but finally realised I wasn't understanding exactly what the question was asking. In the end I didn't even need to use the `Forcats` package. There is undoubtably a much simpler way of doing what I did in this section, but I have spent enough time tinkering around with factors for one assignment.
 
 Some helpful sources:
 
@@ -29,3 +30,5 @@ Some helpful sources:
 - [Multiple plots on a page](http://stat545.com/block020_multiple-plots-on-a-page.html)
 
 - [Forcats package info](https://blog.rstudio.com/2016/08/31/forcats-0-1-0/)
+
+- [More Forcats info](https://cran.r-project.org/web/packages/forcats/forcats.pdf)
