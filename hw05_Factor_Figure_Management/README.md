@@ -10,7 +10,7 @@ Welcome the homework 5 section of my repository. In this section, I work on fact
 Link to Project:
 -----
 
--   [Homework 5: Factor and figure management](/hw05/factor_figure_management.md)
+-   [Homework 5: Factor and figure management](/hw05_Factor_Figure_Management/factor_figure_management.md)
 
 
 Progress Report

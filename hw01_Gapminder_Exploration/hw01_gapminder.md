@@ -3,12 +3,14 @@ Gapminder Exploration
 Hayden Scheiber
 September 14, 2017
 
-[Return to Homework 1 main page](https://github.com/HScheiber/STAT545-hw-Scheiber-Hayden/blob/master/hw01/README.md)
+[Return to Homework 1 main page](https://github.com/HScheiber/STAT545-hw-Scheiber-Hayden/blob/master/hw01_Gapminder_Exploration/README.md)
 
 Gapminder: UN statistics on countries
 =====================================
 
 Below is a plot of Life Expectancy vs year for all countries covered by UN demographics data, beginning in 1952 and running up to the year 2007 in five year incriments.
+
+    ## Warning: package 'tidyverse' was built under R version 3.4.2
 
 ![](hw01_gapminder_files/figure-markdown_github-ascii_identifiers/Plot_1-1.png)
 

@@ -5,7 +5,7 @@ date: "September 14, 2017"
 output: github_document
 ---
 
-[Return to Homework 1 main page](https://github.com/HScheiber/STAT545-hw-Scheiber-Hayden/blob/master/hw01/README.md)
+[Return to Homework 1 main page](https://github.com/HScheiber/STAT545-hw-Scheiber-Hayden/blob/master/hw01_Gapminder_Exploration/README.md)
 
 # Gapminder: UN statistics on countries
 

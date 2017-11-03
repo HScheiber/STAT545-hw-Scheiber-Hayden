@@ -10,9 +10,9 @@ Welcome the homework 4 section of my repository. In this section, I work on my d
 Links
 -----
 
--   [Homework 4: Tidy data and joins.](/hw04/tidy_joins.md)
+-   [Homework 4: Tidy data and joins.](/hw04_Tidyr_and_Joins/tidy_joins.md)
 
--   [R markdown source code for Homework 4](/hw04/tidy_joins.Rmd)
+-   [R markdown source code for Homework 4](/hw04_Tidyr_and_Joins/tidy_joins.Rmd)
 
 Progress Report
 ---------------

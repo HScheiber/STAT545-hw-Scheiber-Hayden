@@ -1,7 +1,7 @@
 Homework 5 - Factor and figure management; Repo hygiene
 ================
 Hayden Scheiber -
-19 October, 2017
+03 November, 2017
 
 [Return to Main Page](https://github.com/HScheiber/STAT545-hw-Scheiber-Hayden/blob/master/README.md)
 

@@ -1,7 +1,7 @@
 Homework 4 - Tidy data and joins
 ================
 Hayden Scheiber -
-07 October, 2017
+03 November, 2017
 
 [Return to Main Page](https://github.com/HScheiber/STAT545-hw-Scheiber-Hayden/blob/master/README.md)
 
@@ -25,6 +25,11 @@ First I need to load the `gapminder` dataset and the `tidyverse` package, as wel
 ``` r
 suppressPackageStartupMessages(library(gapminder))
 suppressPackageStartupMessages(library(tidyverse))
+```
+
+    ## Warning: package 'tidyverse' was built under R version 3.4.2
+
+``` r
 suppressPackageStartupMessages(library(knitr))
 suppressPackageStartupMessages(library(readr))
 ```

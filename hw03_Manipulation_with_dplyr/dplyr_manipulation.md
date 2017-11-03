@@ -1,7 +1,7 @@
 Homework 3 - Gapminder Manipulation and Exploration with dplyr
 ================
 Hayden Scheiber -
-07 October, 2017
+03 November, 2017
 
 [Return to Main Page](https://github.com/HScheiber/STAT545-hw-Scheiber-Hayden/blob/master/README.md)
 
@@ -28,6 +28,11 @@ First we need to load the `gapminder` dataset and the `tidyverse` package, as we
 ``` r
 suppressPackageStartupMessages(library(gapminder))
 suppressPackageStartupMessages(library(tidyverse))
+```
+
+    ## Warning: package 'tidyverse' was built under R version 3.4.2
+
+``` r
 suppressPackageStartupMessages(library(knitr))
 suppressPackageStartupMessages(library(reshape2))
 ```
