@@ -36,7 +36,7 @@ Homework assignments
 | [3](http://stat545.com/hw03_dplyr-and-more-ggplot2.html)          | October 3, 2017    |    Yes    | [HW03 - Manipulation with dplyr](/hw03_Manipulation_with_dplyr/README.md "Homework 3") |             [1](https://github.com/navysealtf9k/STAT545-hw-Farouk-Abdullah) [2](https://github.com/SonjaS1/STAT545-hw-surjanovic-sonja)            |
 | [4](http://stat545.com/hw04_tidy-data-joins.html)                 | October 10, 2017   |    Yes    | [HW04 - Tidy Data and Joins](/hw04_Tidyr_and_Joins/README.md "Homework 4") |              [1](https://github.com/mlawre01/STAT545-hw-lawrence-mackenzie) [2](https://github.com/burkeprw/STAT545-hw-burke-patrick)              |
 | [5](http://stat545.com/hw05_factor-figure-boss-repo-hygiene.html) | October 20, 2017   |    Yes    | [HW05 - Factors and Fig. Management](/hw05_Factor_Figure_Management/README.md "Homework 5") | [1](https://github.com/mlawre01/STAT545-hw-lawrence-mackenzie) [2](https://github.com/heathersummers/STAT545-hw-Summers-Heather)                                
-| [6](http://stat545.com/hw06_data-wrangling-conclusion.html)       | November 8, 2017   |   No      | [HW06 - Data wrangling wrap up](/hw06_Data_Wrangling_Wrapup/README.md "Homework 6") | 1 2                                          |
+| [6](http://stat545.com/hw06_data-wrangling-conclusion.html)       | November 8, 2017   |   Yes     | [HW06 - Data wrangling wrap up](/hw06_Data_Wrangling_Wrapup/README.md "Homework 6") | 1 2                                          |
 
 How I made this repository
 --------------------------
