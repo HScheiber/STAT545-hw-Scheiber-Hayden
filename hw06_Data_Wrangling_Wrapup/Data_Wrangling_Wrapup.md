@@ -1,7 +1,7 @@
 Homework 6 - Data Wrangling Wrap Up
 ================
 Hayden Scheiber -
-06 November, 2017
+07 November, 2017
 
 [Return to Main Page](https://github.com/HScheiber/STAT545-hw-Scheiber-Hayden/blob/master/README.md)
 
@@ -10,19 +10,19 @@ Hayden Scheiber -
 ------------------------------------------------------------------------
 
 -   [Character data](#character-data)
-    1.  [Section 14.2 Excercises](#section-14.2-excercises)
-    2.  [Section 14.3.1 Excercises](#section-14.3.1-excercises)
-    3.  [Section 14.3.2 Excercises](#section-14.3.2-excercises)
-    4.  [Section 14.3.3 Excercises](#section-14.3.3-excercises)
-    5.  [Section 14.3.4 Excercises](#section-14.3.4-excercises)
-    6.  [Section 14.3.5 Excercises](#section-14.3.5-excercises)
-    7.  [Section 14.4.2 Excercises](#section-14.4.2-excercises)
-    8.  [Section 14.4.3 Excercises](#section-14.4.3-excercises)
-    9.  [Section 14.4.4 Excercises](#section-14.4.4-excercises)
-    10. [Section 14.4.5 Excercises](#section-14.4.5-excercises)
-    11. [Section 14.4.6 Excercises](#section-14.4.6-excercises)
-    12. [Section 14.5 Excercises](#section-14.5-excercises)
-    13. [Section 14.7 Excercises](#section-14.7-excercises)
+    1.  [Section 14.2 Excercises](#section-142-excercises)
+    2.  [Section 14.3.1 Excercises](#section-1431-excercises)
+    3.  [Section 14.3.2 Excercises](#section-1432-excercises)
+    4.  [Section 14.3.3 Excercises](#section-1433-excercises)
+    5.  [Section 14.3.4 Excercises](#section-1434-excercises)
+    6.  [Section 14.3.5 Excercises](#section-1435-excercises)
+    7.  [Section 14.4.2 Excercises](#section-1442-excercises)
+    8.  [Section 14.4.3 Excercises](#section-1443-excercises)
+    9.  [Section 14.4.4 Excercises](#section-1444-excercises)
+    10. [Section 14.4.5 Excercises](#section-1445-excercises)
+    11. [Section 14.4.6 Excercises](#section-1446-excercises)
+    12. [Section 14.5 Excercises](#section-145-excercises)
+    13. [Section 14.7 Excercises](#section-147-excercises)
 -   [Writing functions](#writing-functions)
 
 ------------------------------------------------------------------------
@@ -190,16 +190,12 @@ str_wrap(random_text, width = 80, indent = 5, exdent = 1) %>%
   writeLines()
 ```
 
-    ##      Lorem ipsum dolor sit amet, consectetur ac in libero senectus lorem consequat
-    ##  mi mauris blandit. Velit nisl turpis, non nec, nostra semper curae velit ac ac.
-    ##  Tempor aliquet mauris tincidunt imperdiet nec eu. Habitasse lorem a. Hendrerit
-    ##  senectus nec dictumst aliquam auctor sed vestibulum, accumsan velit. Molestie
-    ##  parturient efficitur. Sed, tincidunt ex ac non sapien cubilia feugiat aenean
-    ##  justo himenaeos. Duis nisi tristique malesuada in maximus velit praesent, fames
-    ##  sed sed velit eget. Penatibus duis dis ac, enim morbi et ac pretium in ante sed.
-    ##  Habitant, quam sociosqu ipsum. Nunc ridiculus eu nec, praesent, proin lacus per
-    ##  iaculis nascetur. Nisi mi, curabitur aptent et sed vel leo. Orci ipsum ut dis,
-    ##  ante eu parturient et.
+    ##      Lorem ipsum dolor sit amet, facilisis tempor fermentum volutpat quisque tempus
+    ##  bibendum. Dis nec, et faucibus aptent. Luctus, mauris consectetur donec purus
+    ##  purus augue cursus. Aliquet nisi faucibus lectus erat egestas. Auctor tincidunt
+    ##  rutrum ipsum phasellus eros maecenas, donec, bibendum nunc ut. Arcu vel. Sed nec
+    ##  elit, sit lobortis mauris quis lacinia posuere. At sapien vestibulum nulla, amet
+    ##  etiam.
 
 #### 5. What does `str_trim()` do? What’s the opposite of `str_trim()`?
 
@@ -1339,13 +1335,13 @@ stri_rand_lipsum(1) %>%
   writeLines()
 ```
 
-    ## Lorem ipsum dolor sit amet, diam imperdiet in et mauris, est vel, interdum. Ut nec, phasellus tincidunt ac aliquam justo justo non sed sit orci. Maximus libero parturient ut ac, magna. Finibus laoreet, orci. Lacus amet consequat montes ultrices nec et. Torquent elit amet enim auctor eu id elementum condimentum. Ligula natoque erat enim. Euismod sociosqu primis eu cum, id. Montes volutpat massa augue pharetra, auctor nam. Iaculis, scelerisque sociis penatibus id faucibus aliquam maximus rutrum sagittis orci mollis ut. Ad mauris lacinia porta a varius risus non eu. Quis aliquam tristique dignissim viverra vitae. Quis ac ut enim varius quisque vivamus orci nascetur sit cum.
+    ## Lorem ipsum dolor sit amet, tempor sed finibus sed, vulputate volutpat scelerisque eros sed odio! Maecenas, condimentum. Et amet ac vehicula feugiat a nec ut. Amet vel quam placerat a a quam tincidunt odio mauris sed. Ipsum, odio sed sem mollis sed lorem. Faucibus in nibh vitae malesuada risus nisl suspendisse. Mauris pharetra vehicula amet nascetur facilisis massa pellentesque. Dolor eleifend sit sodales sed mauris malesuada luctus quam. Nulla eget, ac iaculis, per. Torquent tincidunt sodales ipsum proin potenti habitasse ligula arcu. Auctor lobortis malesuada. Conubia tellus ex himenaeos, nullam mattis. Commodo elit in velit. Nulla molestie pellentesque magna nisl. Amet vestibulum ante consectetur, diam posuere metus mauris. Tellus proin sit maecenas elit curabitur, est.
 
 ``` r
 stri_rand_strings(1, 10)
 ```
 
-    ## [1] "7eyv3fcncA"
+    ## [1] "Ed4MBcoLlT"
 
 #### 2. How do you control the language that `stri_sort()` uses for sorting?
 
