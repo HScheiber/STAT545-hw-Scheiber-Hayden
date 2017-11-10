@@ -1,7 +1,7 @@
 Homework 6 - Data Wrangling Wrap Up
 ================
 Hayden Scheiber -
-07 November, 2017
+10 November, 2017
 
 [Return to Main Page](https://github.com/HScheiber/STAT545-hw-Scheiber-Hayden/blob/master/README.md)
 
@@ -190,12 +190,14 @@ str_wrap(random_text, width = 80, indent = 5, exdent = 1) %>%
   writeLines()
 ```
 
-    ##      Lorem ipsum dolor sit amet, facilisis tempor fermentum volutpat quisque tempus
-    ##  bibendum. Dis nec, et faucibus aptent. Luctus, mauris consectetur donec purus
-    ##  purus augue cursus. Aliquet nisi faucibus lectus erat egestas. Auctor tincidunt
-    ##  rutrum ipsum phasellus eros maecenas, donec, bibendum nunc ut. Arcu vel. Sed nec
-    ##  elit, sit lobortis mauris quis lacinia posuere. At sapien vestibulum nulla, amet
-    ##  etiam.
+    ##      Lorem ipsum dolor sit amet, lacus auctor himenaeos non, urna aliquam ridiculus
+    ##  commodo, et eu ipsum. Blandit nec condimentum in. Morbi quis varius auctor.
+    ##  Convallis nec vestibulum enim auctor, libero, eu maximus. Risus ut tempus
+    ##  fringilla elementum, tristique eget porttitor. Mi pulvinar malesuada etiam at
+    ##  ut torquent, dapibus, orci curae. Turpis, dui turpis, quam sodales eleifend
+    ##  euismod. At mi et consequat sed mauris aenean ultricies ante. Eget etiam dui
+    ##  dui lacus sed dapibus molestie aliquet mus mollis. Vivamus, risus, netus dui,
+    ##  potenti at in vestibulum sit ante vivamus blandit auctor.
 
 #### 5. What does `str_trim()` do? What’s the opposite of `str_trim()`?
 
@@ -1335,13 +1337,13 @@ stri_rand_lipsum(1) %>%
   writeLines()
 ```
 
-    ## Lorem ipsum dolor sit amet, tempor sed finibus sed, vulputate volutpat scelerisque eros sed odio! Maecenas, condimentum. Et amet ac vehicula feugiat a nec ut. Amet vel quam placerat a a quam tincidunt odio mauris sed. Ipsum, odio sed sem mollis sed lorem. Faucibus in nibh vitae malesuada risus nisl suspendisse. Mauris pharetra vehicula amet nascetur facilisis massa pellentesque. Dolor eleifend sit sodales sed mauris malesuada luctus quam. Nulla eget, ac iaculis, per. Torquent tincidunt sodales ipsum proin potenti habitasse ligula arcu. Auctor lobortis malesuada. Conubia tellus ex himenaeos, nullam mattis. Commodo elit in velit. Nulla molestie pellentesque magna nisl. Amet vestibulum ante consectetur, diam posuere metus mauris. Tellus proin sit maecenas elit curabitur, est.
+    ## Lorem ipsum dolor sit amet, laoreet non et ac quis eget amet imperdiet vitae. At tortor, pellentesque iaculis justo vel magnis non amet et nunc magna ante. Massa eget vestibulum, est tincidunt lorem sit. Dignissim enim pretium porta mauris sapien. Nec dolor taciti consequat urna torquent mauris eleifend. Commodo pretium ante porttitor rutrum sed. Non lectus dis ac sed hendrerit faucibus donec accumsan suspendisse. Habitant lectus molestie vehicula. Dapibus velit nisi in, luctus turpis. Dolor ipsum porta pellentesque augue dui tortor erat facilisis, quis maecenas molestie, orci. Semper netus, sed molestie ullamcorper scelerisque sollicitudin mus. Eu vel sed et non orci vulputate ex. Bibendum nec fermentum eget eros mi pellentesque. Cras sed, vel fusce facilisis id placerat nisl. Viverra, habitasse sociis ac praesent, viverra ut volutpat eget. Vestibulum ex ligula.
 
 ``` r
 stri_rand_strings(1, 10)
 ```
 
-    ## [1] "Ed4MBcoLlT"
+    ## [1] "gfZOJUXHAJ"
 
 #### 2. How do you control the language that `stri_sort()` uses for sorting?
 
