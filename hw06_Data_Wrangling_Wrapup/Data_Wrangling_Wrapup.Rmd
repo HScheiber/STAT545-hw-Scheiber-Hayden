@@ -86,7 +86,7 @@ The best way to answer this is with an example using the same vector of characte
 str_c(x, x, sep = " ")
 str_c(x, x, collapse = "|", sep = " ")
 ```
-When collapse is set to `NULL` (the default), vectors of strings are not collapsed further into a single output, but when `collapse` is set to some string, everything in the input is collapsed into a single output string. The string _assigned_ to `collapse` becomes the separator between vector elements that would have otherwise remained separate components of a vector in the output.
+When `collapse` is set to `NULL` (the default), vectors of strings are not collapsed further into a single output, but when `collapse` is set to some string, everything in the input is collapsed into a single output string. The string _assigned_ to `collapse` becomes the separator between vector elements that would have otherwise remained separate components of a vector in the output.
 
 #### 3. Use `str_length()` and `str_sub()` to extract the middle character from a string. What will you do if the string has an even number of characters?
 
@@ -146,7 +146,6 @@ str_wrap(random_text, width = 80, indent = 5, exdent = 1) %>%
 ```
 
 #### 5. What does `str_trim()` do? What’s the opposite of `str_trim()`?
-<a href="#top">Back to top</a>
 
 `str_trim()` trims away any white space at the start or end of a string. Note it recognizes more than just spaces, it recognizes tab (`\t`) and newline (`\n`) as well.
 ```{r}
@@ -282,7 +281,7 @@ str_subset(stringr::words,"x$")
 
 **3. Are exactly three letters long. (Don’t cheat by using `str_length()`!)**
 
-This is pretty easy in regex, we just need to anchor three sinlge-character wildcards.
+This is pretty easy in regex, we just need to anchor three single-character wildcards.
 ```{r}
 str_subset(stringr::words,"^...$")
 ```

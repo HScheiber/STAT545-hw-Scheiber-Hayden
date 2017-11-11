@@ -1,7 +1,7 @@
 Homework 6 - Data Wrangling Wrap Up
 ================
 Hayden Scheiber -
-10 November, 2017
+11 November, 2017
 
 [Return to Main Page](https://github.com/HScheiber/STAT545-hw-Scheiber-Hayden/blob/master/README.md)
 
@@ -114,7 +114,7 @@ str_c(x, x, collapse = "|", sep = " ")
 
     ## [1] "foo foo|bar bar|baz baz"
 
-When collapse is set to `NULL` (the default), vectors of strings are not collapsed further into a single output, but when `collapse` is set to some string, everything in the input is collapsed into a single output string. The string *assigned* to `collapse` becomes the separator between vector elements that would have otherwise remained separate components of a vector in the output.
+When `collapse` is set to `NULL` (the default), vectors of strings are not collapsed further into a single output, but when `collapse` is set to some string, everything in the input is collapsed into a single output string. The string *assigned* to `collapse` becomes the separator between vector elements that would have otherwise remained separate components of a vector in the output.
 
 #### 3. Use `str_length()` and `str_sub()` to extract the middle character from a string. What will you do if the string has an even number of characters?
 
@@ -190,18 +190,19 @@ str_wrap(random_text, width = 80, indent = 5, exdent = 1) %>%
   writeLines()
 ```
 
-    ##      Lorem ipsum dolor sit amet, lacus auctor himenaeos non, urna aliquam ridiculus
-    ##  commodo, et eu ipsum. Blandit nec condimentum in. Morbi quis varius auctor.
-    ##  Convallis nec vestibulum enim auctor, libero, eu maximus. Risus ut tempus
-    ##  fringilla elementum, tristique eget porttitor. Mi pulvinar malesuada etiam at
-    ##  ut torquent, dapibus, orci curae. Turpis, dui turpis, quam sodales eleifend
-    ##  euismod. At mi et consequat sed mauris aenean ultricies ante. Eget etiam dui
-    ##  dui lacus sed dapibus molestie aliquet mus mollis. Vivamus, risus, netus dui,
-    ##  potenti at in vestibulum sit ante vivamus blandit auctor.
+    ##      Lorem ipsum dolor sit amet, donec porta gravida quis auctor urna aliquet
+    ##  elementum. Cras sed sed amet, suspendisse tristique finibus, ex, porttitor ut
+    ##  nostra eros, leo. Habitasse habitasse congue faucibus risus et, quis consequat
+    ##  ligula elementum, in. Ornare ac elit integer suspendisse pellentesque praesent
+    ##  ad! Tincidunt nulla sed nisl nibh ut donec, aliquet bibendum mollis sed pretium
+    ##  a dui. Pharetra nulla efficitur, elementum. Adipiscing risus posuere vitae
+    ##  sit consectetur nullam sed. Non curabitur, enim tempor. Ex id leo morbi, at,
+    ##  tempus enim. Id fames est purus sed tortor habitasse sed rhoncus, parturient
+    ##  et. Ultrices lacinia metus ultrices ac. Aenean lacus ac amet consequat in enim
+    ##  a porttitor fames. Dis egestas nibh sed potenti facilisis egestas aliquam sit. A
+    ##  et nec nisi.
 
 #### 5. What does `str_trim()` do? What’s the opposite of `str_trim()`?
-
-<a href="#top">Back to top</a>
 
 `str_trim()` trims away any white space at the start or end of a string. Note it recognizes more than just spaces, it recognizes tab (`\t`) and newline (`\n`) as well.
 
@@ -395,7 +396,7 @@ str_subset(stringr::words,"x$")
 
 **3. Are exactly three letters long. (Don’t cheat by using `str_length()`!)**
 
-This is pretty easy in regex, we just need to anchor three sinlge-character wildcards.
+This is pretty easy in regex, we just need to anchor three single-character wildcards.
 
 ``` r
 str_subset(stringr::words,"^...$")
@@ -1337,13 +1338,13 @@ stri_rand_lipsum(1) %>%
   writeLines()
 ```
 
-    ## Lorem ipsum dolor sit amet, laoreet non et ac quis eget amet imperdiet vitae. At tortor, pellentesque iaculis justo vel magnis non amet et nunc magna ante. Massa eget vestibulum, est tincidunt lorem sit. Dignissim enim pretium porta mauris sapien. Nec dolor taciti consequat urna torquent mauris eleifend. Commodo pretium ante porttitor rutrum sed. Non lectus dis ac sed hendrerit faucibus donec accumsan suspendisse. Habitant lectus molestie vehicula. Dapibus velit nisi in, luctus turpis. Dolor ipsum porta pellentesque augue dui tortor erat facilisis, quis maecenas molestie, orci. Semper netus, sed molestie ullamcorper scelerisque sollicitudin mus. Eu vel sed et non orci vulputate ex. Bibendum nec fermentum eget eros mi pellentesque. Cras sed, vel fusce facilisis id placerat nisl. Viverra, habitasse sociis ac praesent, viverra ut volutpat eget. Vestibulum ex ligula.
+    ## Lorem ipsum dolor sit amet, aenean felis non proin turpis netus lectus elementum egestas posuere. Sollicitudin natoque arcu mi. Quis volutpat mi commodo sit habitasse neque. Justo arcu ut scelerisque laoreet sed dolor proin. Diam a dictum lacus mauris pharetra duis praesent. Sem efficitur velit nulla laoreet adipiscing. Porta tristique, in, facilisis. Eget erat sociis nec pellentesque condimentum justo ullamcorper leo! Suspendisse fames donec sed sit in massa cras id. A euismod libero facilisi porttitor, etiam quis sed.
 
 ``` r
 stri_rand_strings(1, 10)
 ```
 
-    ## [1] "gfZOJUXHAJ"
+    ## [1] "bPTzPPJbfk"
 
 #### 2. How do you control the language that `stri_sort()` uses for sorting?
 
