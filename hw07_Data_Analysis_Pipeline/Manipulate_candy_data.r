@@ -1,7 +1,8 @@
+.libPaths(c("C:/Users/Hayden/Documents/R/win-library/3.4", "C:/Program Files/R/R-3.4.1/library"))
 suppressPackageStartupMessages(library(tidyverse))
 
 # Read the data file to memory
-candies_clean <- readRDS("Clean_candy_wide.rds")
+candies_clean <- readRDS("./DataFiles/Clean_candy_wide.rds")
 
 # Group by age and convert to long format
 candies_group_age_long <- candies_clean %>%
@@ -23,5 +24,5 @@ candies_long_no_group <- candies_clean %>%
 	arrange(Joy_Despair_Ratio)
 
 # Save both files
-saveRDS(candies_group_age_long,"Ratios_Group_Age.rds")
-saveRDS(candies_long_no_group,"Ratios_No_Group.rds")
+saveRDS(candies_group_age_long,"./DataFiles/Ratios_Group_Age.rds")
+saveRDS(candies_long_no_group,"./DataFiles/Ratios_No_Group.rds")

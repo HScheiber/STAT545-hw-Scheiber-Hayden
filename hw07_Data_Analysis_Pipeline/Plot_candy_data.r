@@ -1,10 +1,11 @@
+.libPaths(c("C:/Users/Hayden/Documents/R/win-library/3.4", "C:/Program Files/R/R-3.4.1/library"))
 suppressPackageStartupMessages(library(tidyverse))
 suppressPackageStartupMessages(library(data.table))
 suppressPackageStartupMessages(library(stringr))
 
 # Read the data file to memory
-ratios_Group_age <- readRDS("Ratios_Group_Age.rds")
-ratios_no_group <- readRDS("Ratios_No_Group.rds")
+ratios_Group_age <- readRDS("./DataFiles/Ratios_Group_Age.rds")
+ratios_no_group <- readRDS("./DataFiles/Ratios_No_Group.rds")
 
 # Convert _ back to spaces for plotting
 ratios_no_group[[1]] <- str_replace_all(ratios_no_group[[1]],"_"," ")
@@ -48,7 +49,7 @@ p.UnGrouped <- ratios_no_group %>%
 				legend.text = element_text(size=12, face ="bold"))
 
 # Save as png
-ggsave("CandyPop_By_Candy.png",
+ggsave("./DataFiles/CandyPop_By_Candy.png",
 			 plot = p.UnGrouped, 
 			 device = "png",
 			 width = 15, 
@@ -78,7 +79,7 @@ p.Grouped <- ratios_Group_age_long %>%
 				legend.text = element_text(size=12, face ="bold"))
 
 # Save as png
-ggsave("CandyPop_By_Age_Candy.png",
+ggsave("./DataFiles/CandyPop_By_Age_Candy.png",
 			 plot = p.Grouped, 
 			 device = "png",
 			 width = 17, 

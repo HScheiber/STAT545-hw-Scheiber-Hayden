@@ -1,10 +1,11 @@
+.libPaths(c("C:/Users/Hayden/Documents/R/win-library/3.4", "C:/Program Files/R/R-3.4.1/library"))
 suppressPackageStartupMessages(library(readxl))
 suppressPackageStartupMessages(library(tidyverse))
 suppressPackageStartupMessages(library(stringr))
 
 
 # Load the candy survey data
-candies <- read_excel("Raw_Candy.xlsx")
+candies <- read_excel("./DataFiles/Raw_Candy.xlsx")
 
 # Make new dataframe for cleaned data
 candies_clean <- candies
@@ -58,4 +59,4 @@ dispair_joy_binary <- function(input) {
 candies_clean[4:length(candies_clean)] <- sapply(candies_clean[4:length(candies_clean)], dispair_joy_binary)
 
 # Save to file
-saveRDS(candies_clean,"Clean_candy_wide.rds")
+saveRDS(candies_clean,"./DataFiles/Clean_candy_wide.rds")

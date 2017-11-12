@@ -20,6 +20,8 @@ While cleaing the candy data, I wanted to convert all strings of `JOY` into `TRU
 
 I then spent ages trying to use the `summarise_at()` function to calculate the ratio of joy to despair (with `mean`). I eventually realised that the names of the variables were causing the problems because they had spaces in them. I went back and used `stringr::str_replace_all()` to change all spaces to `_`.
 
+I wanted to have my `Makefile` put the intermediate data files into a separate folder within the main directory, but I kept getting errors. It took **HOURS** to figure out why I kept getting stupid errors. Made me want to pull my hair out. But eventually I figured it out by googling. For whatever reason, I had to add `.libPaths(c("C:/Users/Hayden/Documents/R/win-library/3.4", "C:/Program Files/R/R-3.4.1/library"))` to my rscripts in order to load my libaries properly. This problem only cropped up when I started using subdirectories in my `Makefile`.
+
 
 Some helpful resources I used:
 

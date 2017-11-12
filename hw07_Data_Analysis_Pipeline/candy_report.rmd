@@ -1,0 +1,73 @@
+---
+title: "Homework 7 - Data Analysis Pipeline"
+author: "Hayden Scheiber -"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output: 
+  github_document
+---
+
+[Return to Main Page](https://github.com/HScheiber/STAT545-hw-Scheiber-Hayden/blob/master/README.md)
+
+[Return to Homework 7 Landing Page](README.md)
+
+---
+
+- [Downloading and Cleaning the Data](#downloading-and-cleaning-the-data)
+- [Manipulating the Data](#manipulating-the-data)
+- [Plotting the Data](#plotting-the-data)
+- [One Script to Rule Them All](#one-script-to-rule-them-all)
+
+---
+
+Welcome! This is the 7th homework assignment for the STAT 545+547M course. In this assignment, I build an automated data analysis pipline using the program `GNU Make`. A link to the assignment itself can be found [here](http://stat545.com/hw07_automation.html "STAT 545 Assignment 7").
+
+---
+
+For this assignment, I decided that I was bored of exploring the gapminder data. So I tried my hand at exploring the [2015 candy survey data](http://www.scq.ubc.ca/2015-candy-hierarchy-supplemental-raw-data-and-new-analyses/), which I did not explore for assignment 6. Below are the libraries needed to run this R markdown file:
+```{r}
+suppressPackageStartupMessages(library(tidyverse))
+suppressPackageStartupMessages(library(knitr))
+```
+
+
+## Downloading and Cleaning the Data
+<a href="#top">Back to top</a>
+
+To initially download the candy survey data, I used a short Rscript command within my [Makefile](Makefile). The excel spreadsheet data is downloaded into the subdirectory called `DataFiles`, to keep things neat.
+
+From there, I call the first real R script called [Clean_candy_data.r](Clean_candy_data.r). In that script, I take the ugly excel spreadsheet and remove the questions I didn't feel like working with. I only kept the data about people's candy preferences and their age. I converted the strings `JOY/DESPAIR` into logical `TRUE/FALSE` so that it would be easier to work with. Below I show the structure of the output file of this script, which I saved as a `.rds` file.
+```{r}
+candies_clean <- readRDS("./DataFiles/Clean_candy_wide.rds")
+str(candies_clean, max.level = 1, list.len=10 ) %>% head(10)
+```
+
+## Manipulating the Data
+<a href="#top">Back to top</a>
+
+The next script, called [Manipulate_candy_data.r](Manipulate_candy_data.r), takes the output of the previous script and converts the data into two different data frames. One is broken down by age, and shows the ratio of people who wrote `JOY` vs `DESPAIR` for each candy. The other data frame does not group by age. It is simply a long data frame of the total Joy-Despair Ratio for each candy type. Below I show a glimpse of how the outputs look:
+```{r}
+candies_grouped <- readRDS("./DataFiles/Ratios_Group_Age.rds")
+candies_ungrouped <- readRDS("./DataFiles/Ratios_No_Group.rds")
+
+candies_grouped %>% head(10) %>%
+	knitr::kable()
+
+candies_ungrouped %>% head(10) %>%
+	knitr::kable()
+```
+
+## Plotting the Data
+<a href="#top">Back to top</a>
+
+My last workhorse script is called [Plot_candy_data.r](Plot_candy_data.r). It takes the input from the previous script, does a little bit more data rearrangement, and then creates two beautiful plots. If you want to understand how the script works, it is best to just look at it. I tried to comment it as best as I could. Here are the two plots that I created using that script.
+
+!['Candy Popularity by Type'](DataFiles/CandyPop_By_Candy.png)
+
+From this we can conclude that everyone's favorite candy to get on Halloween is a full-sized chocolate bar. Everyone's least favourite thing is a broken glow stick.
+
+!['Candy Popularity by Age and Type'](DataFiles/CandyPop_By_Age_Candy.png)
+
+## One Script to Rule Them All
+<a href="#top">Back to top</a>
+
+To tie everything together, I also made a `Makefile` script that automates the entire data analysis process. You can view it [here](Makefile).
