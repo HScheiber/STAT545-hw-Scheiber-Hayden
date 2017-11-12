@@ -10,15 +10,18 @@ Welcome the homework 7 section of my repository. In this section, I build an aut
 Link to Project Pages:
 -----
 
-- LINK PAGES HERE
-
+- [Main report](candy_report.md)
+- [Data Cleaning Script](Clean_candy_data.r)
+- [Data Manipulating Script](Manipulate_candy_data.r)
+- [Data Plotting Script](Plot_candy_data.r)
+- [One Sript to Rule Them All](Makefile)
 
 Progress Report
 ---------------
 
 While cleaing the candy data, I wanted to convert all strings of `JOY` into `TRUE` and all strings of `DESPAIR` into `FALSE` so that working with the data downstream would be easier. I tried really hard to get `mutate_all` to do this but I could not for the life of me get it to work properly. In the end I just built my own custom function to do the job. If anyone reading this knows a way to do the above (when `NA` are also present in the data) let me know!
 
-I then spent ages trying to use the `summarise_at()` function to calculate the ratio of joy to despair (with `mean`). I eventually realised that the names of the variables were causing the problems because they had spaces in them. I went back and used `stringr::str_replace_all()` to change all spaces to `_`.
+I then spent ages trying to use the `summarise_at()` function to calculate the ratio of joy to despair (with `mean`). I eventually realised that the names of the variables were causing the problems because they had spaces in them. I went back and used `stringr::str_replace_all()` to change all spaces to `_`. I later had to reverse this to make the names look good on the final plot.
 
 I wanted to have my `Makefile` put the intermediate data files into a separate folder within the main directory, but I kept getting errors. It took **HOURS** to figure out why I kept getting stupid errors. Made me want to pull my hair out. But eventually I figured it out by googling. For whatever reason, I had to add `.libPaths(c("C:/Users/Hayden/Documents/R/win-library/3.4", "C:/Program Files/R/R-3.4.1/library"))` to my rscripts in order to load my libaries properly. This problem only cropped up when I started using subdirectories in my `Makefile`.
 
