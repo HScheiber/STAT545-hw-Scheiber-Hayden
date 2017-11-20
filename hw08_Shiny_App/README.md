@@ -7,17 +7,28 @@ STAT 545 - Homework 8 Landing Page
 
 Welcome the homework 8 section of my repository. In this section, I build a `Shiny` App based on data from the BC liquor store. A link to the assignment itself can be found on the [STAT545 website](http://stat545.com/hw08_shiny.html).
 
-Link to App site:
+Link to Project:
 -----
 
-- TO DO
+- [App website](https://scheiber.shinyapps.io/BC_Liquor_App/)
+
+- [Server Script](server.R)
+
+- [User Interface Script](ui.R)
+
+- [App Script](app.R)
 
 Progress Report
 ---------------
 
-TO DO
+- I spent hours perfecting that title so that it scaled with the size of the webpage, but I learned a lot doing it! I learned the syntax to impliment HTML and CSS into `shiny` apps, it's actually super easy once you get the hang of it. Stack exchange was my friend here.
 
+- It was really hard to get the minimum and maximum of the slider to update with the max/min price in the filtered data. I managed to get it in the end but it felt like a hack doing what I did.
 
-Some helpful resources I used:
+- I spent so much time debugging and making sure no errors pop up under any circumstances. If you can get my app to throw an error please let me know!
 
-- TO DO
+- Overall I had a fun time doing this project. I really enjoyed putting together all of the stuff I've been learning about throughout the course into a small app. There's so much more I could add to it, but I think I've done enough for the purposes of this project!
+
+A helpful resource I used:
+
+- [Shiny Tutorial](https://shiny.rstudio.com/tutorial/written-tutorial/lesson1/)

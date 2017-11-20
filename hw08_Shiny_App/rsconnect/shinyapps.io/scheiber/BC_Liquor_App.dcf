@@ -1,0 +1,12 @@
+name: BC_Liquor_App
+title: BC_Liquor_App
+username:
+account: scheiber
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 237678
+bundleId: 1085244
+url: https://scheiber.shinyapps.io/BC_Liquor_App/
+when: 1511166131.6736
+asMultiple: FALSE
+asStatic: FALSE

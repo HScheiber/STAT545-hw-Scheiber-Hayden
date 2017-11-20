@@ -38,7 +38,7 @@ Homework assignments
 | [5](http://stat545.com/hw05_factor-figure-boss-repo-hygiene.html) | October 20, 2017   |    Yes    | [HW05 - Factors and Fig. Management](/hw05_Factor_Figure_Management/README.md "Homework 5") | [1](https://github.com/mlawre01/STAT545-hw-lawrence-mackenzie) [2](https://github.com/heathersummers/STAT545-hw-Summers-Heather)                                
 | [6](http://stat545.com/hw06_data-wrangling-conclusion.html)       | November 10, 2017   |   Yes     | [HW06 - Data wrangling wrap up](/hw06_Data_Wrangling_Wrapup/README.md "Homework 6") | [1](https://github.com/jmurthy12/STAT545-hw-murthy-janani) [2](https://github.com/vmichalowski/STAT545-hw-Michalowski-Victoria)                                          |
 | [7](http://stat545.com/hw07_automation.html)       | November 14, 2017   |   Yes     | [HW07 - Automated Data Analysis Pipeline](/hw07_Data_Analysis_Pipeline/README.md "Homework 7") | [1](https://github.com/santiagodr/STAT545_hw_David_Santiago)  [2](https://github.com/mattsada/STAT547-hw-mattsson-adam) |
-| [8](http://stat545.com/hw08_shiny.html)       | November 21, 2017   |   No     | [HW08 - Building a Shiny App](/hw08_Shiny_App/README.md "Homework 8") | 1  2                                          |
+| [8](http://stat545.com/hw08_shiny.html)       | November 21, 2017   |   Yes     | [HW08 - Building a Shiny App](/hw08_Shiny_App/README.md "Homework 8") | 1  2                                          |
 
 How I made this repository
 --------------------------

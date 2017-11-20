@@ -1,40 +1,42 @@
 # Load Libraries
 library(shiny)
 library(tidyverse)
+library(DT)
 
 # Define UI for the app
 ui <- fluidPage(
 	
-	# Application title
+	
+	# Title Frame
 	titlePanel(
-		"The Unofficial BC Liquor Store App",
-		imageOutput("BCL_Logo")
+		htmlOutput("Title_Logo")
 		),
 	
+	
+	# Sidebar Frame
 	sidebarPanel(
-		"This is my sidebar",
-		sliderInput("PriceIn", 
-								"Price of Booze" ,
-								min = 0, 
-								max = 300, 
-								value = c(10, 20),
-								pre = "CAD"
-		),
-		
-		radioButtons(
+		htmlOutput("Options"),
+		br(),
+		uiOutput("Priceslider"),
+		checkboxGroupInput(
 			"TypeIn",
-			"What kind of booze?",
-			choices = c("BEER", "REFRESHMENT", "SPIRITS", "WINE"),
-			selected = "SPIRITS"
-		)
+			"Type of Product:",
+			choices = c("Beer", "Refreshment", "Spirits", "Wine"),
+			selected = c("Beer", "Refreshment", "Spirits", "Wine")
+		),
+		br(),
+		uiOutput("countrylist"),
+		width = 3
 	),
 	
-	mainPanel(
-		plotOutput("Hist_AlcCont"),
-		br(),br(),
-		tableOutput("table_head"),
-		br(),br(),
-		plotOutput("Plot_price_vs_alc_perc")
-	)
 	
+	# Main Frame
+	mainPanel(
+		tabsetPanel(
+			tabPanel("Alc % Histogram", plotOutput("Hist_AlcCont")),
+			tabPanel("Searchable Table", DT::dataTableOutput("table_head")),
+			tabPanel("Alc % vs Price", plotOutput("Plot_price_vs_alc_perc"))
+		),
+		width = 9
+	)
 )
