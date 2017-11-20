@@ -38,5 +38,6 @@ ui <- fluidPage(
 			tabPanel("Alc % vs Price", plotOutput("Plot_price_vs_alc_perc"))
 		),
 		width = 9
-	)
+	),
+	title="BCL Unofficial App"
 )
