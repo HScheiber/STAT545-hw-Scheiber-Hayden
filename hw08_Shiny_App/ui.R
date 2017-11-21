@@ -26,6 +26,8 @@ ui <- fluidPage(
 		),
 		br(),
 		uiOutput("countrylist"),
+		br(),
+		htmlOutput("Search_Result_number"),
 		width = 3
 	),
 	

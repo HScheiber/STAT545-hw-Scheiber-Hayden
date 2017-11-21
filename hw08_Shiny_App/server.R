@@ -3,6 +3,8 @@ library(shiny)
 library(tidyverse)
 library(stringr)
 library(DT)
+library(ggvis)
+
 
 # Define the server function
 server <- function(input, output, session) {
@@ -24,8 +26,12 @@ server <- function(input, output, session) {
 	bcl_data[1:4] <- sapply(bcl_data[1:4],str_to_title)
 	
 	
+	
+	
+	
 	#make dynamic slider
 	output$Priceslider <- renderUI({
+		
 		# If no types of product selected
 		if (is_empty(input$TypeIn)){
 			return(NULL)
@@ -34,8 +40,8 @@ server <- function(input, output, session) {
 			# Need to initilize slider before filtered data is generated
 			filteredDat <- bcl_data %>%
 				filter(Type %in% input$TypeIn)
-		
-		} else if (input$SelCountry == "All"){
+			
+		}else if (input$SelCountry == "All"){
 			
 			filteredDat <- bcl_data %>%
 				filter(Type %in% input$TypeIn)
@@ -48,17 +54,26 @@ server <- function(input, output, session) {
 			
 		}
 		
-		maxkaw <- max(filteredDat$Price, na.rm = TRUE)
-		minkaw <- min(filteredDat$Price, na.rm = TRUE)
-		
-		sliderInput("PriceIn", 
-								"Price Range:", 
-								min = minkaw, 
-								max = maxkaw, 
-								value = c(minkaw, maxkaw),
-								pre = "CAD $")
-		
+		# Catch empty result
+		if (nrow(filteredDat) == 0){
+			return(NULL)
+		}else{
+			
+			
+			maxkaw <- max(filteredDat$Price, na.rm = TRUE)
+			minkaw <- min(filteredDat$Price, na.rm = TRUE)
+			
+			sliderInput("PriceIn", 
+									"Price Range:", 
+									min = minkaw, 
+									max = maxkaw, 
+									value = c(minkaw, maxkaw),
+									pre = "CAD $")
+		}
 	})
+	
+	
+	
 	
 	
 	# Create Country Select Menu
@@ -254,6 +269,22 @@ server <- function(input, output, session) {
 		)
 	})
 	
+	# 'Your search has __ matches'
+	output$Search_Result_number <- renderUI({
+		if (is_empty(Filtered_bcl())){
+			return(NULL)
+		}else if (nrow(Filtered_bcl()) == 1){
+			plural <- ""
+		} else {
+			plural <- "s"
+		}
+		
+		textout <- paste0("Your search has returned ", 
+											strong(as.character(nrow(Filtered_bcl()))), 
+											" matching product", plural,".")
+		
+		HTML(textout)
+		})
 	
 	# 'Search Options' dynamic sidebar title
 	output$Options <- renderUI({
