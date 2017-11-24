@@ -18,6 +18,8 @@ Link to Project:
 
 - [App Script](app.R)
 
+- [BC Liquour Store Source Data](https://www.opendatabc.ca/dataset/bc-liquor-store-product-price-list-current-prices)
+
 App Features
 --------
 
