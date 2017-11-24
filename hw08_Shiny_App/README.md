@@ -31,7 +31,7 @@ App Features
 
 - Number of matching search results is returned.
 
-- Three tabs: histogram of alcohol; searchable table of search results; and a log scale plot of alcohol % vs price, coloured by country.
+- Three tabs: histogram of alcohol %; searchable table of search results; and a log scale plot of alcohol % vs price, coloured by country.
 
 - Utilized ggplot theme features to make the plots look nicer.
 
