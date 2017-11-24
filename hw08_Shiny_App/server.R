@@ -26,9 +26,6 @@ server <- function(input, output, session) {
 	bcl_data[1:4] <- sapply(bcl_data[1:4],str_to_title)
 	
 	
-	
-	
-	
 	#make dynamic slider
 	output$Priceslider <- renderUI({
 		
@@ -71,9 +68,6 @@ server <- function(input, output, session) {
 									pre = "CAD $")
 		}
 	})
-	
-	
-	
 	
 	
 	# Create Country Select Menu

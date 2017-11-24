@@ -18,6 +18,24 @@ Link to Project:
 
 - [App Script](app.R)
 
+App Features
+--------
+
+- Dynamic title frame. The size of the picture and text scale with the browser frame size. I used html and CSS here to get the design I wanted.
+
+- The price range automatically scales to the minimum and maximum prices of the selected products.
+
+- Can filter by country or all countries.
+
+- Can filter by type of product.
+
+- Number of matching search results is returned.
+
+- Three tabs: histogram of alcohol; searchable table of search results; and a log scale plot of alcohol % vs price, coloured by country.
+
+- Utilized ggplot theme features to make the plots look nicer.
+
+
 Progress Report
 ---------------
 
