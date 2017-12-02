@@ -14,7 +14,9 @@ Link to Project:
 
 - [Here is a link to the package vignette](https://github.com/HScheiber/powers/blob/master/inst/doc/powers_vignette.pdf).
 
-- It can be installed with `devtools::install_github("HScheiber/powers")` in Rstudio.
+- It can be installed with `devtools::install_github("HScheiber/powers")` in Rstudio. Note this will overwrite any other package named `powers`, but you can reinstall your own package afterwards, as it will affect your source files!
+
+- Then simply load it with `library(powers)`.
 
 Progress Report
 ---------------
