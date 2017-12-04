@@ -24,11 +24,6 @@ For this assignment, I decided that I was bored of exploring the gapminder data.
 
 ``` r
 suppressPackageStartupMessages(library(tidyverse))
-```
-
-    ## Warning: package 'tidyverse' was built under R version 3.4.2
-
-``` r
 suppressPackageStartupMessages(library(knitr))
 ```
 
