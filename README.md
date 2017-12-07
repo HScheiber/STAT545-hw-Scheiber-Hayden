@@ -40,7 +40,7 @@ Homework assignments
 | [7](http://stat545.com/hw07_automation.html)       | November 14, 2017   |   Yes     | [HW07 - Automated Data Analysis Pipeline](/hw07_Data_Analysis_Pipeline/README.md "Homework 7") | [1](https://github.com/santiagodr/STAT545_hw_David_Santiago)  [2](https://github.com/mattsada/STAT547-hw-mattsson-adam) |
 | [8](http://stat545.com/hw08_shiny.html)       | November 21, 2017   |   Yes     | [HW08 - Building a Shiny App](/hw08_Shiny_App/README.md "Homework 8") | [1](https://github.com/juansbr7/STAT547Bonilla_Juan)  [2](https://github.com/swynes/STAT545-hw-wynes-chris/)  |
 | [9](http://stat545.com/hw09_package.html)       | November 28, 2017   |   Yes     | [HW09 - Building an R Package](/hw09_R_Package/README.md "Homework 9") | [1](https://github.com/gbraich/STAT547-hw-Braich-Gurneet)  [2](https://github.com/rainerlempert/Lempert_Rainer_hw09) |
-| [10](http://stat545.com/hw10_data-from-web.html)       | December 7, 2017   |   No    | [HW10 - Scraping Data from the Web](/hw10_Web_Data_Scraping/README.md "Homework 10") | 1  2 |
+| [10](http://stat545.com/hw10_data-from-web.html)       | December 7, 2017   |   Yes    | [HW10 - Scraping Data from the Web](/hw10_Web_Data_Scraping/README.md "Homework 10") | 1  2 |
 
 How I made this repository
 --------------------------
