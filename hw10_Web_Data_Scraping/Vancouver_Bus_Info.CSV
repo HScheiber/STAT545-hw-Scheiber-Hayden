@@ -1,0 +1,219 @@
+Bus_Number,Bus_Route,Bus_Type,Service_Weekdays,Service_Saturday,Service_Sunday,Working_Days,Route_Stops
+2,Macdonald / Downtown,Regular,TRUE,TRUE,TRUE,7,44
+3,Main / Downtown,Regular,TRUE,TRUE,TRUE,7,40
+4,Powell / Downtown / UBC,Regular,TRUE,TRUE,TRUE,7,67
+5,Robson / Downtown,Regular,TRUE,TRUE,TRUE,7,18
+6,Davie / Downtown,Regular,TRUE,TRUE,TRUE,7,15
+7,Nanaimo Station / Dunbar,Regular,TRUE,TRUE,TRUE,7,80
+8,Fraser / Downtown,Regular,TRUE,TRUE,TRUE,7,43
+9,Boundary / Comm-Bwy / Gran / Alma / UBC,Regular,TRUE,TRUE,TRUE,7,67
+10,Granville / Downtown,Regular,TRUE,TRUE,TRUE,7,55
+14,Hastings / UBC,Regular,TRUE,TRUE,TRUE,7,74
+15,Cambie / Olympic Village Station,Regular,TRUE,TRUE,TRUE,7,25
+16,29th Avenue Station / Arbutus,Regular,TRUE,TRUE,TRUE,7,89
+17,Oak / Downtown,Regular,TRUE,TRUE,TRUE,7,47
+19,Metrotown Station / Stanley Park,Regular,TRUE,TRUE,TRUE,7,58
+20,Victoria / Downtown,Regular,TRUE,TRUE,TRUE,7,51
+22,Knight / Downtown,Regular,TRUE,TRUE,TRUE,7,59
+23,Main St Station / Yaletown / Beach,Regular,TRUE,TRUE,TRUE,7,22
+25,Brentwood Station / UBC,Regular,TRUE,TRUE,TRUE,7,76
+26,Joyce Station / 29th Avenue Station,Regular,TRUE,TRUE,TRUE,7,46
+27,Kootenay Loop / Joyce Station,Regular,TRUE,TRUE,TRUE,7,38
+28,Cap Universit / Phibbs Exchange / Joyce Station,Regular,TRUE,TRUE,TRUE,7,40
+29,Elliott / 29th Avenue Station,Regular,TRUE,TRUE,TRUE,7,19
+32,Dunbar / Downtown,Regular,TRUE,FALSE,FALSE,5,35
+33,29 Ave Station /  UBC,Regular,TRUE,TRUE,TRUE,7,48
+41,Joyce Station / Crown / UBC,Regular,TRUE,TRUE,TRUE,7,60
+43,Joyce Station / UBC,Regular,TRUE,FALSE,FALSE,5,18
+44,UBC / Downtown,Regular,TRUE,FALSE,FALSE,5,18
+49,Metrotown Station / Dunbar Loop / UBC,Regular,TRUE,TRUE,TRUE,7,66
+50,Waterfront Station / False Creek South,Regular,TRUE,TRUE,TRUE,7,27
+84,UBC / VCC Station,Regular,TRUE,TRUE,TRUE,7,19
+95,SFU / Burrard Station (B-Line),Regular,TRUE,TRUE,TRUE,7,17
+96,Guildford Exchange /  Newton Exchange (B-Line),Regular,TRUE,TRUE,TRUE,7,13
+99,Commercial-Broadway / UBC (B-Line),Regular,TRUE,TRUE,TRUE,7,20
+100,22nd St Station / Marpole Loop,Regular,TRUE,TRUE,TRUE,7,49
+101,Lougheed Station / 22nd St Station,Regular,TRUE,TRUE,TRUE,7,35
+104,22nd St Station / Annacis Island,Regular,TRUE,TRUE,TRUE,7,25
+106,New Westminster Station / Metrotown Station,Regular,TRUE,TRUE,TRUE,7,49
+110,Lougheed Station / Metrotown Station,Regular,TRUE,TRUE,TRUE,7,49
+112,Edmonds Station / New Westminster Station,Regular,TRUE,TRUE,TRUE,7,42
+116,Edmonds Station / Metrotown Station,Regular,TRUE,TRUE,TRUE,7,38
+123,New Westminster Station / Brentwood Station,Regular,TRUE,TRUE,TRUE,7,37
+125,Patterson Station / BCIT,Regular,TRUE,FALSE,FALSE,5,13
+128,Braid Station / 22nd Street Station,Regular,TRUE,TRUE,TRUE,7,25
+129,Patterson Station / Edmonds Station,Regular,TRUE,TRUE,TRUE,7,72
+130,Metrotown / Hastings / Kootenay / Cap U,Regular,TRUE,TRUE,TRUE,7,37
+134,Lake City Station / Brentwood Station,Regular,TRUE,TRUE,TRUE,7,46
+136,Lougheed Station / Brentwood Station,Regular,TRUE,TRUE,TRUE,7,50
+143,Burquitlam Station / SFU,Regular,TRUE,FALSE,FALSE,5,7
+144,SFU / Metrotown Station,Regular,TRUE,TRUE,TRUE,7,43
+145,SFU / Production Station,Regular,TRUE,TRUE,TRUE,7,7
+151,Coquitlam Ctrl Station / Burquitlam Station,Regular,TRUE,TRUE,TRUE,7,45
+152,Coquitlam Central Station / Lougheed Station,Regular,TRUE,TRUE,TRUE,7,55
+153,Coquitlam Central Station / Braid Station,Regular,TRUE,TRUE,TRUE,7,35
+155,Braid Station / 22nd Street Station,Regular,TRUE,TRUE,TRUE,7,24
+156,Braid Station / Lougheed Station,Regular,TRUE,TRUE,TRUE,7,52
+157,Burquitlam Station / Lougheed Station,Regular,TRUE,TRUE,TRUE,7,32
+159,Coquitlam Central Station / Braid Station,Regular,TRUE,TRUE,TRUE,7,48
+160,Port Coquitlam Station / Kootenay Loop,Regular,TRUE,TRUE,TRUE,7,57
+169,Coquitlam Centralstn / Braid Station,Regular,TRUE,TRUE,TRUE,7,11
+170,Pt Coquitlam Station / Pt Coquitlam South,Regular,TRUE,TRUE,TRUE,7,15
+171,Coquitlam Central Station / Fremont,Regular,TRUE,TRUE,TRUE,7,12
+172,Coquitlam Central Station / Riverside,Regular,TRUE,TRUE,TRUE,7,31
+173,Coquitlam Central Station / Cedar,Regular,TRUE,TRUE,TRUE,7,30
+174,Coquitlam Central Station / Rocklin,Regular,TRUE,TRUE,TRUE,7,35
+175,Coquitlam Central Station / Meridian,Regular,TRUE,FALSE,FALSE,5,20
+180,Moody Centre Station / Lougheed Station,Regular,TRUE,TRUE,TRUE,7,33
+181,Moody Centre Station / Ioco,Regular,TRUE,TRUE,TRUE,7,37
+182,Moody Centre Station / Belcarra,Regular,TRUE,TRUE,TRUE,7,40
+183,Moody Centre Station / Coquitlam Central Station,Regular,TRUE,TRUE,TRUE,7,39
+184,Moody Centre Station / Noons Creek,Regular,TRUE,TRUE,TRUE,7,19
+185,Coquitlam Central Station / Lansdowne,Regular,TRUE,TRUE,TRUE,7,15
+186,Coquitlam Central Station / Hampton Park,Regular,TRUE,TRUE,TRUE,7,23
+187,Coquitlam Central Station / Parkway Blvd,Regular,TRUE,TRUE,TRUE,7,22
+188,Coquitlam Central Station / Port Coquitlam Station,Regular,TRUE,TRUE,TRUE,7,34
+189,Coquitlam Central Station / Lafarge Park,Regular,TRUE,TRUE,TRUE,7,12
+191,Coquitlam Central Station / Princeton,Regular,TRUE,TRUE,TRUE,7,19
+209,Upper Lynn Valley / Vancouver,Regular,TRUE,TRUE,TRUE,7,51
+210,Upper Lynn Valley / Vancouver,Regular,TRUE,TRUE,TRUE,7,42
+211,Seymour / Phibbs Exchange / Vancouver,Regular,TRUE,TRUE,TRUE,7,44
+212,Deep Cove / Phibbs Exchange,Regular,TRUE,TRUE,TRUE,7,21
+214,Blueridge / Phibbs Exchange / Vancouver,Regular,TRUE,TRUE,TRUE,7,32
+227,Lynn Valley Centre / Phibbs Exchange,Regular,TRUE,TRUE,TRUE,7,28
+228,Lynn Valley / Lonsdale Quay,Regular,TRUE,TRUE,TRUE,7,30
+229,Lynn Valley / Lonsdale Quay,Regular,TRUE,TRUE,TRUE,7,24
+230,Upper Lonsdale / Lonsdale Quay,Regular,TRUE,TRUE,TRUE,7,31
+231,Harbourside / Lonsdale Quay,Regular,TRUE,FALSE,FALSE,5,6
+232,Grouse Mountain / Phibbs Exchange,Regular,TRUE,TRUE,TRUE,7,51
+236,Grouse Mountain / Lonsdale Quay,Regular,TRUE,TRUE,TRUE,7,31
+239,Capilano University / Park Royal,Regular,TRUE,TRUE,TRUE,7,34
+240,15th Street / Vancouver,Regular,TRUE,TRUE,TRUE,7,29
+241,Upper Lonsdale / Vancouver,Regular,TRUE,FALSE,FALSE,5,37
+242,Lynn Valley / Vancouver,Regular,FALSE,TRUE,TRUE,2,44
+246,Lonsdale Quay / Highland / Vancouver,Regular,TRUE,TRUE,TRUE,7,52
+247,Upper Capilano / Grouse / Vancouver,Regular,TRUE,FALSE,FALSE,5,38
+250,Horseshoe Bay / Dundarave / Vancouver,Regular,TRUE,TRUE,TRUE,7,60
+251,Queens / Park Royal,Regular,TRUE,TRUE,TRUE,7,30
+252,Inglewood / Park Royal,Regular,TRUE,TRUE,TRUE,7,24
+253,Caulfeild / Vancouver / Park Royal,Regular,TRUE,TRUE,TRUE,7,47
+254,British Properties / Park Royal / Van,Regular,TRUE,TRUE,TRUE,7,56
+255,Dundarave / Capilano University,Regular,TRUE,TRUE,TRUE,7,54
+256,Folkstone Way / Whitby Estate / Spuraway,Regular,FALSE,TRUE,TRUE,2,20
+257,Horseshoe Bay / Vancouver Express,Regular,TRUE,TRUE,TRUE,7,9
+258,UBC / West Vancouver,Regular,TRUE,FALSE,FALSE,5,5
+259,Lions Bay / Horseshoe Bay,Regular,TRUE,FALSE,FALSE,5,17
+301,Newton Exchange / Brighouse Station,Regular,TRUE,TRUE,TRUE,7,17
+311,Scottsdale / Bridgeport Station,Regular,TRUE,FALSE,FALSE,5,14
+312,Scottsdale / Scott Road Station,Regular,TRUE,TRUE,TRUE,7,34
+314,Surrey Central / Sunbury,Regular,TRUE,TRUE,TRUE,7,35
+316,Surrey Central Station / Scottsdale,Regular,TRUE,TRUE,TRUE,7,37
+319,Scott Road Station / Newton Exchange,Regular,TRUE,TRUE,TRUE,7,30
+320,Langley / Fleetwood / Surrey Ctrl Station,Regular,TRUE,TRUE,TRUE,7,63
+321,White Rock / Newton / Surrey Ctrl Station,Regular,TRUE,TRUE,TRUE,7,76
+323,Newton Exchange / Surrey Central Station,Regular,TRUE,TRUE,TRUE,7,36
+324,Newton Exchange / Surrey Central Station,Regular,TRUE,TRUE,TRUE,7,33
+325,Newton Exchange / Surrey Central Station,Regular,TRUE,TRUE,TRUE,7,27
+326,Guildford / Surrey Central Station,Regular,TRUE,TRUE,TRUE,7,36
+329,Surrey Central Station / Scottsdale,Regular,TRUE,TRUE,FALSE,6,33
+335,Newton / Surrey Central Station,Regular,TRUE,TRUE,TRUE,7,53
+337,Fraser Heights / Guildford / Surrey Centre,Regular,TRUE,TRUE,TRUE,7,17
+340,Scottsdale / 22nd St Station,Regular,TRUE,TRUE,TRUE,7,14
+341,Guildford / Newton Exchange,Regular,TRUE,TRUE,TRUE,7,32
+342,Langley Centre / Newton Exchange,Regular,TRUE,TRUE,TRUE,7,42
+345,King George Station / White Rock Centre,Regular,TRUE,FALSE,FALSE,5,46
+351,Crescent Beach / Bridgeport Station,Regular,TRUE,TRUE,TRUE,7,52
+352,Ocean Park  / Bridgeport Station,Regular,TRUE,FALSE,FALSE,5,36
+354,White Rock South / Bridgeport Station,Regular,TRUE,FALSE,FALSE,5,38
+360,Ocean Park / Peace Arch Hospital,Regular,TRUE,TRUE,TRUE,7,36
+361,Ocean Park / White Rock Centre,Regular,TRUE,TRUE,TRUE,7,42
+362,Seaside / White Rock Centre,Regular,TRUE,TRUE,TRUE,7,14
+363,Southpoint / Peace Arch Hospital,Regular,TRUE,TRUE,TRUE,7,32
+364,Langley Centre /  Scottsdale Exchange,Regular,TRUE,TRUE,TRUE,7,47
+372,Clayton Heights / Langley Centre,Regular,TRUE,TRUE,TRUE,7,24
+375,White Rock / White Rock South / Guildford,Regular,TRUE,TRUE,TRUE,7,58
+388,22st Station / Carvolth Exchange,Regular,TRUE,FALSE,FALSE,5,45
+391,Scottsdale / Scott Road Station,Regular,TRUE,FALSE,FALSE,5,29
+393,Newton Exchange / Surrey Central Station,Regular,TRUE,FALSE,FALSE,5,39
+394,White Rock / King George Station Express,Regular,TRUE,FALSE,FALSE,5,18
+395,Langley Centre / King George Station,Regular,TRUE,FALSE,FALSE,5,39
+401,One Road / Garden City,Regular,TRUE,TRUE,TRUE,7,61
+402,Two Road / Brighouse Station,Regular,TRUE,TRUE,TRUE,7,32
+403,Bridgeport Station / Three Road,Regular,TRUE,TRUE,TRUE,7,41
+404,Four Road / Brighouse Station,Regular,TRUE,TRUE,TRUE,7,30
+405,Five Road / Cambie,Regular,TRUE,TRUE,TRUE,7,61
+407,Gilbert / Bridgeport,Regular,TRUE,TRUE,TRUE,7,74
+410,22nd St Station / Queensborough / Railway,Regular,TRUE,TRUE,TRUE,7,84
+430,Metrotown / Brighouse Station,Regular,TRUE,TRUE,TRUE,7,21
+480,UBC / Bridgeport Station,Regular,TRUE,FALSE,FALSE,5,14
+501,Langley Centre / Surrey Central Station,Regular,TRUE,TRUE,TRUE,7,47
+502,Langley Centre / Surrey Central Station,Regular,TRUE,TRUE,TRUE,7,35
+503,Aldergrove / Surrey Central Station,Regular,TRUE,TRUE,TRUE,7,33
+509,Walnut Grove / Surrey Central Station,Regular,TRUE,FALSE,FALSE,5,33
+531,White Rock Centre / Willowbrook,Regular,TRUE,TRUE,TRUE,7,62
+555,Carvolth Exchange  /  Lougheed Station,Regular,TRUE,TRUE,TRUE,7,3
+595,Maple Meadows Station / Langley Centre,Regular,TRUE,TRUE,TRUE,7,18
+601,South Delta / Boundary Bay / Bridgeport,Regular,TRUE,TRUE,TRUE,7,54
+602,Tsawwassen Heights / Bridgeport,Regular,TRUE,FALSE,FALSE,5,22
+603,Beach Grove / Bridgeport,Regular,TRUE,FALSE,FALSE,5,28
+604,English Bluff / Bridgeport,Regular,TRUE,FALSE,FALSE,5,20
+606,Ladner Ring,Regular,TRUE,FALSE,FALSE,5,24
+608,Ladner Ring,Regular,TRUE,FALSE,FALSE,5,11
+609,Tsawwassen First Nation / South Delta,Regular,TRUE,TRUE,TRUE,7,12
+620,Tsawwassen Ferry / Bridgeport Station,Regular,TRUE,TRUE,TRUE,7,6
+640,Ladner Exchange / Scott Road Station,Regular,TRUE,TRUE,TRUE,7,45
+701,Haney / Maple Ridge East / Coquitlam Station,Regular,TRUE,TRUE,TRUE,7,65
+733,Rock Ridge / Haney Pl / Pt Haney Station,Regular,TRUE,TRUE,TRUE,7,19
+741,Anderson Creek / Haney Pl / Pt Haney St,Regular,TRUE,TRUE,TRUE,7,25
+791,Haney Place / Braid Station,Regular,TRUE,FALSE,FALSE,5,35
+N8,Downtown / Fraser,Night Bus,TRUE,TRUE,TRUE,7,53
+N9,Downtn / Lough'D Station / Coquitlam Ctrl Station,Night Bus,TRUE,TRUE,TRUE,7,89
+N10,Downtown / Richmond,Night Bus,TRUE,TRUE,TRUE,7,65
+N15,Downtown / Cambie,Night Bus,TRUE,TRUE,TRUE,7,28
+N17,Downtown / UBC,Night Bus,TRUE,TRUE,TRUE,7,37
+N19,Downtown / Surrey Central Station,Night Bus,TRUE,TRUE,TRUE,7,90
+N20,Downtown / Victoria,Night Bus,TRUE,TRUE,TRUE,7,59
+N22,Downtown / Macdonald,Night Bus,TRUE,TRUE,TRUE,7,45
+N24,Downtown /  Lynn Valley,Night Bus,TRUE,TRUE,TRUE,7,51
+N35,Downtown / SFU,Night Bus,TRUE,TRUE,TRUE,7,49
+C1,Hastings & Gilmore / Kootenay Loop,Community Shuttle,TRUE,TRUE,TRUE,7,20
+C2,Capitol Hill / Hastings at Gilmore,Community Shuttle,TRUE,TRUE,TRUE,7,15
+C3,Quayside / Victoria Hill,Community Shuttle,TRUE,TRUE,TRUE,7,13
+C4,Uptown / New Westminster Station,Community Shuttle,TRUE,TRUE,TRUE,7,28
+C5,Royal Oak Station / Edmonds Station,Community Shuttle,TRUE,TRUE,TRUE,7,20
+C6,Metrotown Station / Suncrest,Community Shuttle,TRUE,TRUE,TRUE,7,12
+C7,Metrotown Station / Edmonds Station,Community Shuttle,TRUE,TRUE,TRUE,7,24
+C9,New Westminster Station / Lougheed Station,Community Shuttle,TRUE,TRUE,TRUE,7,18
+C10,Bluewater / Snug Cove,Community Shuttle,TRUE,TRUE,TRUE,7,9
+C11,Eagle Cliff / Snug Cove,Community Shuttle,TRUE,TRUE,TRUE,7,6
+C12,Lions Bay / Caulfeild,Community Shuttle,FALSE,TRUE,TRUE,2,11
+C15,Indian River / Phibbs Exchange,Community Shuttle,TRUE,TRUE,TRUE,7,20
+C18,West Mall / UBC Exchange,Community Shuttle,TRUE,TRUE,TRUE,7,9
+C20,Totem Park / UBC Exchange,Community Shuttle,TRUE,TRUE,TRUE,7,8
+C41,Meadowtown / Maple Meadows Station / P Meadow Centre,Community Shuttle,TRUE,TRUE,FALSE,6,32
+C43,Haney Pl / Maple Meadows Station / Meadowtown,Community Shuttle,TRUE,TRUE,TRUE,7,42
+C44,Haney Pl / Maple Meadows Station / Meadowtown,Community Shuttle,TRUE,TRUE,FALSE,6,33
+C45,Cottonwood / Haney Place,Community Shuttle,TRUE,TRUE,TRUE,7,37
+C46,Albion / Haney Place,Community Shuttle,TRUE,TRUE,TRUE,7,24
+C48,Thornhill / Haney Place,Community Shuttle,TRUE,TRUE,FALSE,6,31
+C49,Ruskin / Haney Place,Community Shuttle,TRUE,TRUE,FALSE,6,40
+C60,Langley Centre / Langley Hospital,Community Shuttle,TRUE,TRUE,TRUE,7,32
+C61,Langley Centre / Brookswood,Community Shuttle,TRUE,TRUE,TRUE,7,27
+C62,Langley Centre / Walnut Grove,Community Shuttle,TRUE,TRUE,TRUE,7,41
+C63,Langley Centre / Fernridge,Community Shuttle,TRUE,TRUE,TRUE,7,34
+C64,Langley Centre / Willowbrook,Community Shuttle,TRUE,TRUE,TRUE,7,33
+C70,Cloverdale / Willowbrook,Community Shuttle,TRUE,TRUE,TRUE,7,29
+C71,Surrey Central / Scott Rd Station,Community Shuttle,TRUE,TRUE,TRUE,7,22
+C73,Guildford /  Surrey Central Station,Community Shuttle,TRUE,TRUE,TRUE,7,45
+C75,Newton Exchange / Scottsdale,Community Shuttle,TRUE,TRUE,TRUE,7,37
+C76,Scottsdale / Ladner Exchange,Community Shuttle,TRUE,TRUE,TRUE,7,28
+C84,English Bluff / South Delta Rec Centre,Community Shuttle,TRUE,TRUE,TRUE,7,25
+C86,Ladner South / Ladner Exchange,Community Shuttle,TRUE,TRUE,TRUE,7,14
+C87,East Ladner / Ladner Exchange,Community Shuttle,TRUE,TRUE,TRUE,7,10
+C88,Ladner North / Ladner Exchange,Community Shuttle,TRUE,TRUE,TRUE,7,29
+C89,Boundary Bay / South Delta Rec Centre,Community Shuttle,TRUE,TRUE,TRUE,7,16
+C92,Bridgeport Station / Sea Island South,Community Shuttle,TRUE,TRUE,FALSE,6,12
+C93,Riverport / Steveston,Community Shuttle,TRUE,TRUE,TRUE,7,35
+C94,Richmond Oval / Brighouse Station,Community Shuttle,TRUE,TRUE,FALSE,6,15
+C96,East Cambie / Brighouse Station,Community Shuttle,TRUE,FALSE,FALSE,5,32
+C98,Kingswood / 22nd St Station,Community Shuttle,TRUE,FALSE,FALSE,5,14

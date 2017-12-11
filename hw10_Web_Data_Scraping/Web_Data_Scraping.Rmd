@@ -16,6 +16,7 @@ output:
     1. [Scraping the Vancouver Bus Schedules](#scraping-the-vancouver-bus-schedules)
     2. [Obtaining Lists of Webpage Data](#obtaining-lists-of-webpage-data)
     3. [We Need to go Deeper](#we-need-to-go-deeper)
+    4. [Saving the data](#saving-the-data)
 
 ---
 
@@ -431,6 +432,27 @@ vanc_bus_linkinfo %>%
   		legend.position="bottom")
 ```
 
-Pretty neat. I'm happy with this data. Thanks for reading.
+Pretty neat. I'm happy with this data now, so I will put all the useful data into a single dataframe and save it.
+
+### Saving the data
+<a href="#top">Back to top</a>
+
+I want to save a "clean" data frame to disc, so let's get rid of the messy HTML and links from this data frame and save only the real data. That means we should want to keep data from columns 1-3,6-9, and 12.
+
+```{r}
+# Subset data
+Vancouver_Transit_df <- vanc_bus_linkinfo[c(1:3,6:9,12)]
+
+knitr::kable(Vancouver_Transit_df %>%
+						 	head(15))
+```
+
+Now we can save this subsetted data frame to file. Here I will save as a CVS type file.
+```{r}
+write_csv(Vancouver_Transit_df, "Vancouver_Bus_Info.CSV")
+```
+
+
+That's all! Thanks for reading!
 
 <a href="#top">Back to top</a>

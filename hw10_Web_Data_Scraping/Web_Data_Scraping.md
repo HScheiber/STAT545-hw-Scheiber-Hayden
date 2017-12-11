@@ -1,7 +1,7 @@
 Homework 10 - Data Scraping from the Web
 ================
 Hayden Scheiber -
-06 December, 2017
+10 December, 2017
 
 [Return to Main Page](https://github.com/HScheiber/STAT545-hw-Scheiber-Hayden/blob/master/README.md)
 
@@ -13,6 +13,7 @@ Hayden Scheiber -
     1.  [Scraping the Vancouver Bus Schedules](#scraping-the-vancouver-bus-schedules)
     2.  [Obtaining Lists of Webpage Data](#obtaining-lists-of-webpage-data)
     3.  [We Need to go Deeper](#we-need-to-go-deeper)
+    4.  [Saving the data](#saving-the-data)
 
 ------------------------------------------------------------------------
 
@@ -104,7 +105,7 @@ vanc_bus_info <- data_frame(
 str(vanc_bus_info)
 ```
 
-    ## Classes 'tbl_df', 'tbl' and 'data.frame':    221 obs. of  2 variables:
+    ## Classes 'tbl_df', 'tbl' and 'data.frame':    218 obs. of  2 variables:
     ##  $ Bus_Number: chr  "2" "3" "4" "5" ...
     ##  $ Bus_Route : chr  "2 Macdonald / Downtown" "3 Main / Downtown" "4 Powell / Downtown / UBC" "5 Robson / Downtown" ...
 
@@ -204,13 +205,13 @@ vanc_bus_linkinfo <- vanc_bus_info %>%
 str(vanc_bus_linkinfo, max.level = 1)
 ```
 
-    ## Classes 'tbl_df', 'tbl' and 'data.frame':    221 obs. of  5 variables:
+    ## Classes 'tbl_df', 'tbl' and 'data.frame':    218 obs. of  5 variables:
     ##  $ Bus_Number: chr  "2" "3" "4" "5" ...
     ##  $ Bus_Route : chr  "Macdonald / Downtown" "Main / Downtown" "Powell / Downtown / UBC" "Robson / Downtown" ...
     ##  $ Bus_Type  : Named chr  "Regular" "Regular" "Regular" "Regular" ...
     ##   ..- attr(*, "names")= chr  "2" "3" "4" "5" ...
     ##  $ Route_Link: chr  "http://www.transitdb.ca/route/002/" "http://www.transitdb.ca/route/003/" "http://www.transitdb.ca/route/004/" "http://www.transitdb.ca/route/005/" ...
-    ##  $ Route_HTML:List of 221
+    ##  $ Route_HTML:List of 218
 
 Okay so now the data frame contains a mess of HTML in the 5th column. We wish to find out interesting things about the bus routes based on the data in this column. One thing we can look at is the service information, which indicates whether or not the bus runs on weekdays, saturday, or sunday/holidays.
 
@@ -530,6 +531,46 @@ vanc_bus_linkinfo %>%
 
 ![](Web_Data_Scraping_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-21-1.png)
 
-Pretty neat. I'm happy with this data. Thanks for reading.
+Pretty neat. I'm happy with this data now, so I will put all the useful data into a single dataframe and save it.
+
+### Saving the data
+
+<a href="#top">Back to top</a>
+
+I want to save a "clean" data frame to disc, so let's get rid of the messy HTML and links from this data frame and save only the real data. That means we should want to keep data from columns 1-3,6-9, and 12.
+
+``` r
+# Subset data
+Vancouver_Transit_df <- vanc_bus_linkinfo[c(1:3,6:9,12)]
+
+knitr::kable(Vancouver_Transit_df %>%
+                            head(15))
+```
+
+| Bus\_Number | Bus\_Route                              | Bus\_Type | Service\_Weekdays | Service\_Saturday | Service\_Sunday |  Working\_Days|  Route\_Stops|
+|:------------|:----------------------------------------|:----------|:------------------|:------------------|:----------------|--------------:|-------------:|
+| 2           | Macdonald / Downtown                    | Regular   | TRUE              | TRUE              | TRUE            |              7|            44|
+| 3           | Main / Downtown                         | Regular   | TRUE              | TRUE              | TRUE            |              7|            40|
+| 4           | Powell / Downtown / UBC                 | Regular   | TRUE              | TRUE              | TRUE            |              7|            67|
+| 5           | Robson / Downtown                       | Regular   | TRUE              | TRUE              | TRUE            |              7|            18|
+| 6           | Davie / Downtown                        | Regular   | TRUE              | TRUE              | TRUE            |              7|            15|
+| 7           | Nanaimo Station / Dunbar                | Regular   | TRUE              | TRUE              | TRUE            |              7|            80|
+| 8           | Fraser / Downtown                       | Regular   | TRUE              | TRUE              | TRUE            |              7|            43|
+| 9           | Boundary / Comm-Bwy / Gran / Alma / UBC | Regular   | TRUE              | TRUE              | TRUE            |              7|            67|
+| 10          | Granville / Downtown                    | Regular   | TRUE              | TRUE              | TRUE            |              7|            55|
+| 14          | Hastings / UBC                          | Regular   | TRUE              | TRUE              | TRUE            |              7|            74|
+| 15          | Cambie / Olympic Village Station        | Regular   | TRUE              | TRUE              | TRUE            |              7|            25|
+| 16          | 29th Avenue Station / Arbutus           | Regular   | TRUE              | TRUE              | TRUE            |              7|            89|
+| 17          | Oak / Downtown                          | Regular   | TRUE              | TRUE              | TRUE            |              7|            47|
+| 19          | Metrotown Station / Stanley Park        | Regular   | TRUE              | TRUE              | TRUE            |              7|            58|
+| 20          | Victoria / Downtown                     | Regular   | TRUE              | TRUE              | TRUE            |              7|            51|
+
+Now we can save this subsetted data frame to file. Here I will save as a CVS type file.
+
+``` r
+write_csv(Vancouver_Transit_df, "Vancouver_Bus_Info.CSV")
+```
+
+That's all! Thanks for reading!
 
 <a href="#top">Back to top</a>
